@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<metadata>
+	<layout title="COM_PLUGNMEET_MENU_CATEGORIES_TITLE" option="COM_PLUGNMEET_MENU_CATEGORIES_OPTION">
+		<message>
+			<![CDATA[COM_PLUGNMEET_MENU_CATEGORIES_DESC]]>
+		</message>
+	</layout>
+</metadata>

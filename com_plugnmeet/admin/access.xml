@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<access component="com_plugnmeet">
+	<section name="component">
+		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.options" title="JACTION_OPTIONS" description="JACTION_OPTIONS_COMPONENT_DESC" />
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+		<action name="core.export" title="COM_PLUGNMEET_EXPORT_DATA" description="COM_PLUGNMEET_EXPORT_DATA_DESC" />
+		<action name="core.import" title="COM_PLUGNMEET_IMPORT_DATA" description="COM_PLUGNMEET_IMPORT_DATA_DESC" />
+		<action name="core.batch" title="COM_PLUGNMEET_USE_BATCH" description="COM_PLUGNMEET_USE_BATCH_DESC" />
+		<action name="core.version" title="COM_PLUGNMEET_EDIT_VERSIONS" description="COM_PLUGNMEET_EDIT_VERSIONS_DESC" />
+		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_ACCESS_EDITSTATE_DESC" />
+		<action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
+		<action name="core.edit.created_by" title="COM_PLUGNMEET_EDIT_CREATED_BY" description="COM_PLUGNMEET_EDIT_CREATED_BY_DESC" />
+		<action name="core.edit.created" title="COM_PLUGNMEET_EDIT_CREATED_DATE" description="COM_PLUGNMEET_EDIT_CREATED_DATE_DESC" />
+		<action name="recordings.access" title="COM_PLUGNMEET_RECORDINGS_ACCESS" description="COM_PLUGNMEET_RECORDINGS_ACCESS_DESC" />
+		<action name="recordings.dashboard_list" title="COM_PLUGNMEET_RECORDINGS_DASHBOARD_LIST" description="COM_PLUGNMEET_RECORDINGS_DASHBOARD_LIST_DESC" />
+		<action name="recordings.submenu" title="COM_PLUGNMEET_RECORDINGS_SUBMENU" description="COM_PLUGNMEET_RECORDINGS_SUBMENU_DESC" />
+		<action name="site.category.access" title="COM_PLUGNMEET_ROOM_CATEGORY_VIEW_ACCESS_SITE" description="COM_PLUGNMEET_ROOM_CATEGORY_VIEW_ACCESS_SITE_DESC" />
+		<action name="room.update_client" title="COM_PLUGNMEET_ROOM_UPDATE_CLIENT_BUTTON_ACCESS" description="COM_PLUGNMEET_ROOM_UPDATE_CLIENT_BUTTON_ACCESS_DESC" />
+		<action name="room.access" title="COM_PLUGNMEET_ROOMS_ACCESS" description="COM_PLUGNMEET_ROOMS_ACCESS_DESC" />
+		<action name="room.batch" title="COM_PLUGNMEET_ROOMS_BATCH_USE" description="COM_PLUGNMEET_ROOMS_BATCH_USE_DESC" />
+		<action name="room.dashboard_add" title="COM_PLUGNMEET_ROOMS_DASHBOARD_ADD" description="COM_PLUGNMEET_ROOMS_DASHBOARD_ADD_DESC" />
+		<action name="room.dashboard_list" title="COM_PLUGNMEET_ROOMS_DASHBOARD_LIST" description="COM_PLUGNMEET_ROOMS_DASHBOARD_LIST_DESC" />
+		<action name="room.export" title="COM_PLUGNMEET_ROOMS_EXPORT" description="COM_PLUGNMEET_ROOMS_EXPORT_DESC" />
+		<action name="room.import" title="COM_PLUGNMEET_ROOMS_IMPORT" description="COM_PLUGNMEET_ROOMS_IMPORT_DESC" />
+		<action name="room.submenu" title="COM_PLUGNMEET_ROOMS_SUBMENU" description="COM_PLUGNMEET_ROOMS_SUBMENU_DESC" />
+		<action name="site.room.access" title="COM_PLUGNMEET_SINGLE_ROOM_ACCESS_SITE" description="COM_PLUGNMEET_SINGLE_ROOM_ACCESS_SITE_DESC" />
+	</section>
+
+	<section name="category.rooms">
+		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="COM_CATEGORIES_ACCESS_DELETE_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="COM_CATEGORIES_ACCESS_EDIT_DESC" />
+		<action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_CATEGORIES_ACCESS_EDITSTATE_DESC" />
+		<action name="core.edit.own" title="JACTION_EDITOWN" description="COM_CATEGORIES_ACCESS_EDITOWN_DESC" />
+	</section>
+</access>

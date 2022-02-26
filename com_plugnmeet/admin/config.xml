@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		addrulepath="/administrator/components/com_plugnmeet/models/rules"
+		addfieldpath="/administrator/components/com_plugnmeet/models/fields"
+		name="global_config"
+		label="COM_PLUGNMEET_CONFIG_GLOBAL_LABEL"
+		description="COM_PLUGNMEET_CONFIG_GLOBAL_DESC">
+		<field
+			name="check_in"
+			type="list"
+			default="0"
+			label="COM_PLUGNMEET_CONFIG_CHECK_TIMER_LABEL"
+			description="COM_PLUGNMEET_CONFIG_CHECK_TIMER_DESC">
+			<option
+				value="-5 hours">COM_PLUGNMEET_CONFIG_CHECK_TIMER_OPTION_ONE</option>
+			<option
+				value="-12 hours">COM_PLUGNMEET_CONFIG_CHECK_TIMER_OPTION_TWO</option>
+			<option
+				value="-1 day">COM_PLUGNMEET_CONFIG_CHECK_TIMER_OPTION_THREE</option>
+			<option
+				value="-2 day">COM_PLUGNMEET_CONFIG_CHECK_TIMER_OPTION_FOUR</option>
+			<option
+				value="-1 week">COM_PLUGNMEET_CONFIG_CHECK_TIMER_OPTION_FIVE</option>
+			<option
+				value="0">COM_PLUGNMEET_CONFIG_CHECK_TIMER_OPTION_SIX</option>
+		</field>
+		<field type="spacer" name="spacerAuthor" hr="true" />
+		<field name="autorTitle"
+			type="spacer"
+			label="COM_PLUGNMEET_CONFIG_AUTHOR"
+		/>
+		<field name="autorName"
+			type="text"
+			label="COM_PLUGNMEET_CONFIG_AUTHOR_NAME_LABEL"
+			description="COM_PLUGNMEET_CONFIG_AUTHOR_NAME_DESC"
+			size="60"
+			default="Jibon L. Costa"
+			readonly="true"
+			class="readonly"
+		/>
+		<field name="autorEmail"
+			type="email"
+			label="COM_PLUGNMEET_CONFIG_AUTHOR_EMAIL_LABEL"
+			description="COM_PLUGNMEET_CONFIG_AUTHOR_EMAIL_DESC"
+			size="60"
+			default="jibon@mynaparrot.com"
+			readonly="true"
+			class="readonly"
+		/>
+	</fieldset>
+	<fieldset
+		name="plugnmeet_config_custom_config"
+		label="COM_PLUGNMEET_CONFIG_PLUGNMEET_CONFIG">
+
+		<!-- Plugnmeet_server_url Field. Type: Url. (joomla) -->
+		<field
+			type="url"
+			name="plugnmeet_server_url"
+			label="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_LABEL"
+			size="10"
+			maxlength="50"
+			default="http://localhost:8080"
+			description="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_DESCRIPTION"
+			class="text_area"
+			required="true"
+			relative="false"
+			filter="url"
+			validated="url"
+			scheme="http,https,ws,wss"
+			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_MESSAGE"
+			autocomplete="on"
+		/>
+		<!-- Plugnmeet_api_key Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="plugnmeet_api_key"
+			label="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_LABEL"
+			size="10"
+			maxlength="50"
+			default="plugnmeet"
+			description="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="true"
+			filter="STRING"
+			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_MESSAGE"
+			autocomplete="on"
+		/>
+		<!-- Plugnmeet_secret Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="plugnmeet_secret"
+			label="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_LABEL"
+			size="10"
+			maxlength="50"
+			default="zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6"
+			description="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="true"
+			filter="STRING"
+			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_MESSAGE"
+			autocomplete="on"
+		/>
+		<!-- Livekit_server_url Field. Type: Url. (joomla) -->
+		<field
+			type="url"
+			name="livekit_server_url"
+			label="COM_PLUGNMEET_CONFIG_LIVEKIT_SERVER_URL_LABEL"
+			size="10"
+			maxlength="50"
+			default="http://localhost:7880"
+			description="COM_PLUGNMEET_CONFIG_LIVEKIT_SERVER_URL_DESCRIPTION"
+			class="text_area"
+			required="true"
+			relative="false"
+			filter="url"
+			validated="url"
+			scheme="http,https,ws,wss"
+			message="COM_PLUGNMEET_CONFIG_LIVEKIT_SERVER_URL_MESSAGE"
+			autocomplete="on"
+		/>
+		<!-- Client_download_url Field. Type: Url. (joomla) -->
+		<field
+			type="url"
+			name="client_download_url"
+			label="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_LABEL"
+			size="10"
+			maxlength="50"
+			default="https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip"
+			description="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_DESCRIPTION"
+			class="text_area"
+			relative="false"
+			filter="url"
+			validated="url"
+			scheme="http,https"
+			autocomplete="on"
+		/>
+	</fieldset>
+	<fieldset
+		name="plugnmeet_options_custom_config"
+		label="COM_PLUGNMEET_CONFIG_PLUGNMEET_OPTIONS">
+
+		<!-- Enable_dynacast Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="enable_dynacast"
+			label="COM_PLUGNMEET_CONFIG_ENABLE_DYNACAST_LABEL"
+			class="list_class"
+			multiple="false"
+			required="true"
+			default="true">
+			<!-- Option Set. -->
+			<option value="true">
+				COM_PLUGNMEET_CONFIG_TRUE</option>
+			<option value="false">
+				COM_PLUGNMEET_CONFIG_FALSE</option>
+		</field>
+		<!-- Enable_simulcast Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="enable_simulcast"
+			label="COM_PLUGNMEET_CONFIG_ENABLE_SIMULCAST_LABEL"
+			class="list_class"
+			multiple="false"
+			default="true">
+			<!-- Option Set. -->
+			<option value="true">
+				COM_PLUGNMEET_CONFIG_TRUE</option>
+			<option value="false">
+				COM_PLUGNMEET_CONFIG_FALSE</option>
+		</field>
+		<!-- Stop_mic_track_on_mute Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="stop_mic_track_on_mute"
+			label="COM_PLUGNMEET_CONFIG_STOP_MIC_TRACK_ON_MUTE_LABEL"
+			class="list_class"
+			multiple="false"
+			default="true">
+			<!-- Option Set. -->
+			<option value="true">
+				COM_PLUGNMEET_CONFIG_TRUE</option>
+			<option value="false">
+				COM_PLUGNMEET_CONFIG_FALSE</option>
+		</field>
+		<!-- Number_of_webcams_per_page_pc Field. Type: Number. (joomla) -->
+		<field
+			type="number"
+			name="number_of_webcams_per_page_pc"
+			label="COM_PLUGNMEET_CONFIG_NUMBER_OF_WEBCAMS_PER_PAGE_PC_LABEL"
+			default="25"
+			class="text_area"
+			min="1"
+			max="24"
+			step="1"
+		/>
+		<!-- Number_of_webcams_per_page_mobile Field. Type: Number. (joomla) -->
+		<field
+			type="number"
+			name="number_of_webcams_per_page_mobile"
+			label="COM_PLUGNMEET_CONFIG_NUMBER_OF_WEBCAMS_PER_PAGE_MOBILE_LABEL"
+			default="6"
+			class="text_area"
+			min="1"
+			max="8"
+			step="1"
+		/>
+		<!-- Logo Field. Type: Media. (joomla) -->
+		<field
+			type="media"
+			name="logo"
+			label="COM_PLUGNMEET_CONFIG_LOGO_LABEL"
+			description="COM_PLUGNMEET_CONFIG_LOGO_DESCRIPTION"
+			directory=""
+			preview="false"
+		/>
+	</fieldset>
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC">
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			validate="rules"
+			filter="rules"
+			component="com_plugnmeet"
+			section="component"
+		/>
+	</fieldset>
+</config>

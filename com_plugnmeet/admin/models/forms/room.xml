@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form
+	addrulepath="/administrator/components/com_plugnmeet/models/rules"
+	addfieldpath="/administrator/components/com_plugnmeet/models/fields"
+>
+	<fieldset name="details">
+		<!-- Default Fields. -->
+		<!-- Id Field. Type: Text (joomla) -->
+		<field
+			name="id"
+			type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC" size="10" default="0"
+			readonly="true"
+		/>
+		<!-- Date Created Field. Type: Calendar (joomla) -->
+		<field
+			name="created"
+			type="calendar"
+			label="COM_PLUGNMEET_ROOM_CREATED_DATE_LABEL"
+			description="COM_PLUGNMEET_ROOM_CREATED_DATE_DESC"
+			size="22"
+			format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc"
+		/>
+		<!-- User Created Field. Type: User (joomla) -->
+		<field
+			name="created_by"
+			type="user"
+			label="COM_PLUGNMEET_ROOM_CREATED_BY_LABEL"
+			description="COM_PLUGNMEET_ROOM_CREATED_BY_DESC"
+		/>
+		<!-- Published Field. Type: List (joomla) -->
+		<field name="published" type="list" label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+			filter="intval" size="1" default="1" >
+			<option value="1">
+				JPUBLISHED</option>
+			<option value="0">
+				JUNPUBLISHED</option>
+			<option value="2">
+				JARCHIVED</option>
+			<option value="-2">
+				JTRASHED</option>
+		</field>
+		<!-- Date Modified Field. Type: Calendar (joomla) -->
+		<field name="modified" type="calendar" class="readonly"
+			label="COM_PLUGNMEET_ROOM_MODIFIED_DATE_LABEL" description="COM_PLUGNMEET_ROOM_MODIFIED_DATE_DESC"
+			size="22" readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+		<!-- User Modified Field. Type: User (joomla) -->
+		<field name="modified_by" type="user"
+			label="COM_PLUGNMEET_ROOM_MODIFIED_BY_LABEL"
+			description="COM_PLUGNMEET_ROOM_MODIFIED_BY_DESC"
+			class="readonly"
+			readonly="true"
+			filter="unset"
+		/>
+		<!-- Access Field. Type: Accesslevel (joomla) -->
+		<field name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			default="1"
+			required="false"
+		/>
+		<!-- Ordering Field. Type: Numbers (joomla) -->
+		<field
+			name="ordering"
+			type="number"
+			class="inputbox validate-ordering"
+			label="COM_PLUGNMEET_ROOM_ORDERING_LABEL"
+			description=""
+			default="0"
+			size="6"
+			required="false"
+		/>
+		<!-- Version Field. Type: Text (joomla) -->
+		<field
+			name="version"
+			type="text"
+			class="readonly"
+			label="COM_PLUGNMEET_ROOM_VERSION_LABEL"
+			description="COM_PLUGNMEET_ROOM_VERSION_DESC"
+			size="6"
+			readonly="true"
+			filter="unset"
+		/>
+		<!-- Metakey Field. Type: Textarea (joomla) -->
+		<field
+			name="metakey"
+			type="textarea"
+			label="JFIELD_META_KEYWORDS_LABEL"
+			description="JFIELD_META_KEYWORDS_DESC"
+			rows="3"
+			cols="30"
+		/>
+		<!-- Metadesc Field. Type: Textarea (joomla) -->
+		<field
+			name="metadesc"
+			type="textarea"
+			label="JFIELD_META_DESCRIPTION_LABEL"
+			description="JFIELD_META_DESCRIPTION_DESC"
+			rows="3"
+			cols="30"
+		/>
+		<!-- Dynamic Fields. -->
+		<!-- Room_title Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="room_title"
+			label="COM_PLUGNMEET_ROOM_ROOM_TITLE_LABEL"
+			size="10"
+			maxlength="50"
+			default=""
+			description="COM_PLUGNMEET_ROOM_ROOM_TITLE_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="true"
+			filter="STRING"
+			message="COM_PLUGNMEET_ROOM_ROOM_TITLE_MESSAGE"
+			autocomplete="on"
+		/>
+		<!-- Catid Field. Type: Category. (joomla) -->
+		<field
+			type="category"
+			name="catid"
+			label="COM_PLUGNMEET_ROOM_CATID_LABEL"
+			extension="com_plugnmeet"
+			required="true"
+			default=""
+			description="COM_PLUGNMEET_ROOM_CATID_DESCRIPTION"
+			class="inputbox"
+			published="1"
+			multiple="false"
+			display="menu"
+		/>
+		<!-- Moderator_pass Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="moderator_pass"
+			label="COM_PLUGNMEET_ROOM_MODERATOR_PASS_LABEL"
+			size="10"
+			maxlength="50"
+			default=""
+			description="COM_PLUGNMEET_ROOM_MODERATOR_PASS_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="true"
+			filter="STRING"
+			message="COM_PLUGNMEET_ROOM_MODERATOR_PASS_MESSAGE"
+			autocomplete="off"
+		/>
+		<!-- Attendee_pass Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="attendee_pass"
+			label="COM_PLUGNMEET_ROOM_ATTENDEE_PASS_LABEL"
+			size="10"
+			maxlength="50"
+			default=""
+			description="COM_PLUGNMEET_ROOM_ATTENDEE_PASS_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="true"
+			filter="STRING"
+			message="COM_PLUGNMEET_ROOM_ATTENDEE_PASS_MESSAGE"
+			autocomplete="off"
+		/>
+		<!-- Room_id Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="room_id"
+			label="COM_PLUGNMEET_ROOM_ROOM_ID_LABEL"
+			size="10"
+			maxlength="50"
+			default=""
+			description="COM_PLUGNMEET_ROOM_ROOM_ID_DESCRIPTION"
+			class="text_area"
+			readonly="true"
+			disabled="false"
+			required="false"
+			filter="STRING"
+			message="COM_PLUGNMEET_ROOM_ROOM_ID_MESSAGE"
+			hint="COM_PLUGNMEET_ROOM_ROOM_ID_HINT"
+			autocomplete="off"
+		/>
+		<!-- Room_metadata Field. Type: Hidden. (joomla) -->
+		<field
+			type="hidden"
+			name="room_metadata"
+			default="1"
+			filter="STRING"
+		/>
+		<!-- Max_participants Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="max_participants"
+			label="COM_PLUGNMEET_ROOM_MAX_PARTICIPANTS_LABEL"
+			size="10"
+			maxlength="50"
+			default="0"
+			description="COM_PLUGNMEET_ROOM_MAX_PARTICIPANTS_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="false"
+			filter="INT"
+			message="COM_PLUGNMEET_ROOM_MAX_PARTICIPANTS_MESSAGE"
+			autocomplete="off"
+		/>
+		<!-- Welcome_message Field. Type: Textarea. (joomla) -->
+		<field
+			type="textarea"
+			name="welcome_message"
+			label="COM_PLUGNMEET_ROOM_WELCOME_MESSAGE_LABEL"
+			rows="10"
+			cols="5"
+			default=""
+			description="COM_PLUGNMEET_ROOM_WELCOME_MESSAGE_DESCRIPTION"
+			class="text_area"
+			filter="raw"
+			required="false"
+			readonly="false"
+			disabled="false"
+		/>
+		<!-- Description Field. Type: Editor. (joomla) -->
+		<field
+			type="editor"
+			name="description"
+			label="COM_PLUGNMEET_ROOM_DESCRIPTION_LABEL"
+			default=""
+			cols="5"
+			rows="10"
+			buttons="no"
+			editor="tinymce|codemirror|none"
+			filter="raw"
+			required="false"
+		/>
+		<!-- Alias Field. Type: Text. (joomla) -->
+		<field
+			type="text"
+			name="alias"
+			label="COM_PLUGNMEET_ROOM_ALIAS_LABEL"
+			size="10"
+			maxlength="50"
+			default=""
+			description="COM_PLUGNMEET_ROOM_ALIAS_DESCRIPTION"
+			class="text_area"
+			readonly="false"
+			disabled="false"
+			required="false"
+			filter="STRING"
+			message="COM_PLUGNMEET_ROOM_ALIAS_MESSAGE"
+			hint="COM_PLUGNMEET_ROOM_ALIAS_HINT"
+			autocomplete="on"
+		/>
+	</fieldset>
+
+	<!-- Metadata Fields. -->
+	<fields name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+		<fieldset name="vdmmetadata"
+			label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+			<!-- Robots Field. Type: List (joomla) -->
+			<field name="robots"
+				type="list"
+				label="JFIELD_METADATA_ROBOTS_LABEL"
+				description="JFIELD_METADATA_ROBOTS_DESC" >
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+				<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+				<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+				<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			</field>
+			<!-- Author Field. Type: Text (joomla) -->
+			<field name="author"
+				type="text"
+				label="JAUTHOR" description="JFIELD_METADATA_AUTHOR_DESC"
+				size="20"
+			/>
+			<!-- Rights Field. Type: Textarea (joomla) -->
+			<field name="rights" type="textarea" label="JFIELD_META_RIGHTS_LABEL"
+				description="JFIELD_META_RIGHTS_DESC" required="false" filter="string"
+				cols="30" rows="2"
+			/>
+		</fieldset>
+	</fields>
+	
+	<!-- Access Control Fields. -->
+	<fieldset name="accesscontrol">
+		<!-- Asset Id Field. Type: Hidden (joomla) -->
+		<field
+			name="asset_id"
+			type="hidden"
+			filter="unset"
+		/>
+		<!-- Rules Field. Type: Rules (joomla) -->
+		<field
+			name="rules"
+			type="rules"
+			label="Permissions in relation to this room"
+			translate_label="false"
+			filter="rules"
+			validate="rules"
+			class="inputbox"
+			component="com_plugnmeet"
+			section="room"
+		/>
+	</fieldset>
+</form>
