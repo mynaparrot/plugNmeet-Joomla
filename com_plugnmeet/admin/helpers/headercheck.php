@@ -3,7 +3,6 @@
  * @package 	plugNmeet
  * @subpackage	headercheck.php
  * @version		1.0.0
- * @build		26th February, 2022
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>

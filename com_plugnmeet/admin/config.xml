@@ -129,7 +129,6 @@
 			name="client_download_url"
 			label="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_LABEL"
 			size="10"
-			maxlength="50"
 			default="https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip"
 			description="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_DESCRIPTION"
 			class="text_area"

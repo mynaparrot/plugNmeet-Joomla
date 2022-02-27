@@ -3,7 +3,6 @@
  * @package 	plugNmeet
  * @subpackage	rooms.php
  * @version		1.0.0
- * @build		26th February, 2022
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -52,7 +51,8 @@ class PlugnmeetModelRooms extends JModelList
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $params->get("client_download_url"));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         $data = curl_exec($ch);
         $error = curl_error($ch);
         $errno = curl_errno($ch);
