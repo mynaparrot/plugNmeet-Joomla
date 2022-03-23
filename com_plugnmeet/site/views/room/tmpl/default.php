@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	default.php
- * @version		1.0.0
+ * @version		1.0.1
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -108,7 +108,12 @@ if ($isActiveSEF) {
                         status.addClass("alert-success");
                         status.html("Redirecting...");
                         const url = '<?php echo $link ?>' + data.token + '&layout=conference';
-                        window.open(url, "_blank");
+                        const windowOpen = window.open(url, "_blank");
+                        if (!windowOpen) {
+                            setTimeout(() => {
+                                window.location.href = url
+                            }, 2000)
+                        }
                         $("#password").val("");
                         status.hide();
                     } else {

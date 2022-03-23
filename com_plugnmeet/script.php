@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	script.php
- * @version		1.0.0
+ * @version		1.0.1
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -142,7 +142,7 @@ class com_plugnmeetInstallerScript
 			$query = $db->getQuery(true);
 			// Field to update.
 			$fields = array(
-				$db->quoteName('params') . ' = ' . $db->quote('{"autorName":"Jibon L. Costa","autorEmail":"jibon@mynaparrot.com","category_request_id":"0","room_request_id":"0","plugnmeet_server_url":"http://localhost:8080","plugnmeet_api_key":"plugnmeet","plugnmeet_secret":"zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6","livekit_server_url":"http://localhost:7880","client_download_url":"https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip","enable_dynacast":"true","enable_simulcast":"true","stop_mic_track_on_mute":"true","number_of_webcams_per_page_pc":"25","number_of_webcams_per_page_mobile":"6","check_in":"-1 day"}'),
+				$db->quoteName('params') . ' = ' . $db->quote('{"autorName":"Jibon L. Costa","autorEmail":"jibon@mynaparrot.com","category_request_id":"0","room_request_id":"0","plugnmeet_server_url":"https://demo.plugnmeet.com","plugnmeet_api_key":"plugnmeet","plugnmeet_secret":"zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6","livekit_server_url":"https://lk.plugnmeet.com","client_download_url":"https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip","enable_dynacast":"true","enable_simulcast":"true","stop_mic_track_on_mute":"true","number_of_webcams_per_page_pc":"25","number_of_webcams_per_page_mobile":"6","check_in":"-1 day"}'),
 			);
 			// Condition.
 			$conditions = array(
@@ -162,7 +162,7 @@ class com_plugnmeetInstallerScript
 			echo '<a target="_blank" href="https://www.plugnmeet.com" title="plugNmeet">
 				<img src="components/com_plugnmeet/assets/images/vdm-component.png"/>
 				</a>
-				<h3>Upgrade to Version 1.0.0 Was Successful! Let us know if anything is not working as expected.</h3>';
+				<h3>Upgrade to Version 1.0.1 Was Successful! Let us know if anything is not working as expected.</h3>';
 		}
 		return true;
 	}

@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.0
+ * @version		1.0.1
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -94,7 +94,7 @@ class PlugnmeetModelRoom extends JModelAdmin
             foreach ($item["options"] as $option) {
                 $selected = "";
                 if (!empty($data)) {
-                    if ($option == $data[$key]) {
+                    if ($option['value'] == $data[$key]) {
                         $selected = "selected";
                     } else {
                         /*if($option == $item["selected"]){
@@ -102,11 +102,11 @@ class PlugnmeetModelRoom extends JModelAdmin
                         }*/
                     }
                 } else {
-                    if ($option == $item["selected"]) {
+                    if ($option['value'] == $item["selected"]) {
                         $selected = "selected";
                     }
                 }
-                $html .= "<option value=\"{$option}\" {$selected}>{$option}</option>";
+                $html .= "<option value=\"{$option['value']}\" {$selected}>{$option['label']}</option>";
             }
 
             $html .= "</select></div></div>";
@@ -121,50 +121,106 @@ class PlugnmeetModelRoom extends JModelAdmin
             "allow_webcams" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_WEBCAMS"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_WEBCAMS_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "mute_on_start" => array(
                 "label" => JText::_("COM_PLUGNMEET_MUTE_ON_START"),
                 "des" => JText::_("COM_PLUGNMEET_MUTE_ON_START_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
             "allow_screen_share" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_SCREEN_SHARING"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_SCREEN_SHARING_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "allow_recording" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "allow_rtmp" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_RTMP"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_RTMP_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "allow_view_other_webcams" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_VIEW_OTHER_WEBCAMS"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_VIEW_OTHER_WEBCAMS_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "allow_view_other_users_list" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "admin_only_webcams" => array(
                 "label" => JText::_("COM_PLUGNMEET_ADMIN_ONLY_WEBCAMS"),
                 "des" => JText::_("COM_PLUGNMEET_ADMIN_ONLY_WEBCAMS_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
         );
 
@@ -183,14 +239,28 @@ class PlugnmeetModelRoom extends JModelAdmin
             "allow_chat" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_CHAT"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_CHAT_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "allow_file_upload" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_FILE_UPLOAD"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_FILE_UPLOAD_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
         );
 
@@ -203,44 +273,140 @@ class PlugnmeetModelRoom extends JModelAdmin
         return $this->formatHtml($chatFeatures, "chat_features", $data);
     }
 
+    public function getSharedNotePadFeatures()
+    {
+        $sharedNotePadFeatures = array(
+            "allowed_shared_note_pad" => array(
+                "label" => JText::_("COM_PLUGNMEET_ALLOW_SHARED_NOTEPAD"),
+                "des" => JText::_("COM_PLUGNMEET_ALLOW_SHARED_NOTEPAD_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
+            ),
+        );
+
+        $item = $this->getItem();
+        $data = [];
+        if (isset($item->room_metadata->shared_note_pad_features)) {
+            $data = (array)$item->room_metadata->shared_note_pad_features;
+        }
+
+        return $this->formatHtml($sharedNotePadFeatures, "shared_note_pad_features", $data);
+    }
+
+    public function getWhiteboardFeatures()
+    {
+        $whiteboardFeatures = array(
+            "allowed_whiteboard" => array(
+                "label" => JText::_("COM_PLUGNMEET_ALLOW_WHITEBOARD"),
+                "des" => JText::_("COM_PLUGNMEET_ALLOW_WHITEBOARD_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
+            ),
+        );
+
+        $item = $this->getItem();
+        $data = [];
+        if (isset($item->room_metadata->whiteboard_features)) {
+            $data = (array)$item->room_metadata->whiteboard_features;
+        }
+
+        return $this->formatHtml($whiteboardFeatures, "whiteboard_features", $data);
+    }
+
     public function getDefaultLockSettings()
     {
         $defaultLockSettings = array(
             "lock_microphone" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_MICROPHONE"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_MICROPHONE_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
             "lock_webcam" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_WEBCAM"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_WEBCAM_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
             "lock_screen_sharing" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_SCREEN_SHARING"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_SCREEN_SHARING_DES"),
-                "options" => array("true", "false"),
-                "selected" => "true"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
             ),
             "lock_chat" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_CHAT"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_CHAT_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
             "lock_chat_send_message" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_CHAT_SEND_MESSAGE"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_CHAT_SEND_MESSAGE_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
             "lock_chat_file_share" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_CHAT_SEND_FILE"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_CHAT_SEND_FILE_DES"),
-                "options" => array("true", "false"),
-                "selected" => "false"
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0
             ),
         );
 
@@ -1043,6 +1209,12 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
         if (isset($jform['chat_features'])) {
             $data['room_metadata']['chat_features'] = $jform['chat_features'];
+        }
+        if (isset($jform['shared_note_pad_features'])) {
+            $data['room_metadata']['shared_note_pad_features'] = $jform['shared_note_pad_features'];
+        }
+        if (isset($jform['whiteboard_features'])) {
+            $data['room_metadata']['whiteboard_features'] = $jform['whiteboard_features'];
         }
         if (isset($jform['default_lock_settings'])) {
             $data['room_metadata']['default_lock_settings'] = $jform['default_lock_settings'];

@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	edit.php
- * @version		1.0.0
+ * @version		1.0.1
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -68,6 +68,22 @@ $componentParams = $this->params; // will be removed just use $this->params inst
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span12">
 				<?php echo $this->get("ChatFeatures"); ?>
+			</div>
+		</div>
+	<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'shared_notepad_features', JText::_('COM_PLUGNMEET_ROOM_SHARED_NOTEPAD_FEATURES', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span12">
+				<?php echo $this->get("SharedNotePadFeatures"); ?>
+			</div>
+		</div>
+	<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'whiteboard_features', JText::_('COM_PLUGNMEET_ROOM_WHITEBOARD_FEATURES', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span12">
+				<?php echo $this->get("WhiteboardFeatures"); ?>
 			</div>
 		</div>
 	<?php echo JHtml::_('bootstrap.endTab'); ?>
