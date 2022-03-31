@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.1
+ * @version		1.0.2
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -417,6 +417,18 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
 
         return $this->formatHtml($defaultLockSettings, "default_lock_settings", $data);
+    }
+
+    public function getDesignCustomization()
+    {
+        $item = $this->getItem();
+        $form = JForm::getInstance("custom_design", JPATH_ADMINISTRATOR . "/components/com_plugnmeet/models/forms/design_fields.xml", array("control" => "jform"));
+        
+        if (isset($item->room_metadata->custom_design)) {
+            $form->bind((array)$item->room_metadata->custom_design);
+        }
+
+        return $form->renderFieldset('plugnmeet_design_customization');
     }/***[/JCBGUI$$$$]***/
 
     
@@ -1219,6 +1231,18 @@ class PlugnmeetModelRoom extends JModelAdmin
         if (isset($jform['default_lock_settings'])) {
             $data['room_metadata']['default_lock_settings'] = $jform['default_lock_settings'];
         }
+
+        $data['room_metadata']['custom_design'] = array(
+            'custom_css_url' => $jform['custom_css_url'],
+            'primary_color' => $jform['primary_color'],
+            'secondary_color' => $jform['secondary_color'],
+            'background_color' => $jform['background_color'],
+            'background_image' => $jform['background_image'],
+            'header_color' => $jform['header_color'],
+            'footer_color' => $jform['footer_color'],
+            'left_color' => $jform['left_color'],
+            'right_color' => $jform['right_color'],
+        );
 
         if ($data['moderator_pass'] === $data['attendee_pass']) {
             $msg = JText::_("COM_PLUGNMEET_MODERATOR_AND_ATTENDEE_PASSWORD_CANT_BE_SAME");
