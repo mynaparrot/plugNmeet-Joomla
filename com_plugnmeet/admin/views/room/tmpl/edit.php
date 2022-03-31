@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	edit.php
- * @version		1.0.1
+ * @version		1.0.2
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -72,26 +72,27 @@ $componentParams = $this->params; // will be removed just use $this->params inst
 		</div>
 	<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'shared_notepad_features', JText::_('COM_PLUGNMEET_ROOM_SHARED_NOTEPAD_FEATURES', true)); ?>
+	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'whiteboard_and_shared_notepad', JText::_('COM_PLUGNMEET_ROOM_WHITEBOARD_AND_SHARED_NOTEPAD', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span12">
 				<?php echo $this->get("SharedNotePadFeatures"); ?>
+								<?php echo $this->get("WhiteboardFeatures"); ?>
 			</div>
 		</div>
 	<?php echo JHtml::_('bootstrap.endTab'); ?>
 
-	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'whiteboard_features', JText::_('COM_PLUGNMEET_ROOM_WHITEBOARD_FEATURES', true)); ?>
-		<div class="row-fluid form-horizontal-desktop">
-			<div class="span12">
-				<?php echo $this->get("WhiteboardFeatures"); ?>
-			</div>
-		</div>
-	<?php echo JHtml::_('bootstrap.endTab'); ?>
-
-	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'default_lock_settings', JText::_('COM_PLUGNMEET_ROOM_DEFAULT_LOCK_SETTINGS', true)); ?>
+	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'lock_settings', JText::_('COM_PLUGNMEET_ROOM_LOCK_SETTINGS', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span12">
 				<?php echo $this->get("DefaultLockSettings"); ?>
+			</div>
+		</div>
+	<?php echo JHtml::_('bootstrap.endTab'); ?>
+
+	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'design_customization', JText::_('COM_PLUGNMEET_ROOM_DESIGN_CUSTOMIZATION', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<div class="span12">
+				<?php echo $this->get("DesignCustomization"); ?>
 			</div>
 		</div>
 	<?php echo JHtml::_('bootstrap.endTab'); ?>

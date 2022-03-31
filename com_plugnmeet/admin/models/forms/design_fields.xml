@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form
+        addrulepath="/administrator/components/com_plugnmeet/models/rules"
+        addfieldpath="/administrator/components/com_plugnmeet/models/fields"
+>
+    <fieldset
+            name="plugnmeet_design_customization"
+            label="COM_PLUGNMEET_CONFIG_DESIGN_CUSTOMIZATION">
+
+        <!-- Custom_css_url Field. Type: Url. (joomla) -->
+        <field
+                type="url"
+                name="custom_css_url"
+                label="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_LABEL"
+                size="10"
+                maxlength="500"
+                default=""
+                description="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_DESCRIPTION"
+                class="text_area"
+                relative="false"
+                filter="url"
+                validated="url"
+                scheme="https"
+                message="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_MESSAGE"
+                autocomplete="on"
+        />
+        <!-- Primary_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="primary_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_DESCRIPTION"
+                required="false"
+        />
+        <!-- Secondary_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="secondary_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_DESCRIPTION"
+                required="false"
+        />
+        <!-- Background_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="background_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_DESCRIPTION"
+                required="false"
+        />
+        <!-- Background_image Field. Type: Media. (joomla) -->
+        <field
+                type="media"
+                name="background_image"
+                label="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_LABEL"
+                description="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_DESCRIPTION"
+                directory=""
+                preview="false"
+        />
+        <!-- Header_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="header_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_HEADER_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_HEADER_COLOR_DESCRIPTION"
+                required="false"
+        />
+        <!-- Footer_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="footer_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_DESCRIPTION"
+                required="false"
+        />
+        <!-- Left_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="left_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_LEFT_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_LEFT_COLOR_DESCRIPTION"
+                required="false"
+        />
+        <!-- Right_color Field. Type: Color. (joomla) -->
+        <field
+                type="color"
+                name="right_color"
+                default=""
+                label="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_LABEL"
+                description="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_DESCRIPTION"
+                required="false"
+        />
+    </fieldset>
+</form>

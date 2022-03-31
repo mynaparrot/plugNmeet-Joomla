@@ -172,6 +172,25 @@
 			<option value="false">
 				COM_PLUGNMEET_CONFIG_FALSE</option>
 		</field>
+		<!-- Video_codec Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="video_codec"
+			label="COM_PLUGNMEET_CONFIG_VIDEO_CODEC_LABEL"
+			description="COM_PLUGNMEET_CONFIG_VIDEO_CODEC_DESCRIPTION"
+			class="list_class"
+			multiple="false"
+			default="vp8">
+			<!-- Option Set. -->
+			<option value="av1">
+				COM_PLUGNMEET_CONFIG_AVONE</option>
+			<option value="h264">
+				COM_PLUGNMEET_CONFIG_HTWO_HUNDRED_AND_SIXTY_FOUR</option>
+			<option value="vp8">
+				COM_PLUGNMEET_CONFIG_VPEIGHT</option>
+			<option value="vp9">
+				COM_PLUGNMEET_CONFIG_VPNINE</option>
+		</field>
 		<!-- Stop_mic_track_on_mute Field. Type: List. (joomla) -->
 		<field
 			type="list"
@@ -216,6 +235,100 @@
 			description="COM_PLUGNMEET_CONFIG_LOGO_DESCRIPTION"
 			directory=""
 			preview="false"
+		/>
+	</fieldset>
+	<fieldset
+		name="design_customization_custom_config"
+		label="COM_PLUGNMEET_CONFIG_DESIGN_CUSTOMIZATION">
+
+		<!-- Custom_css_url Field. Type: Url. (joomla) -->
+		<field
+			type="url"
+			name="custom_css_url"
+			label="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_LABEL"
+			size="10"
+			maxlength="500"
+			default=""
+			description="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_DESCRIPTION"
+			class="text_area"
+			relative="false"
+			filter="url"
+			validated="url"
+			scheme="http,https"
+			message="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_MESSAGE"
+			autocomplete="on"
+		/>
+		<!-- Primary_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="primary_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_DESCRIPTION"
+			required="false"
+		/>
+		<!-- Secondary_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="secondary_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_DESCRIPTION"
+			required="false"
+		/>
+		<!-- Background_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="background_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_DESCRIPTION"
+			required="false"
+		/>
+		<!-- Background_image Field. Type: Media. (joomla) -->
+		<field
+			type="media"
+			name="background_image"
+			label="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_LABEL"
+			description="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_DESCRIPTION"
+			directory=""
+			preview="false"
+		/>
+		<!-- Header_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="header_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_HEADER_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_HEADER_COLOR_DESCRIPTION"
+			required="false"
+		/>
+		<!-- Footer_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="footer_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_DESCRIPTION"
+			required="false"
+		/>
+		<!-- Left_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="left_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_LEFT_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_LEFT_COLOR_DESCRIPTION"
+			required="false"
+		/>
+		<!-- Right_color Field. Type: Color. (joomla) -->
+		<field
+			type="color"
+			name="right_color"
+			default=""
+			label="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_LABEL"
+			description="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_DESCRIPTION"
+			required="false"
 		/>
 	</fieldset>
 	<fieldset
