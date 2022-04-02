@@ -64,8 +64,6 @@ if ($isActiveSEF) {
                         </label>
 
                         <div class="btns">
-                            <button type="reset"
-                                    class="reset"><?php echo JText::_("COM_PLUGNMEET_RESET"); ?></button>
                             <button type="submit"
                                     class="submit"><?php echo JText::_("COM_PLUGNMEET_SUBMIT"); ?></button>
                         </div>

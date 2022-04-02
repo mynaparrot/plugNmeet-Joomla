@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="4" method="upgrade">
 	<name>COM_PLUGNMEET</name>
-	<creationDate>31st March, 2022</creationDate>
+	<creationDate>2nd April, 2022</creationDate>
 	<author>Jibon L. Costa</author>
 	<authorEmail>jibon@mynaparrot.com</authorEmail>
 	<authorUrl>https://www.plugnmeet.com</authorUrl>

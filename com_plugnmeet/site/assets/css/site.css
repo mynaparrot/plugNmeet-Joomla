@@ -93,19 +93,12 @@
 
 .pnm-container a.detail-btn {
     padding: 8px 30px;
-    background-color: #24AEF7;
-    color: #fff;
     text-decoration: none;
     font-size: 16px;
     display: inline-block;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     border-radius: 8px;
     transition: 0.3s ease-in;
-}
-
-.pnm-container a.detail-btn:hover {
-    background-color: rgba(0, 69, 131);
-    color: #fff;
 }
 
 .pnm-container .flex {
@@ -157,17 +150,11 @@
     height: 36px;
     width: 100px;
     border: none;
-    background-color: #24AEF7;
-    color: #fff;
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease-in;
     outline: none;
-}
-
-.pnm-container form.login-form .btns button.submit:hover {
-    background-color: rgba(0, 69, 131);
 }
 
 .pnm-container form.login-form label.input input::placeholder {
