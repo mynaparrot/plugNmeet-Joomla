@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	default.php
- * @version		1.0.2
+ * @version		1.0.3
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -217,12 +217,12 @@ JHtml::_('behavior.keepalive');
 
                             html += '<li class="disabled" id="backward"><span>';
                             html +=
-                                '<span class="icon-step-backward icon-previous" aria-hidden="true"></span>';
+                                '<span class="icon-step-backward icon-previous" aria-hidden="true" style="cursor: pointer;"></span>';
                             html += '</span></li>';
 
                             html += '<li id="forward"><span>';
                             html +=
-                                '<span class="icon-step-forward icon-next" aria-hidden="true"></span>';
+                                '<span class="icon-step-forward icon-next" aria-hidden="true" style="cursor: pointer;"></span>';
                             html += '</span></li>';
 
                             html += '</ul></nav>';

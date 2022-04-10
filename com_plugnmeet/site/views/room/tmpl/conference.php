@@ -34,10 +34,6 @@ $cssTag = "";
 foreach ($cssFiles as $file) {
     $cssTag .= '<link href="' . $path . '/css/' . $file . '" rel="stylesheet" />' . "\n\t";
 }
-$customLogo = "";
-if ($params->get("logo")) {
-    $customLogo = 'window.CUSTOM_LOGO = "' . JUri::root() . $params->get("logo") . '";';
-}
 $room_metadata = json_decode($this->item->room_metadata, true);
 $custom_designs = [];
 foreach ($room_metadata["custom_design"] as $key => $val) {
@@ -49,6 +45,12 @@ foreach ($room_metadata["custom_design"] as $key => $val) {
 }
 if (!empty($custom_designs['custom_css_url'])) {
     $cssTag .= '<link href="' . $custom_designs['custom_css_url'] . '" rel="stylesheet" />' . "\n\t";
+}
+$customLogo = "";
+if (!empty($custom_designs['logo'])) {
+    $customLogo = 'window.CUSTOM_LOGO = "' . JUri::root() . $custom_designs['logo'] . '";';
+} else if ($params->get("logo")) {
+    $customLogo = 'window.CUSTOM_LOGO = "' . JUri::root() . $params->get("logo") . '";';
 }
 ?>
 <!doctype html>
@@ -69,6 +71,8 @@ if (!empty($custom_designs['custom_css_url'])) {
         Window.ENABLE_DYNACAST = <?php echo filter_var($params->get("enable_dynacast"), FILTER_VALIDATE_BOOLEAN); ?>;
         window.ENABLE_SIMULCAST = <?php echo filter_var($params->get("enable_simulcast"), FILTER_VALIDATE_BOOLEAN); ?>;
         window.VIDEO_CODEC = '<?php echo $params->get("video_codec"); ?>';
+        window.DEFAULT_WEBCAM_RESOLUTION = '<?php echo $params->get("default_webcam_resolution", "h720"); ?>';
+        window.DEFAULT_SCREEN_SHARE_RESOLUTION = '<?php echo $params->get("default_screen_share_resolution", "h1080fps15"); ?>';
         window.STOP_MIC_TRACK_ON_MUTE = <?php echo filter_var($params->get("stop_mic_track_on_mute"), FILTER_VALIDATE_BOOLEAN); ?>;
         window.NUMBER_OF_WEBCAMS_PER_PAGE_PC = <?php echo (int)$params->get("number_of_webcams_per_page_pc"); ?>;
         window.NUMBER_OF_WEBCAMS_PER_PAGE_MOBILE = <?php echo (int)$params->get("number_of_webcams_per_page_mobile"); ?>;
@@ -76,35 +80,43 @@ if (!empty($custom_designs['custom_css_url'])) {
 
     <style>
         <?php if(!empty($custom_designs['primary_color'])) : ?>
-        .brand-color1 {
+        .brand-color1, .text-brandColor1, .placeholder\:text-brandColor1\/70::placeholder {
             color: <?php echo $custom_designs['primary_color']; ?>;
         }
 
-        .text-brandColor1 {
-            color: <?php echo $custom_designs['primary_color']; ?>;
+        .bg-brandColor1, .hover\:bg-brandColor1:hover {
+            background: <?php echo $custom_designs['primary_color']; ?> !important;
+        }
+
+        .border-brandColor1 {
+            border-color: <?php echo $custom_designs['primary_color']; ?> !important;
         }
 
         <?php endif; ?>
 
         <?php if(!empty($custom_designs['secondary_color'])) : ?>
-        .brand-color2 {
+        .brand-color2, .text-brandColor2, .hover\:text-brandColor2:hover, .group:hover .group-hover\:text-brandColor2 {
             color: <?php echo $custom_designs['secondary_color']; ?>;
         }
 
-        .text-brandColor2 {
-            color: <?php echo $custom_designs['secondary_color']; ?>;
+        .bg-brandColor2, .hover\:bg-brandColor2:hover {
+            background: <?php echo $custom_designs['secondary_color']; ?> !important;
+        }
+
+        .border-brandColor2 {
+            border-color: <?php echo $custom_designs['secondary_color']; ?> !important;
         }
 
         <?php endif; ?>
 
         <?php if(!empty($custom_designs['background_color'])) : ?>
-        .main-app-bg {
+        .main-app-bg, .error-app-bg {
             background-image: none !important;
             background-color: <?php echo $custom_designs['background_color']; ?>;
         }
 
         <?php elseif(!empty($custom_designs['background_image'])) : ?>
-        .main-app-bg {
+        .main-app-bg, .error-app-bg {
             background-image: url('<?php echo JUri::base() . $custom_designs['background_image']; ?>') !important;
         }
 

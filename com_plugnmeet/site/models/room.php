@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.2
+ * @version		1.0.3
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -201,8 +201,8 @@ class PlugnmeetModelRoom extends JModelItem
 
         try {
             $res = $connect->isRoomActive($roomInfo->room_id);
-            $isRoomActive = $res->status;
-            $output->msg = $res->msg;
+            $isRoomActive = $res->getStatus();
+            $output->msg = $res->getResponseMsg();
         } catch (Exception $e) {
             $output->msg = $e->getMessage();
             return $output;
@@ -212,8 +212,8 @@ class PlugnmeetModelRoom extends JModelItem
             try {
                 $create = $connect->createRoom($roomInfo->room_id, $roomInfo->room_title, $roomInfo->welcome_message, $roomInfo->max_participants, "", $room_metadata);
 
-                $isRoomActive = $create->status;
-                $output->msg = $create->msg;
+                $isRoomActive = $create->getStatus();
+                $output->msg = $create->getResponseMsg();
             } catch (Exception $e) {
                 $output->msg = $e->getMessage();
                 return $output;
@@ -229,9 +229,9 @@ class PlugnmeetModelRoom extends JModelItem
                 }
                 $join = $connect->getJoinToken($roomInfo->room_id, $name, $useId, $isAdmin);
 
-                $output->token = $join->token;
-                $output->status = $join->status;
-                $output->msg = $join->msg;
+                $output->token = $join->getToken();
+                $output->status = $join->getStatus();
+                $output->msg = $join->getResponseMsg();
             } catch (Exception $e) {
                 $output->msg = $e->getMessage();
                 return $output;

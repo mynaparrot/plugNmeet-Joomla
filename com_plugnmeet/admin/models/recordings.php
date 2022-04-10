@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	recordings.php
- * @version		1.0.2
+ * @version		1.0.3
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -123,9 +123,9 @@ class PlugnmeetModelRecordings extends JModelList
         $roomIds = array($roomId);
         $res = $connect->getRecordings($roomIds, $from, $limit, $orderBy);
 
-        $output->status = $res->status;
-        $output->msg = $res->msg;
-        $output->result = $res->result;
+        $output->status = $res->getStatus();
+        $output->msg = $res->getResponseMsg();
+        $output->result = $res->getRawResponse()->result;
 
         return $output;
     }
@@ -141,13 +141,14 @@ class PlugnmeetModelRecordings extends JModelList
         }
 
         $connect = new plugNmeetConnect();
-        $output = $connect->getRecordingDownloadLink($recordingId);
+        $res = $connect->getRecordingDownloadLink($recordingId);
+        $output->status = $res->getStatus();
+        $output->msg = $res->getResponseMsg();
 
-        if ($output->status && $output->token) {
+        if ($res->getStatus() && $res->getToken()) {
             $params = JComponentHelper::getParams("com_plugnmeet");
-            $output->url = $params->get("plugnmeet_server_url") . "/download/recording/" . $output->token;
+            $output->url = $params->get("plugnmeet_server_url") . "/download/recording/" . $res->getToken();
         }
-
         return $output;
     }
 
@@ -162,7 +163,9 @@ class PlugnmeetModelRecordings extends JModelList
         }
 
         $connect = new plugNmeetConnect();
-        $output = $connect->deleteRecording($recordingId);
+        $res = $connect->deleteRecording($recordingId);
+        $output->status = $res->getStatus();
+        $output->msg = $res->getResponseMsg();
         
         return $output;
     }/***[/JCBGUI$$$$]***/

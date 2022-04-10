@@ -25,8 +25,10 @@ defined('_JEXEC') or die('Restricted access');
 use Mynaparrot\Plugnmeet\Parameters\ChatFeaturesParameters;
 use Mynaparrot\Plugnmeet\Parameters\CreateRoomParameters;
 use Mynaparrot\Plugnmeet\Parameters\DeleteRecordingParameters;
+use Mynaparrot\Plugnmeet\Parameters\EndRoomParameters;
 use Mynaparrot\Plugnmeet\Parameters\FetchRecordingsParameters;
 use Mynaparrot\Plugnmeet\Parameters\GenerateJoinTokenParameters;
+use Mynaparrot\Plugnmeet\Parameters\GetActiveRoomInfoParameters;
 use Mynaparrot\Plugnmeet\Parameters\IsRoomActiveParameters;
 use Mynaparrot\Plugnmeet\Parameters\LockSettingsParameters;
 use Mynaparrot\Plugnmeet\Parameters\RecordingDownloadTokenParameters;
@@ -34,6 +36,15 @@ use Mynaparrot\Plugnmeet\Parameters\RoomFeaturesParameters;
 use Mynaparrot\Plugnmeet\Parameters\RoomMetadataParameters;
 use Mynaparrot\Plugnmeet\Parameters\SharedNotePadFeaturesParameters;
 use Mynaparrot\Plugnmeet\Parameters\WhiteboardFeaturesParameters;
+use Mynaparrot\Plugnmeet\Responses\CreateRoomResponse;
+use Mynaparrot\Plugnmeet\Responses\DeleteRecordingResponse;
+use Mynaparrot\Plugnmeet\Responses\EndRoomResponse;
+use Mynaparrot\Plugnmeet\Responses\FetchRecordingsResponse;
+use Mynaparrot\Plugnmeet\Responses\GenerateJoinTokenResponse;
+use Mynaparrot\Plugnmeet\Responses\GetActiveRoomInfoResponse;
+use Mynaparrot\Plugnmeet\Responses\GetActiveRoomsInfoResponse;
+use Mynaparrot\Plugnmeet\Responses\IsRoomActiveResponse;
+use Mynaparrot\Plugnmeet\Responses\RecordingDownloadTokenResponse;
 use Mynaparrot\Plugnmeet\PlugNmeet;
 
 require __DIR__ . "/libs/plugnmeet-sdk-php/vendor/autoload.php";
@@ -58,6 +69,9 @@ class plugNmeetConnect
         );
     }
 
+    /**
+     * @return string
+     */
     public function getUUID()
     {
         return $this->plugnmeet->getUUID();
@@ -65,9 +79,9 @@ class plugNmeetConnect
 
     /**
      * @param string $roomId
-     * @return mixed
+     * @return IsRoomActiveResponse
      */
-    public function isRoomActive(string $roomId)
+    public function isRoomActive(string $roomId): IsRoomActiveResponse
     {
         $isRoomActiveParameters = new IsRoomActiveParameters();
         $isRoomActiveParameters->setRoomId($roomId);
@@ -81,9 +95,9 @@ class plugNmeetConnect
      * @param string $welcomeMessage
      * @param string $webHookUrl
      * @param array $roomMetadata
-     * @return mixed
+     * @return CreateRoomResponse
      */
-    public function createRoom(string $roomId, string $roomTitle, string $welcomeMessage, int $max_participants, string $webHookUrl, array $roomMetadata)
+    public function createRoom(string $roomId, string $roomTitle, string $welcomeMessage, int $max_participants, string $webHookUrl, array $roomMetadata): CreateRoomResponse
     {
         $roomChatFeatures = $roomMetadata['chat_features'];
         $chatFeatures = new ChatFeaturesParameters();
@@ -117,6 +131,8 @@ class plugNmeetConnect
         $lockSettings->setLockMicrophone($defaultLocks['lock_microphone']);
         $lockSettings->setLockWebcam($defaultLocks['lock_webcam']);
         $lockSettings->setLockScreenSharing($defaultLocks['lock_screen_sharing']);
+        $lockSettings->setLockWhiteboard($defaultLocks['lock_whiteboard']);
+        $lockSettings->setLockSharedNotepad($defaultLocks['lock_shared_notepad']);
         $lockSettings->setLockChat($defaultLocks['lock_chat']);
         $lockSettings->setLockChatSendMessage($defaultLocks['lock_chat_send_message']);
         $lockSettings->setLockChatFileShare($defaultLocks['lock_chat_file_share']);
@@ -130,10 +146,10 @@ class plugNmeetConnect
 
         $roomCreateParams = new CreateRoomParameters();
         $roomCreateParams->setRoomId($roomId);
-        $roomCreateParams->setRoomMetadata($metadata);
         if ($max_participants > 0) {
             $roomCreateParams->setMaxParticipants($max_participants);
         }
+        $roomCreateParams->setRoomMetadata($metadata);
 
         return $this->plugnmeet->createRoom($roomCreateParams);
     }
@@ -143,9 +159,9 @@ class plugNmeetConnect
      * @param string $name
      * @param string $userId
      * @param bool $isAdmin
-     * @return mixed
+     * @return GenerateJoinTokenResponse
      */
-    public function getJoinToken(string $roomId, string $name, string $userId, bool $isAdmin)
+    public function getJoinToken(string $roomId, string $name, string $userId, bool $isAdmin): GenerateJoinTokenResponse
     {
         $generateJoinTokenParameters = new GenerateJoinTokenParameters();
         $generateJoinTokenParameters->setRoomId($roomId);
@@ -156,7 +172,46 @@ class plugNmeetConnect
         return $this->plugnmeet->getJoinToken($generateJoinTokenParameters);
     }
 
-    public function getRecordings(array $roomIds, int $from = 0, int $limit = 20, string $orderBy)
+    /**
+     * @param string $roomId
+     * @return EndRoomResponse
+     */
+    public function endRoom(string $roomId)
+    {
+        $endRoomParameters = new EndRoomParameters();
+        $endRoomParameters->setRoomId($roomId);
+
+        return $this->plugnmeet->endRoom($endRoomParameters);
+    }
+
+    /**
+     * @param string $roomId
+     * @return GetActiveRoomInfoResponse
+     */
+    public function getActiveRoomInfo(string $roomId)
+    {
+        $getActiveRoomInfoParameters = new GetActiveRoomInfoParameters();
+        $getActiveRoomInfoParameters->setRoomId($roomId);
+
+        return $this->plugnmeet->getActiveRoomInfo($getActiveRoomInfoParameters);
+    }
+
+    /**
+     * @return GetActiveRoomsInfoResponse
+     */
+    public function getActiveRoomsInfo()
+    {
+        return $this->plugnmeet->getActiveRoomsInfo();
+    }
+
+    /**
+     * @param array $roomIds
+     * @param int $from
+     * @param int $limit
+     * @param string $orderBy
+     * @return FetchRecordingsResponse
+     */
+    public function getRecordings(array $roomIds, int $from = 0, int $limit = 20, string $orderBy = "DESC")
     {
         $fetchRecordingsParameters = new FetchRecordingsParameters();
         $fetchRecordingsParameters->setRoomIds($roomIds);
@@ -167,6 +222,10 @@ class plugNmeetConnect
         return $this->plugnmeet->fetchRecordings($fetchRecordingsParameters);
     }
 
+    /**
+     * @param $recordingId
+     * @return mixed|RecordingDownloadTokenResponse
+     */
     public function getRecordingDownloadLink($recordingId)
     {
         $recordingDownloadTokenParameters = new RecordingDownloadTokenParameters();
@@ -175,6 +234,10 @@ class plugNmeetConnect
         return $this->plugnmeet->getRecordingDownloadToken($recordingDownloadTokenParameters);
     }
 
+    /**
+     * @param $recordingId
+     * @return DeleteRecordingResponse
+     */
     public function deleteRecording($recordingId)
     {
         $deleteRecordingParameters = new DeleteRecordingParameters();
