@@ -60,6 +60,15 @@
                 directory=""
                 preview="false"
         />
+        <!-- Logo Field. Type: Media. (joomla) -->
+        <field
+                type="media"
+                name="logo"
+                label="COM_PLUGNMEET_CONFIG_LOGO_LABEL"
+                description="COM_PLUGNMEET_CONFIG_LOGO_DESCRIPTION"
+                directory=""
+                preview="false"
+        />
         <!-- Header_color Field. Type: Color. (joomla) -->
         <field
                 type="color"

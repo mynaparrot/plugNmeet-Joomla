@@ -227,6 +227,56 @@
 			max="8"
 			step="1"
 		/>
+		<!-- Default_webcam_resolution Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="default_webcam_resolution"
+			label="COM_PLUGNMEET_CONFIG_DEFAULT_WEBCAM_RESOLUTION_LABEL"
+			description="COM_PLUGNMEET_CONFIG_DEFAULT_WEBCAM_RESOLUTION_DESCRIPTION"
+			class="list_class"
+			multiple="false"
+			default="h720">
+			<!-- Option Set. -->
+			<option value="h90">
+				COM_PLUGNMEET_CONFIG_HNINETY</option>
+			<option value="h180">
+				COM_PLUGNMEET_CONFIG_HONE_HUNDRED_AND_EIGHTY</option>
+			<option value="h216">
+				COM_PLUGNMEET_CONFIG_HTWO_HUNDRED_AND_SIXTEEN</option>
+			<option value="h360">
+				COM_PLUGNMEET_CONFIG_HTHREE_HUNDRED_AND_SIXTY</option>
+			<option value="h540">
+				COM_PLUGNMEET_CONFIG_HFIVE_HUNDRED_AND_FORTY</option>
+			<option value="h720">
+				COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTY</option>
+			<option value="h1080">
+				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTY</option>
+			<option value="h1440">
+				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_FOUR_HUNDRED_AND_FORTY</option>
+			<option value="h2160">
+				COM_PLUGNMEET_CONFIG_HTWO_THOUSAND_ONE_HUNDRED_AND_SIXTY</option>
+		</field>
+		<!-- Default_screen_share_resolution Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="default_screen_share_resolution"
+			label="COM_PLUGNMEET_CONFIG_DEFAULT_SCREEN_SHARE_RESOLUTION_LABEL"
+			description="COM_PLUGNMEET_CONFIG_DEFAULT_SCREEN_SHARE_RESOLUTION_DESCRIPTION"
+			class="list_class"
+			multiple="false"
+			default="h1080fps15">
+			<!-- Option Set. -->
+			<option value="h360fps3">
+				COM_PLUGNMEET_CONFIG_HTHREE_HUNDRED_AND_SIXTYFPSTHREE</option>
+			<option value="h720fps5">
+				COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTYFPSFIVE</option>
+			<option value="h720fps15">
+				COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTYFPSFIFTEEN</option>
+			<option value="h1080fps15">
+				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTYFPSFIFTEEN</option>
+			<option value="h1080fps30">
+				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTYFPSTHIRTY</option>
+		</field>
 		<!-- Logo Field. Type: Media. (joomla) -->
 		<field
 			type="media"

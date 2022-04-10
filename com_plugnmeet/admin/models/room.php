@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.2
+ * @version		1.0.3
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -359,6 +359,32 @@ class PlugnmeetModelRoom extends JModelAdmin
             "lock_screen_sharing" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_SCREEN_SHARING"),
                 "des" => JText::_("COM_PLUGNMEET_LOCK_SCREEN_SHARING_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
+            ),
+            "lock_whiteboard" => array(
+                "label" => JText::_("COM_PLUGNMEET_LOCK_WHITEBOARD"),
+                "des" => JText::_("COM_PLUGNMEET_LOCK_WHITEBOARD_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
+            ),
+            "lock_shared_notepad" => array(
+                "label" => JText::_("COM_PLUGNMEET_LOCK_SHARED_NOTEPAD"),
+                "des" => JText::_("COM_PLUGNMEET_LOCK_SHARED_NOTEPAD_DES"),
                 "options" => array(
                     array(
                         "label" => JText::_("COM_PLUGNMEET_YES"),
@@ -1238,6 +1264,7 @@ class PlugnmeetModelRoom extends JModelAdmin
             'secondary_color' => $jform['secondary_color'],
             'background_color' => $jform['background_color'],
             'background_image' => $jform['background_image'],
+            'logo' => $jform['logo'],
             'header_color' => $jform['header_color'],
             'footer_color' => $jform['footer_color'],
             'left_color' => $jform['left_color'],

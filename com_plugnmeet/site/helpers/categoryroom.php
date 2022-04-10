@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	categoryroom.php
- * @version		1.0.2
+ * @version		1.0.3
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
