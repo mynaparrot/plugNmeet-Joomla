@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	script.php
- * @version		1.0.3
+ * @version		1.0.4
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -162,7 +162,7 @@ class com_plugnmeetInstallerScript
 			echo '<a target="_blank" href="https://www.plugnmeet.com" title="plugNmeet">
 				<img src="components/com_plugnmeet/assets/images/vdm-component.png"/>
 				</a>
-				<h3>Upgrade to Version 1.0.3 Was Successful! Let us know if anything is not working as expected.</h3>';
+				<h3>Upgrade to Version 1.0.4 Was Successful! Let us know if anything is not working as expected.</h3>';
 		}
 		return true;
 	}

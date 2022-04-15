@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	view.html.php
- * @version		1.0.3
+ * @version		1.0.4
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -59,6 +59,79 @@ class PlugnmeetViewRoom extends JViewLegacy
         }
 
         JFactory::getDocument()->setTitle($this->item->room_title);
+    }
+
+    public function getGlobalVariables()
+    {
+        $params = JComponentHelper::getParams("com_plugnmeet");
+        $path = JUri::root() . "components/com_plugnmeet/assets/client/dist/assets";
+
+        $js = 'window.PLUG_N_MEET_SERVER_URL = "' . $params->get("plugnmeet_server_url") . '";';
+        $js .= 'window.LIVEKIT_SERVER_URL = "' . $params->get("livekit_server_url") . '";';
+        $js .= 'window.STATIC_ASSETS_PATH = "' . $path . '";';
+
+        $js .= 'Window.ENABLE_DYNACAST = ' . filter_var($params->get("enable_dynacast"), FILTER_VALIDATE_BOOLEAN) . ';';
+        $js .= 'window.ENABLE_SIMULCAST = ' . filter_var($params->get("enable_simulcast"), FILTER_VALIDATE_BOOLEAN) . ';';
+        $js .= 'window.VIDEO_CODEC = "' . $params->get("video_codec", "vp8") . '";';
+        $js .= 'window.DEFAULT_WEBCAM_RESOLUTION = "' . $params->get("default_webcam_resolution", "h720") . '";';
+        $js .= 'window.DEFAULT_SCREEN_SHARE_RESOLUTION = "' . $params->get("default_screen_share_resolution", "h1080fps15") . '";';
+        $js .= 'window.STOP_MIC_TRACK_ON_MUTE = ' . filter_var($params->get("stop_mic_track_on_mute"), FILTER_VALIDATE_BOOLEAN) . ';';
+        $js .= 'window.NUMBER_OF_WEBCAMS_PER_PAGE_PC = ' . (int)$params->get("number_of_webcams_per_page_pc") . ';';
+        $js .= 'window.NUMBER_OF_WEBCAMS_PER_PAGE_MOBILE = ' . (int)$params->get("number_of_webcams_per_page_mobile") . ';';
+
+        $room_metadata = json_decode($this->item->room_metadata, true);
+        $custom_designs = [];
+        foreach ($room_metadata["custom_design"] as $key => $val) {
+            if (empty($val)) {
+                $custom_designs[$key] = $params->get($key);
+            } else {
+                $custom_designs[$key] = $val;
+            }
+        }
+
+        if (!empty($custom_designs['logo'])) {
+            $js .= 'window.CUSTOM_LOGO = "' . JUri::root() . $custom_designs['logo'] . '";';
+        } else if ($params->get("logo")) {
+            $js .= 'window.CUSTOM_LOGO = "' . JUri::root() . $params->get("logo") . '";';
+        }
+
+        $custom_design_items = [];
+        if (!empty($custom_designs['primary_color'])) {
+            $custom_design_items['primary_color'] = $custom_designs['primary_color'];
+        }
+        if (!empty($custom_designs['secondary_color'])) {
+            $custom_design_items['secondary_color'] = $custom_designs['secondary_color'];
+        }
+        if (!empty($custom_designs['background_color'])) {
+            $custom_design_items['background_color'] = $custom_designs['background_color'];
+        }
+        if (!empty($custom_designs['background_image'])) {
+            $custom_design_items['background_image'] = $custom_designs['background_image'];
+        }
+        if (!empty($custom_designs['header_color'])) {
+            $custom_design_items['header_bg_color'] = $custom_designs['header_color'];
+        }
+        if (!empty($custom_designs['footer_color'])) {
+            $custom_design_items['footer_bg_color'] = $custom_designs['footer_color'];
+        }
+        if (!empty($custom_designs['left_color'])) {
+            $custom_design_items['left_side_bg_color'] = $custom_designs['left_color'];
+        }
+        if (!empty($custom_designs['right_color'])) {
+            $custom_design_items['right_side_bg_color'] = $custom_designs['right_color'];
+        }
+        if (!empty($custom_designs['custom_css_url'])) {
+            $custom_design_items['custom_css_url'] = $custom_designs['custom_css_url'];
+        }
+
+        if (count($custom_design_items) > 0) {
+            $js .= 'window.DESIGN_CUSTOMIZATION = `' . json_encode($custom_design_items) . '`;';
+        }
+
+        $js = str_replace(";", ";\n\t", $js);
+        $script = "<script type=\"text/javascript\">\n\t" . $js . "</script>\n";
+
+        return $script;
     }/***[/JCBGUI$$$$]***/
 
 

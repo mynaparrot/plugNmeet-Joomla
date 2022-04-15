@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	default_toolbar.php
- * @version		1.0.3
+ * @version		1.0.4
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.com>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
