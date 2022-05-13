@@ -2,9 +2,9 @@
 /**
  * @package 	plugNmeet
  * @subpackage	view.html.php
- * @version		1.0.4
+ * @version		1.0.5
  * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.com>
+ * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
  * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
  * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
@@ -58,10 +58,10 @@ class PlugnmeetViewPlugnmeet extends JViewLegacy
 		JToolBarHelper::title(JText::_('COM_PLUGNMEET_DASHBOARD'), 'grid-2');
 
 		// set help url for this view if found
-		$help_url = PlugnmeetHelper::getHelpUrl('plugnmeet');
-		if (PlugnmeetHelper::checkString($help_url))
+		$this->help_url = PlugnmeetHelper::getHelpUrl('plugnmeet');
+		if (PlugnmeetHelper::checkString($this->help_url))
 		{
-			JToolbarHelper::help('COM_PLUGNMEET_HELP_MANAGER', false, $help_url);
+			JToolbarHelper::help('COM_PLUGNMEET_HELP_MANAGER', false, $this->help_url);
 		}
 
 		if ($canDo->get('core.admin') || $canDo->get('core.options'))

@@ -2,9 +2,9 @@
 /**
  * @package 	plugNmeet
  * @subpackage	default.php
- * @version		1.0.4
+ * @version		1.0.5
  * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.com>
+ * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
  * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
  * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,16 +39,9 @@ if ($isActiveSEF) {
         <hr/>
         <div class="column-full ">
             <div class="flex">
-                <div class="w-6-4 description">
-                    <?php echo JText::_("COM_PLUGNMEET_INSTRUCTIONS"); ?>
-                </div>
                 <div class="w-6-2">
-                    <h1 class="headline"><?php echo JText::_("COM_PLUGNMEET_LOGIN"); ?></h1>
-                    <div class="br">
-                        <div class="br-inner"></div>
-                    </div>
-                    <form action="index.php" method="post" class="login-form" id="joinPlugNmeet">
-                        <div id="roomStatus" class="alert" role="alert" style="display: none"></div>
+                    <form action="index.php" method="post" class="login-form plugnmeet-login-form" >
+                        <div class="alert roomStatus" role="alert" style="display: none"></div>
                         <label for="name" class="input">
                             <p><?php echo JText::_("COM_PLUGNMEET_NAME"); ?></p>
                             <input type="text" placeholder="<?php echo JText::_("COM_PLUGNMEET_YOUR_FULL_NAME"); ?>"
@@ -81,11 +74,11 @@ if ($isActiveSEF) {
 </div>
 <script type="text/javascript">
     jQuery("document").ready(function ($) {
-        $("#joinPlugNmeet").on("submit", function (e) {
+        $(".plugnmeet-login-form").on("submit", function (e) {
             e.preventDefault();
 
-            const data = $(this).serialize();
-            const status = $("#roomStatus");
+            const data = $(e.currentTarget).serialize();
+            const status = $(e.currentTarget).find(".roomStatus");
 
             $.ajax({
                 url: "index.php",

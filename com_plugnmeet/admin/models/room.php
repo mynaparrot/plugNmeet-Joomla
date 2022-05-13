@@ -2,9 +2,9 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.4
+ * @version		1.0.5
  * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.com>
+ * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
  * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
  * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
@@ -325,6 +325,33 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
 
         return $this->formatHtml($whiteboardFeatures, "whiteboard_features", $data);
+    }
+
+    public function getExternalMediaPlayerFeatures()
+    {
+        $externalMediaPlayerFeatures = array(
+            "allowed_external_media_player" => array(
+                "label" => JText::_("COM_PLUGNMEET_ALLOW_EXTERNAL_MEDIAL_PLAYER"),
+                "des" => JText::_("COM_PLUGNMEET_ALLOW_EXTERNAL_MEDIAL_PLAYER_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1
+            ),
+        );
+
+        $item = $this->getItem();
+        $data = [];
+        if (isset($item->room_metadata->external_media_player_features)) {
+            $data = (array)$item->room_metadata->external_media_player_features;
+        }
+
+        return $this->formatHtml($externalMediaPlayerFeatures, "external_media_player_features", $data);
     }
 
     public function getDefaultLockSettings()
@@ -1253,6 +1280,9 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
         if (isset($jform['whiteboard_features'])) {
             $data['room_metadata']['whiteboard_features'] = $jform['whiteboard_features'];
+        }
+        if (isset($jform['external_media_player_features'])) {
+            $data['room_metadata']['external_media_player_features'] = $jform['external_media_player_features'];
         }
         if (isset($jform['default_lock_settings'])) {
             $data['room_metadata']['default_lock_settings'] = $jform['default_lock_settings'];

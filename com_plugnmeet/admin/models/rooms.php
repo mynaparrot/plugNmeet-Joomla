@@ -2,9 +2,9 @@
 /**
  * @package 	plugNmeet
  * @subpackage	rooms.php
- * @version		1.0.4
+ * @version		1.0.5
  * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.com>
+ * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
  * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
  * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
@@ -192,7 +192,7 @@ class PlugnmeetModelRooms extends JModelList
 	 */
 	public function getItems()
 	{
-		// check in items
+		// Check in items
 		$this->checkInNow();
 
 		// load parent items
@@ -481,17 +481,19 @@ class PlugnmeetModelRooms extends JModelList
 
 			// Get a db connection.
 			$db = JFactory::getDbo();
-			// reset query
+			// Reset query.
 			$query = $db->getQuery(true);
 			$query->select('*');
 			$query->from($db->quoteName('#__plugnmeet_room'));
-			$db->setQuery($query);
+			// Only select items that are checked out.
+			$query->where($db->quoteName('checked_out') . '!=0');
+			$db->setQuery($query, 0, 1);
 			$db->execute();
 			if ($db->getNumRows())
 			{
-				// Get Yesterdays date
+				// Get Yesterdays date.
 				$date = JFactory::getDate()->modify($time)->toSql();
-				// reset query
+				// Reset query.
 				$query = $db->getQuery(true);
 
 				// Fields to update.
@@ -506,7 +508,7 @@ class PlugnmeetModelRooms extends JModelList
 					$db->quoteName('checked_out_time') . '<\''.$date.'\''
 				);
 
-				// Check table
+				// Check table.
 				$query->update($db->quoteName('#__plugnmeet_room'))->set($fields)->where($conditions); 
 
 				$db->setQuery($query);

@@ -2,9 +2,9 @@
 /**
  * @package 	plugNmeet
  * @subpackage	script.php
- * @version		1.0.4
+ * @version		1.0.5
  * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.com>
+ * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
  * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
  * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
@@ -51,7 +51,7 @@ class com_plugnmeetInstallerScript
 		<p>Please let me know at <a href="mailto:jibon@mynaparrot.com">jibon@mynaparrot.com</a>.
 		<br />We at MynaParrot are committed to building extensions that performs proficiently! You can help us, really!
 		<br />Send me your thoughts on improvements that is needed, trust me, I will be very grateful!
-		<br />Visit us at <a href="https://www.plugnmeet.com" target="_blank">https://www.plugnmeet.com</a> today!</p>';
+		<br />Visit us at <a href="https://www.plugnmeet.org" target="_blank">https://www.plugnmeet.org</a> today!</p>';
 	}
 
 	/**
@@ -123,7 +123,7 @@ class com_plugnmeetInstallerScript
 		// set the default component settings
 		if ($type === 'install')
 		{
-			// Install the global extenstion assets permission.
+			// Install the global extension assets permission.
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			// Field to update.
@@ -142,7 +142,7 @@ class com_plugnmeetInstallerScript
 			$query = $db->getQuery(true);
 			// Field to update.
 			$fields = array(
-				$db->quoteName('params') . ' = ' . $db->quote('{"autorName":"Jibon L. Costa","autorEmail":"jibon@mynaparrot.com","category_request_id":"0","room_request_id":"0","plugnmeet_server_url":"https://demo.plugnmeet.com","plugnmeet_api_key":"plugnmeet","plugnmeet_secret":"zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6","livekit_server_url":"https://lk.plugnmeet.com","client_download_url":"https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip","enable_dynacast":"true","enable_simulcast":"true","video_codec":"vp8","stop_mic_track_on_mute":"true","number_of_webcams_per_page_pc":"25","number_of_webcams_per_page_mobile":"6","default_webcam_resolution":"h720","default_screen_share_resolution":"h1080fps15","check_in":"-1 day"}'),
+				$db->quoteName('params') . ' = ' . $db->quote('{"autorName":"Jibon L. Costa","autorEmail":"jibon@mynaparrot.com","category_request_id":"0","room_request_id":"0","plugnmeet_server_url":"https://demo.plugnmeet.com","plugnmeet_api_key":"plugnmeet","plugnmeet_secret":"zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6","livekit_server_url":"https://lk.plugnmeet.com","client_download_url":"https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip","enable_dynacast":"true","enable_simulcast":"true","video_codec":"vp8","stop_mic_track_on_mute":"true","default_webcam_resolution":"h720","default_screen_share_resolution":"h1080fps15","check_in":"-1 day"}'),
 			);
 			// Condition.
 			$conditions = array(
@@ -152,17 +152,17 @@ class com_plugnmeetInstallerScript
 			$db->setQuery($query);
 			$allDone = $db->execute();
 
-			echo '<a target="_blank" href="https://www.plugnmeet.com" title="plugNmeet">
+			echo '<a target="_blank" href="https://www.plugnmeet.org" title="plugNmeet">
 				<img src="components/com_plugnmeet/assets/images/vdm-component.png"/>
 				</a>';
 		}
 		// do any updates needed
 		if ($type === 'update')
 		{
-			echo '<a target="_blank" href="https://www.plugnmeet.com" title="plugNmeet">
+			echo '<a target="_blank" href="https://www.plugnmeet.org" title="plugNmeet">
 				<img src="components/com_plugnmeet/assets/images/vdm-component.png"/>
 				</a>
-				<h3>Upgrade to Version 1.0.4 Was Successful! Let us know if anything is not working as expected.</h3>';
+				<h3>Upgrade to Version 1.0.5 Was Successful! Let us know if anything is not working as expected.</h3>';
 		}
 		return true;
 	}

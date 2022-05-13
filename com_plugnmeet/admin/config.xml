@@ -205,28 +205,6 @@
 			<option value="false">
 				COM_PLUGNMEET_CONFIG_FALSE</option>
 		</field>
-		<!-- Number_of_webcams_per_page_pc Field. Type: Number. (joomla) -->
-		<field
-			type="number"
-			name="number_of_webcams_per_page_pc"
-			label="COM_PLUGNMEET_CONFIG_NUMBER_OF_WEBCAMS_PER_PAGE_PC_LABEL"
-			default="25"
-			class="text_area"
-			min="1"
-			max="24"
-			step="1"
-		/>
-		<!-- Number_of_webcams_per_page_mobile Field. Type: Number. (joomla) -->
-		<field
-			type="number"
-			name="number_of_webcams_per_page_mobile"
-			label="COM_PLUGNMEET_CONFIG_NUMBER_OF_WEBCAMS_PER_PAGE_MOBILE_LABEL"
-			default="6"
-			class="text_area"
-			min="1"
-			max="8"
-			step="1"
-		/>
 		<!-- Default_webcam_resolution Field. Type: List. (joomla) -->
 		<field
 			type="list"
