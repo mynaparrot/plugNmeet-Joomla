@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.5
+ * @version		1.0.6
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -83,33 +83,64 @@ class PlugnmeetModelRoom extends JModelAdmin
     {
         $html = "";
         foreach ($items as $key => $item) {
-            $html .= "<div class=\"control-group\" >";
-            $html .= "<div class=\"control-label\">";
-            $html .= "<label class=\"hasPopover\" data-content=\"{$item['des']}\" data-original-title=\"{$item['label']}\">{$item['label']}</label>";
-            $html .= "</div>";
+            if ($item["type"] === "select") {
+                $html .= "<div class=\"control-group\" >";
+                $html .= "<div class=\"control-label\">";
+                $html .= "<label class=\"hasPopover\" data-content=\"{$item['des']}\" data-original-title=\"{$item['label']}\">{$item['label']}</label>";
+                $html .= "</div>";
 
-            $html .= "<div class=\"control-label\">";
-            $html .= "<select name=\"jform[{$fieldName}][{$key}]\" class=\"list_class\">";
+                $html .= "<div class=\"control-label\">";
+                $html .= "<select name=\"jform[{$fieldName}][{$key}]\" class=\"list_class\">";
 
-            foreach ($item["options"] as $option) {
-                $selected = "";
-                if (!empty($data)) {
-                    if ($option['value'] == $data[$key]) {
-                        $selected = "selected";
-                    } else {
-                        /*if($option == $item["selected"]){
-                            $selected = "selected";
-                        }*/
-                    }
-                } else {
-                    if ($option['value'] == $item["selected"]) {
-                        $selected = "selected";
-                    }
+                $value = $item["selected"];
+                if (isset($data[$key])) {
+                    $value = $data[$key];
                 }
-                $html .= "<option value=\"{$option['value']}\" {$selected}>{$option['label']}</option>";
-            }
 
-            $html .= "</select></div></div>";
+                foreach ($item["options"] as $option) {
+                    $selected = "";
+                    if ($option['value'] == $value) {
+                        $selected = "selected";
+                    }
+                    $html .= "<option value=\"{$option['value']}\" {$selected}>{$option['label']}</option>";
+                }
+
+                $html .= "</select></div></div>";
+            } elseif ($item["type"] === "text" || $item["type"] === "number") {
+                $value = $item["default"];
+                if (isset($data[$key])) {
+                    $value = $data[$key];
+                }
+
+                $html .= '<div class="control-group control-wrapper-' . $key . '">';
+
+                $html .= '<div class="control-label">';
+                $html .= '<label class="hasPopover" for="jform_' . $key . '" title="" data-content="' . $item['des'] . '" data-original-title="' . $item['label'] . '">' . $item['label'] . '</label>';
+                $html .= '</div>';
+
+                $html .= '<div class="list_class">';
+                $html .= '<input type="' . $item["type"] . '" name="jform[' . $fieldName . '][' . $key . ']" id="jform_' . $key . '" value="' . $value . '" class="text_area" size="10" maxlength="50" autocomplete="off" aria-invalid="false">';
+                $html .= '</div>';
+
+                $html .= '</div>';
+            } elseif ($item["type"] === "textarea") {
+                $value = $item["default"];
+                if (isset($data[$key])) {
+                    $value = $data[$key];
+                }
+
+                $html .= '<div class="control-group control-wrapper-' . $key . '">';
+
+                $html .= '<div class="control-label">';
+                $html .= '<label class="hasPopover" for="jform_' . $key . '" title="" data-content="' . $item['des'] . '" data-original-title="' . $item['label'] . '">' . $item['label'] . '</label>';
+                $html .= '</div>';
+
+                $html .= '<div class="list_class">';
+                $html .= '<textarea name="jform[' . $fieldName . '][' . $key . ']" id="jform_' . $key . '" cols="4" rows="7" class="text_area" aria-invalid="false">' . $value . '</textarea>';
+                $html .= '</div>';
+
+                $html .= '</div>';
+            }
         }
 
         return $html;
@@ -129,7 +160,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "mute_on_start" => array(
                 "label" => JText::_("COM_PLUGNMEET_MUTE_ON_START"),
@@ -142,7 +174,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
             ),
             "allow_screen_share" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_SCREEN_SHARING"),
@@ -155,7 +188,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "allow_recording" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING"),
@@ -168,7 +202,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "allow_rtmp" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_RTMP"),
@@ -181,7 +216,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "allow_view_other_webcams" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_VIEW_OTHER_WEBCAMS"),
@@ -194,7 +230,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "allow_view_other_users_list" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS"),
@@ -207,7 +244,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "admin_only_webcams" => array(
                 "label" => JText::_("COM_PLUGNMEET_ADMIN_ONLY_WEBCAMS"),
@@ -220,8 +258,29 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
             ),
+            "allow_polls" => array(
+                "label" => JText::_("COM_PLUGNMEET_ALLOW_POLLS"),
+                "des" => JText::_("COM_PLUGNMEET_ALLOW_POLLS_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1,
+                "type" => "select"
+            ),
+            "room_duration" => array(
+                "label" => JText::_("COM_PLUGNMEET_ROOM_DURATION"),
+                "des" => JText::_("COM_PLUGNMEET_ROOM_DURATION_DES"),
+                "default" => 0,
+                "type" => "number"
+            )
         );
 
         $item = $this->getItem();
@@ -247,7 +306,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "allow_file_upload" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_FILE_UPLOAD"),
@@ -260,7 +320,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
         );
 
@@ -287,7 +348,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
         );
 
@@ -314,7 +376,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
         );
 
@@ -341,7 +404,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
         );
 
@@ -352,6 +416,74 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
 
         return $this->formatHtml($externalMediaPlayerFeatures, "external_media_player_features", $data);
+    }
+
+    public function getWaitingRoomFeatures()
+    {
+        $waitingRoomFeatures = array(
+            "is_active" => array(
+                "label" => JText::_("COM_PLUGNMEET_ACTIVATE_WAITING_ROOM"),
+                "des" => JText::_("COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0,
+                "type" => "select"
+            ),
+            "waiting_room_msg" => array(
+                "label" => JText::_("COM_PLUGNMEET_WAITING_ROOM_MESSAGE"),
+                "des" => JText::_("COM_PLUGNMEET_WAITING_ROOM_MESSAGE_DES"),
+                "default" => "",
+                "type" => "textarea"
+            )
+        );
+
+        $item = $this->getItem();
+        $data = [];
+        if (isset($item->room_metadata->waiting_room_features)) {
+            $data = (array)$item->room_metadata->waiting_room_features;
+        }
+
+        return $this->formatHtml($waitingRoomFeatures, "waiting_room_features", $data);
+    }
+
+    public function getBreakoutRoomFeatures()
+    {
+        $breakoutRoomFeatures = array(
+            "is_allow" => array(
+                "label" => JText::_("COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS"),
+                "des" => JText::_("COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1,
+                "type" => "select"
+            ),
+            "allowed_number_rooms" => array(
+                "label" => JText::_("COM_PLUGNMEET_NUMBER_OF_ROOMS"),
+                "des" => JText::_("COM_PLUGNMEET_NUMBER_OF_ROOMS_DES"),
+                "default" => 6,
+                "type" => "number"
+            )
+        );
+
+        $item = $this->getItem();
+        $data = [];
+        if (isset($item->room_metadata->breakout_room_features)) {
+            $data = (array)$item->room_metadata->breakout_room_features;
+        }
+
+        return $this->formatHtml($breakoutRoomFeatures, "breakout_room_features", $data);
     }
 
     public function getDefaultLockSettings()
@@ -368,7 +500,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
             ),
             "lock_webcam" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_WEBCAM"),
@@ -381,7 +514,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
             ),
             "lock_screen_sharing" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_SCREEN_SHARING"),
@@ -394,7 +528,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "lock_whiteboard" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_WHITEBOARD"),
@@ -407,7 +542,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "lock_shared_notepad" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_SHARED_NOTEPAD"),
@@ -420,7 +556,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 1
+                "selected" => 1,
+                "type" => "select"
             ),
             "lock_chat" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_CHAT"),
@@ -433,7 +570,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
             ),
             "lock_chat_send_message" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_CHAT_SEND_MESSAGE"),
@@ -446,7 +584,8 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
             ),
             "lock_chat_file_share" => array(
                 "label" => JText::_("COM_PLUGNMEET_LOCK_CHAT_SEND_FILE"),
@@ -459,7 +598,22 @@ class PlugnmeetModelRoom extends JModelAdmin
                         "label" => JText::_("COM_PLUGNMEET_NO"),
                         "value" => 0
                     )),
-                "selected" => 0
+                "selected" => 0,
+                "type" => "select"
+            ),
+            "lock_chat_file_share" => array(
+                "label" => JText::_("COM_PLUGNMEET_LOCK_PRIVATE_CHAT"),
+                "des" => JText::_("COM_PLUGNMEET_LOCK_PRIVATE_CHAT_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 0,
+                "type" => "select"
             ),
         );
 
@@ -476,7 +630,7 @@ class PlugnmeetModelRoom extends JModelAdmin
     {
         $item = $this->getItem();
         $form = JForm::getInstance("custom_design", JPATH_ADMINISTRATOR . "/components/com_plugnmeet/models/forms/design_fields.xml", array("control" => "jform"));
-        
+
         if (isset($item->room_metadata->custom_design)) {
             $form->bind((array)$item->room_metadata->custom_design);
         }
@@ -1283,6 +1437,12 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
         if (isset($jform['external_media_player_features'])) {
             $data['room_metadata']['external_media_player_features'] = $jform['external_media_player_features'];
+        }
+        if (isset($jform['waiting_room_features'])) {
+            $data['room_metadata']['waiting_room_features'] = $jform['waiting_room_features'];
+        }
+        if (isset($jform['breakout_room_features'])) {
+            $data['room_metadata']['breakout_room_features'] = $jform['breakout_room_features'];
         }
         if (isset($jform['default_lock_settings'])) {
             $data['room_metadata']['default_lock_settings'] = $jform['default_lock_settings'];

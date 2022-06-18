@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	edit.php
- * @version		1.0.5
+ * @version		1.0.6
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -74,6 +74,10 @@ $componentParams = $this->params; // will be removed just use $this->params inst
 								<?php echo $this->get("WhiteboardFeatures"); ?>
 				<hr />
 								<?php echo $this->get("ExternalMediaPlayerFeatures"); ?>
+				<hr />
+								<?php echo $this->get("WaitingRoomFeatures"); ?>
+				<hr />
+								<?php echo $this->get("BreakoutRoomFeatures"); ?>
 			</div>
 		</div>
 	<?php echo JHtml::_('bootstrap.endTab'); ?>

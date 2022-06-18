@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	view.html.php
- * @version		1.0.5
+ * @version		1.0.6
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -67,7 +67,6 @@ class PlugnmeetViewRoom extends JViewLegacy
         $path = JUri::root() . "components/com_plugnmeet/assets/client/dist/assets";
 
         $js = 'window.PLUG_N_MEET_SERVER_URL = "' . $params->get("plugnmeet_server_url") . '";';
-        $js .= 'window.LIVEKIT_SERVER_URL = "' . $params->get("livekit_server_url") . '";';
         $js .= 'window.STATIC_ASSETS_PATH = "' . $path . '";';
 
         $js .= 'Window.ENABLE_DYNACAST = ' . filter_var($params->get("enable_dynacast"), FILTER_VALIDATE_BOOLEAN) . ';';

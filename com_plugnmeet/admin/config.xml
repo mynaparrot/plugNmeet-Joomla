@@ -105,24 +105,6 @@
 			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_MESSAGE"
 			autocomplete="on"
 		/>
-		<!-- Livekit_server_url Field. Type: Url. (joomla) -->
-		<field
-			type="url"
-			name="livekit_server_url"
-			label="COM_PLUGNMEET_CONFIG_LIVEKIT_SERVER_URL_LABEL"
-			size="10"
-			maxlength="50"
-			default="https://lk.plugnmeet.com"
-			description="COM_PLUGNMEET_CONFIG_LIVEKIT_SERVER_URL_DESCRIPTION"
-			class="text_area"
-			required="true"
-			relative="false"
-			filter="url"
-			validated="url"
-			scheme="http,https,ws,wss"
-			message="COM_PLUGNMEET_CONFIG_LIVEKIT_SERVER_URL_MESSAGE"
-			autocomplete="on"
-		/>
 		<!-- Client_download_url Field. Type: Url. (joomla) -->
 		<field
 			type="url"

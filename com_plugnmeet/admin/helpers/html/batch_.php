@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	batch_.php
- * @version		1.0.5
+ * @version		1.0.6
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
