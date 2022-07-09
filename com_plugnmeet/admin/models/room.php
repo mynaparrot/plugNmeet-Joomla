@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.6
+ * @version		1.0.7
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -484,6 +484,34 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
 
         return $this->formatHtml($breakoutRoomFeatures, "breakout_room_features", $data);
+    }
+
+    public function getDisplayExternalLinkFeatures()
+    {
+        $displayExternalLinkFeatures = array(
+            "is_allow" => array(
+                "label" => JText::_("COM_PLUGNMEET_ALLOW_DISPLAY_EXTERNAL_LINK"),
+                "des" => JText::_("COM_PLUGNMEET_ALLOW_DISPLAY_EXTERNAL_LINK_DES"),
+                "options" => array(
+                    array(
+                        "label" => JText::_("COM_PLUGNMEET_YES"),
+                        "value" => 1
+                    ), array(
+                        "label" => JText::_("COM_PLUGNMEET_NO"),
+                        "value" => 0
+                    )),
+                "selected" => 1,
+                "type" => "select"
+            )
+        );
+
+        $item = $this->getItem();
+        $data = [];
+        if (isset($item->room_metadata->display_external_link_features)) {
+            $data = (array)$item->room_metadata->display_external_link_features;
+        }
+
+        return $this->formatHtml($displayExternalLinkFeatures, "display_external_link_features", $data);
     }
 
     public function getDefaultLockSettings()
@@ -1443,6 +1471,9 @@ class PlugnmeetModelRoom extends JModelAdmin
         }
         if (isset($jform['breakout_room_features'])) {
             $data['room_metadata']['breakout_room_features'] = $jform['breakout_room_features'];
+        }
+        if (isset($jform['display_external_link_features'])) {
+            $data['room_metadata']['display_external_link_features'] = $jform['display_external_link_features'];
         }
         if (isset($jform['default_lock_settings'])) {
             $data['room_metadata']['default_lock_settings'] = $jform['default_lock_settings'];
