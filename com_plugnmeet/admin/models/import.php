@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	import.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -13,15 +13,16 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\Utilities\ArrayHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
- * Plugnmeet Import Model
+ * Plugnmeet Import Base Database Model
  */
-class PlugnmeetModelImport extends JModelLegacy
+class PlugnmeetModelImport extends BaseDatabaseModel
 {
 	// set uploading values
 	protected $use_streams = false;

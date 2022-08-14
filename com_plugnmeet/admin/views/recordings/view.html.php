@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	view.html.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -13,10 +13,12 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\MVC\View\HtmlView;
+
 /**
- * Plugnmeet View class for the Recordings
+ * Plugnmeet Html View class for the Recordings
  */
-class PlugnmeetViewRecordings extends JViewLegacy
+class PlugnmeetViewRecordings extends HtmlView
 {
 	// Overwriting JView display method
 	function display($tpl = null)

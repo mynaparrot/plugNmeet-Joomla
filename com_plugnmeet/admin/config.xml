@@ -105,6 +105,20 @@
 			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_MESSAGE"
 			autocomplete="on"
 		/>
+		<!-- Client_load Field. Type: List. (joomla) -->
+		<field
+			type="list"
+			name="client_load"
+			label="COM_PLUGNMEET_CONFIG_CLIENT_LOAD_LABEL"
+			class="list_class"
+			multiple="false"
+			default="1">
+			<!-- Option Set. -->
+			<option value="1">
+				COM_PLUGNMEET_CONFIG_REMOTE</option>
+			<option value="2">
+				COM_PLUGNMEET_CONFIG_LOCAL</option>
+		</field>
 		<!-- Client_download_url Field. Type: Url. (joomla) -->
 		<field
 			type="url"
@@ -119,6 +133,7 @@
 			validated="url"
 			scheme="http,https"
 			autocomplete="on"
+			showon="client_load:2"
 		/>
 	</fieldset>
 	<fieldset

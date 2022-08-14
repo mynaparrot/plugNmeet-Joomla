@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	room.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -13,12 +13,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\Utilities\ArrayHelper;
 
 /**
- * Plugnmeet Room Controller
+ * Plugnmeet Room Form Controller
  */
-class PlugnmeetControllerRoom extends JControllerForm
+class PlugnmeetControllerRoom extends FormController
 {
 	/**
 	 * Current or most recently performed task.

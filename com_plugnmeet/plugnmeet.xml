@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="4" method="upgrade">
 	<name>COM_PLUGNMEET</name>
-	<creationDate>12th July, 2022</creationDate>
+	<creationDate>14th August, 2022</creationDate>
 	<author>Jibon L. Costa</author>
 	<authorEmail>jibon@mynaparrot.com</authorEmail>
 	<authorUrl>https://www.plugnmeet.org</authorUrl>
 	<copyright>Copyright (C) 2022 mynaparrot. All Rights Reserved</copyright>
 	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<description><![CDATA[
-		<h1>plugNmeet (v.1.0.7)</h1>
+		<h1>plugNmeet (v.1.0.8)</h1>
 		<div style="clear: both;"></div>
 		<p>Plug N Meet</p>
 		<p>Created by <a href="https://www.plugnmeet.org" target="_blank">Jibon L. Costa</a><br /><small>Development started 4th February, 2022</small></p>

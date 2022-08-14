@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	recordings.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -13,14 +13,22 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\MVC\Controller\AdminController;
 use Joomla\Utilities\ArrayHelper;
 
 /**
- * Recordings Controller
+ * Recordings Admin Controller
  */
-class PlugnmeetControllerRecordings extends JControllerAdmin
+class PlugnmeetControllerRecordings extends AdminController
 {
+	/**
+	 * The prefix to use with controller messages.
+	 *
+	 * @var    string
+	 * @since  1.6
+	 */
 	protected $text_prefix = 'COM_PLUGNMEET_RECORDINGS';
+
 	/**
 	 * Proxy for getModel.
 	 * @since	2.5
@@ -32,7 +40,7 @@ class PlugnmeetControllerRecordings extends JControllerAdmin
 		return $model;
 	}
 
-        public function dashboard()
+	public function dashboard()
 	{
 		$this->setRedirect(JRoute::_('index.php?option=com_plugnmeet', false));
 		return;

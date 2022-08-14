@@ -19,11 +19,23 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-$clientPath = JPATH_ROOT . "/components/com_plugnmeet/assets/client/dist/assets";
-$jsFiles = preg_grep('~\.(js)$~', scandir($clientPath . "/js", SCANDIR_SORT_DESCENDING));
-$cssFiles = preg_grep('~\.(css)$~', scandir($clientPath . "/css", SCANDIR_SORT_DESCENDING));
+$params = JComponentHelper::getParams("com_plugnmeet");
+if ($params->get("client_load", 1) == 1) {
+    if (!class_exists("plugNmeetConnect")) {
+        require JPATH_ROOT . '/administrator/components/com_plugnmeet/helpers/plugNmeetConnect.php';
+    }
+    $connect = new plugNmeetConnect();
+    $files = $connect->getClientFiles();
+    $jsFiles = $files->getJSFiles() ?? [];
+    $cssFiles = $files->getCSSFiles() ?? [];
+    $path = $params->get("plugnmeet_server_url") . "/assets";
+} else {
+    $clientPath = JPATH_ROOT . "/components/com_plugnmeet/assets/client/dist/assets";
+    $jsFiles = preg_grep('~\.(js)$~', scandir($clientPath . "/js", SCANDIR_SORT_DESCENDING));
+    $cssFiles = preg_grep('~\.(css)$~', scandir($clientPath . "/css", SCANDIR_SORT_DESCENDING));
+    $path = JUri::root() . "components/com_plugnmeet/assets/client/dist/assets";
+}
 
-$path = JUri::root() . "components/com_plugnmeet/assets/client/dist/assets";
 $jsTag = "";
 foreach ($jsFiles as $file) {
     $jsTag .= '<script src="' . $path . '/js/' . $file . '" defer="defer"></script>' . "\n\t";

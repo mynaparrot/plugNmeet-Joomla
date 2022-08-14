@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	view.html.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>

@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	plugnmeet.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -13,12 +13,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-
+use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Utilities\ArrayHelper;
 
 /**
- * Plugnmeet Model
+ * Plugnmeet List Model
  */
-class PlugnmeetModelPlugnmeet extends JModelList
+class PlugnmeetModelPlugnmeet extends ListModel
 {
 	public function getIcons()
 	{

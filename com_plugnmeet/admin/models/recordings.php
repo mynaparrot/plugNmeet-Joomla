@@ -2,7 +2,7 @@
 /**
  * @package 	plugNmeet
  * @subpackage	recordings.php
- * @version		1.0.7
+ * @version		1.0.8
  * @created		4th February, 2022
  * @author		Jibon L. Costa <https://www.plugnmeet.org>
  * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
@@ -13,12 +13,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Utilities\ArrayHelper;
 
 /**
- * Plugnmeet Model for Recordings
+ * Plugnmeet List Model for Recordings
  */
-class PlugnmeetModelRecordings extends JModelList
+class PlugnmeetModelRecordings extends ListModel
 {
 	/**
 	 * Model user data.
