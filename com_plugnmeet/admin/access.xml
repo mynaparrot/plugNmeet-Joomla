@@ -29,7 +29,6 @@
 		<action name="room.submenu" title="COM_PLUGNMEET_ROOMS_SUBMENU" description="COM_PLUGNMEET_ROOMS_SUBMENU_DESC" />
 		<action name="site.room.access" title="COM_PLUGNMEET_SINGLE_ROOM_ACCESS_SITE" description="COM_PLUGNMEET_SINGLE_ROOM_ACCESS_SITE_DESC" />
 	</section>
-
 	<section name="category.rooms">
 		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
 		<action name="core.delete" title="JACTION_DELETE" description="COM_CATEGORIES_ACCESS_DELETE_DESC" />

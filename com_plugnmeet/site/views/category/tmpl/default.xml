@@ -11,17 +11,15 @@
 			addrulepath="/administrator/components/com_plugnmeet/models/rules"
 			addfieldpath="/administrator/components/com_plugnmeet/models/fields">
 			
-		<!-- Category_request_id Field. Type: Roomcats. (custom) -->
-		<field
-			type="roomcats"
-			name="id"
-			label="COM_PLUGNMEET_CONFIG_CATEGORY_REQUEST_ID_LABEL"
-			class="list_class"
-			multiple="false"
-			default="0"
-			button="false"
-			display="menu"
-		/>
+		<!--  Category_request_id Field. Type: Roomcats. (custom) -->
+	<field type="roomcats"
+               name="id"
+               label="COM_PLUGNMEET_CONFIG_CATEGORY_REQUEST_ID_LABEL"
+               class="list_class"
+               multiple="false"
+               default="0"
+               button="false"
+               display="menu" />
 		</fieldset>
 	</fields>
 </metadata>

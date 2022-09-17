@@ -53,308 +53,247 @@
 		name="plugnmeet_config_custom_config"
 		label="COM_PLUGNMEET_CONFIG_PLUGNMEET_CONFIG">
 
-		<!-- Plugnmeet_server_url Field. Type: Url. (joomla) -->
-		<field
-			type="url"
-			name="plugnmeet_server_url"
-			label="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_LABEL"
-			size="10"
-			maxlength="50"
-			default="https://demo.plugnmeet.com"
-			description="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_DESCRIPTION"
-			class="text_area"
-			required="true"
-			relative="false"
-			filter="url"
-			validated="url"
-			scheme="http,https,ws,wss"
-			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_MESSAGE"
-			autocomplete="on"
-		/>
-		<!-- Plugnmeet_api_key Field. Type: Text. (joomla) -->
-		<field
-			type="text"
-			name="plugnmeet_api_key"
-			label="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_LABEL"
-			size="10"
-			maxlength="50"
-			default="plugnmeet"
-			description="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_DESCRIPTION"
-			class="text_area"
-			readonly="false"
-			disabled="false"
-			required="true"
-			filter="STRING"
-			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_MESSAGE"
-			autocomplete="on"
-		/>
-		<!-- Plugnmeet_secret Field. Type: Text. (joomla) -->
-		<field
-			type="text"
-			name="plugnmeet_secret"
-			label="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_LABEL"
-			size="10"
-			maxlength="50"
-			default="zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6"
-			description="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_DESCRIPTION"
-			class="text_area"
-			readonly="false"
-			disabled="false"
-			required="true"
-			filter="STRING"
-			message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_MESSAGE"
-			autocomplete="on"
-		/>
-		<!-- Client_load Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="client_load"
-			label="COM_PLUGNMEET_CONFIG_CLIENT_LOAD_LABEL"
-			class="list_class"
-			multiple="false"
-			default="1">
-			<!-- Option Set. -->
-			<option value="1">
-				COM_PLUGNMEET_CONFIG_REMOTE</option>
-			<option value="2">
-				COM_PLUGNMEET_CONFIG_LOCAL</option>
-		</field>
-		<!-- Client_download_url Field. Type: Url. (joomla) -->
-		<field
-			type="url"
-			name="client_download_url"
-			label="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_LABEL"
-			size="10"
-			default="https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip"
-			description="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_DESCRIPTION"
-			class="text_area"
-			relative="false"
-			filter="url"
-			validated="url"
-			scheme="http,https"
-			autocomplete="on"
-			showon="client_load:2"
-		/>
+		<!--  Plugnmeet_server_url Field. Type: Url. (joomla) -->
+	<field type="url"
+               name="plugnmeet_server_url"
+               label="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_LABEL"
+               size="10"
+               maxlength="50"
+               default="https://demo.plugnmeet.com"
+               description="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_DESCRIPTION"
+               class="text_area"
+               required="true"
+               relative="false"
+               filter="url"
+               validated="url"
+               scheme="http,https,ws,wss"
+               message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_MESSAGE"
+               autocomplete="on" />
+		<!--  Plugnmeet_api_key Field. Type: Text. (joomla) -->
+	<field type="text"
+               name="plugnmeet_api_key"
+               label="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_LABEL"
+               size="10"
+               maxlength="50"
+               default="plugnmeet"
+               description="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_DESCRIPTION"
+               class="text_area"
+               readonly="false"
+               disabled="false"
+               required="true"
+               filter="STRING"
+               message="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_MESSAGE"
+               autocomplete="on" />
+		<!--  Plugnmeet_secret Field. Type: Text. (joomla) -->
+	<field type="text"
+               name="plugnmeet_secret"
+               label="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_LABEL"
+               size="10"
+               maxlength="50"
+               default="zumyyYWqv7KR2kUqvYdq4z4sXg7XTBD2ljT6"
+               description="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_DESCRIPTION"
+               class="text_area"
+               readonly="false"
+               disabled="false"
+               required="true"
+               filter="STRING"
+               message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_MESSAGE"
+               autocomplete="on" />
+		<!--  Client_load Field. Type: List. (joomla) -->
+	<field type="list"
+               name="client_load"
+               label="COM_PLUGNMEET_CONFIG_CLIENT_LOAD_LABEL"
+               class="list_class"
+               multiple="false"
+               default="1">
+                <!-- Option Set.-->
+                <option value="1">COM_PLUGNMEET_CONFIG_REMOTE</option>
+                <option value="2">COM_PLUGNMEET_CONFIG_LOCAL</option>
+        </field>
+		<!--  Client_download_url Field. Type: Url. (joomla) -->
+	<field type="url"
+               name="client_download_url"
+               label="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_LABEL"
+               size="10"
+               default="https://github.com/mynaparrot/plugNmeet-client/releases/latest/download/client.zip"
+               description="COM_PLUGNMEET_CONFIG_CLIENT_DOWNLOAD_URL_DESCRIPTION"
+               class="text_area"
+               relative="false"
+               filter="url"
+               validated="url"
+               scheme="http,https"
+               autocomplete="on"
+               showon="client_load:2" />
 	</fieldset>
 	<fieldset
 		name="plugnmeet_options_custom_config"
 		label="COM_PLUGNMEET_CONFIG_PLUGNMEET_OPTIONS">
 
-		<!-- Enable_dynacast Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="enable_dynacast"
-			label="COM_PLUGNMEET_CONFIG_ENABLE_DYNACAST_LABEL"
-			class="list_class"
-			multiple="false"
-			required="true"
-			default="true">
-			<!-- Option Set. -->
-			<option value="true">
-				COM_PLUGNMEET_CONFIG_TRUE</option>
-			<option value="false">
-				COM_PLUGNMEET_CONFIG_FALSE</option>
-		</field>
-		<!-- Enable_simulcast Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="enable_simulcast"
-			label="COM_PLUGNMEET_CONFIG_ENABLE_SIMULCAST_LABEL"
-			class="list_class"
-			multiple="false"
-			default="true">
-			<!-- Option Set. -->
-			<option value="true">
-				COM_PLUGNMEET_CONFIG_TRUE</option>
-			<option value="false">
-				COM_PLUGNMEET_CONFIG_FALSE</option>
-		</field>
-		<!-- Video_codec Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="video_codec"
-			label="COM_PLUGNMEET_CONFIG_VIDEO_CODEC_LABEL"
-			description="COM_PLUGNMEET_CONFIG_VIDEO_CODEC_DESCRIPTION"
-			class="list_class"
-			multiple="false"
-			default="vp8">
-			<!-- Option Set. -->
-			<option value="av1">
-				COM_PLUGNMEET_CONFIG_AVONE</option>
-			<option value="h264">
-				COM_PLUGNMEET_CONFIG_HTWO_HUNDRED_AND_SIXTY_FOUR</option>
-			<option value="vp8">
-				COM_PLUGNMEET_CONFIG_VPEIGHT</option>
-			<option value="vp9">
-				COM_PLUGNMEET_CONFIG_VPNINE</option>
-		</field>
-		<!-- Stop_mic_track_on_mute Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="stop_mic_track_on_mute"
-			label="COM_PLUGNMEET_CONFIG_STOP_MIC_TRACK_ON_MUTE_LABEL"
-			class="list_class"
-			multiple="false"
-			default="true">
-			<!-- Option Set. -->
-			<option value="true">
-				COM_PLUGNMEET_CONFIG_TRUE</option>
-			<option value="false">
-				COM_PLUGNMEET_CONFIG_FALSE</option>
-		</field>
-		<!-- Default_webcam_resolution Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="default_webcam_resolution"
-			label="COM_PLUGNMEET_CONFIG_DEFAULT_WEBCAM_RESOLUTION_LABEL"
-			description="COM_PLUGNMEET_CONFIG_DEFAULT_WEBCAM_RESOLUTION_DESCRIPTION"
-			class="list_class"
-			multiple="false"
-			default="h720">
-			<!-- Option Set. -->
-			<option value="h90">
-				COM_PLUGNMEET_CONFIG_HNINETY</option>
-			<option value="h180">
-				COM_PLUGNMEET_CONFIG_HONE_HUNDRED_AND_EIGHTY</option>
-			<option value="h216">
-				COM_PLUGNMEET_CONFIG_HTWO_HUNDRED_AND_SIXTEEN</option>
-			<option value="h360">
-				COM_PLUGNMEET_CONFIG_HTHREE_HUNDRED_AND_SIXTY</option>
-			<option value="h540">
-				COM_PLUGNMEET_CONFIG_HFIVE_HUNDRED_AND_FORTY</option>
-			<option value="h720">
-				COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTY</option>
-			<option value="h1080">
-				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTY</option>
-			<option value="h1440">
-				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_FOUR_HUNDRED_AND_FORTY</option>
-			<option value="h2160">
-				COM_PLUGNMEET_CONFIG_HTWO_THOUSAND_ONE_HUNDRED_AND_SIXTY</option>
-		</field>
-		<!-- Default_screen_share_resolution Field. Type: List. (joomla) -->
-		<field
-			type="list"
-			name="default_screen_share_resolution"
-			label="COM_PLUGNMEET_CONFIG_DEFAULT_SCREEN_SHARE_RESOLUTION_LABEL"
-			description="COM_PLUGNMEET_CONFIG_DEFAULT_SCREEN_SHARE_RESOLUTION_DESCRIPTION"
-			class="list_class"
-			multiple="false"
-			default="h1080fps15">
-			<!-- Option Set. -->
-			<option value="h360fps3">
-				COM_PLUGNMEET_CONFIG_HTHREE_HUNDRED_AND_SIXTYFPSTHREE</option>
-			<option value="h720fps5">
-				COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTYFPSFIVE</option>
-			<option value="h720fps15">
-				COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTYFPSFIFTEEN</option>
-			<option value="h1080fps15">
-				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTYFPSFIFTEEN</option>
-			<option value="h1080fps30">
-				COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTYFPSTHIRTY</option>
-		</field>
-		<!-- Logo Field. Type: Media. (joomla) -->
-		<field
-			type="media"
-			name="logo"
-			label="COM_PLUGNMEET_CONFIG_LOGO_LABEL"
-			description="COM_PLUGNMEET_CONFIG_LOGO_DESCRIPTION"
-			directory=""
-			preview="false"
-		/>
+		<!--  Enable_dynacast Field. Type: List. (joomla) -->
+	<field type="list"
+               name="enable_dynacast"
+               label="COM_PLUGNMEET_CONFIG_ENABLE_DYNACAST_LABEL"
+               class="list_class"
+               multiple="false"
+               required="true"
+               default="true">
+                <!-- Option Set.-->
+                <option value="true">COM_PLUGNMEET_CONFIG_TRUE</option>
+                <option value="false">COM_PLUGNMEET_CONFIG_FALSE</option>
+        </field>
+		<!--  Enable_simulcast Field. Type: List. (joomla) -->
+	<field type="list"
+               name="enable_simulcast"
+               label="COM_PLUGNMEET_CONFIG_ENABLE_SIMULCAST_LABEL"
+               class="list_class"
+               multiple="false"
+               default="true">
+                <!-- Option Set.-->
+                <option value="true">COM_PLUGNMEET_CONFIG_TRUE</option>
+                <option value="false">COM_PLUGNMEET_CONFIG_FALSE</option>
+        </field>
+		<!--  Video_codec Field. Type: List. (joomla) -->
+	<field type="list"
+               name="video_codec"
+               label="COM_PLUGNMEET_CONFIG_VIDEO_CODEC_LABEL"
+               description="COM_PLUGNMEET_CONFIG_VIDEO_CODEC_DESCRIPTION"
+               class="list_class"
+               multiple="false"
+               default="vp8">
+                <!-- Option Set.-->
+                <option value="av1">COM_PLUGNMEET_CONFIG_AVONE</option>
+                <option value="h264">COM_PLUGNMEET_CONFIG_HTWO_HUNDRED_AND_SIXTY_FOUR</option>
+                <option value="vp8">COM_PLUGNMEET_CONFIG_VPEIGHT</option>
+                <option value="vp9">COM_PLUGNMEET_CONFIG_VPNINE</option>
+        </field>
+		<!--  Stop_mic_track_on_mute Field. Type: List. (joomla) -->
+	<field type="list"
+               name="stop_mic_track_on_mute"
+               label="COM_PLUGNMEET_CONFIG_STOP_MIC_TRACK_ON_MUTE_LABEL"
+               class="list_class"
+               multiple="false"
+               default="true">
+                <!-- Option Set.-->
+                <option value="true">COM_PLUGNMEET_CONFIG_TRUE</option>
+                <option value="false">COM_PLUGNMEET_CONFIG_FALSE</option>
+        </field>
+		<!--  Default_webcam_resolution Field. Type: List. (joomla) -->
+	<field type="list"
+               name="default_webcam_resolution"
+               label="COM_PLUGNMEET_CONFIG_DEFAULT_WEBCAM_RESOLUTION_LABEL"
+               description="COM_PLUGNMEET_CONFIG_DEFAULT_WEBCAM_RESOLUTION_DESCRIPTION"
+               class="list_class"
+               multiple="false"
+               default="h720">
+                <!-- Option Set.-->
+                <option value="h90">COM_PLUGNMEET_CONFIG_HNINETY</option>
+                <option value="h180">COM_PLUGNMEET_CONFIG_HONE_HUNDRED_AND_EIGHTY</option>
+                <option value="h216">COM_PLUGNMEET_CONFIG_HTWO_HUNDRED_AND_SIXTEEN</option>
+                <option value="h360">COM_PLUGNMEET_CONFIG_HTHREE_HUNDRED_AND_SIXTY</option>
+                <option value="h540">COM_PLUGNMEET_CONFIG_HFIVE_HUNDRED_AND_FORTY</option>
+                <option value="h720">COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTY</option>
+                <option value="h1080">COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTY</option>
+                <option value="h1440">COM_PLUGNMEET_CONFIG_HONE_THOUSAND_FOUR_HUNDRED_AND_FORTY</option>
+                <option value="h2160">COM_PLUGNMEET_CONFIG_HTWO_THOUSAND_ONE_HUNDRED_AND_SIXTY</option>
+        </field>
+		<!--  Default_screen_share_resolution Field. Type: List. (joomla) -->
+	<field type="list"
+               name="default_screen_share_resolution"
+               label="COM_PLUGNMEET_CONFIG_DEFAULT_SCREEN_SHARE_RESOLUTION_LABEL"
+               description="COM_PLUGNMEET_CONFIG_DEFAULT_SCREEN_SHARE_RESOLUTION_DESCRIPTION"
+               class="list_class"
+               multiple="false"
+               default="h1080fps15">
+                <!-- Option Set.-->
+                <option value="h360fps3">COM_PLUGNMEET_CONFIG_HTHREE_HUNDRED_AND_SIXTYFPSTHREE</option>
+                <option value="h720fps5">COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTYFPSFIVE</option>
+                <option value="h720fps15">COM_PLUGNMEET_CONFIG_HSEVEN_HUNDRED_AND_TWENTYFPSFIFTEEN</option>
+                <option value="h1080fps15">COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTYFPSFIFTEEN</option>
+                <option value="h1080fps30">COM_PLUGNMEET_CONFIG_HONE_THOUSAND_AND_EIGHTYFPSTHIRTY</option>
+        </field>
+		<!--  Logo Field. Type: Media. (joomla) -->
+	<field type="media"
+               name="logo"
+               label="COM_PLUGNMEET_CONFIG_LOGO_LABEL"
+               description="COM_PLUGNMEET_CONFIG_LOGO_DESCRIPTION"
+               directory=""
+               preview="false" />
 	</fieldset>
 	<fieldset
 		name="design_customization_custom_config"
 		label="COM_PLUGNMEET_CONFIG_DESIGN_CUSTOMIZATION">
 
-		<!-- Custom_css_url Field. Type: Url. (joomla) -->
-		<field
-			type="url"
-			name="custom_css_url"
-			label="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_LABEL"
-			size="10"
-			maxlength="500"
-			default=""
-			description="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_DESCRIPTION"
-			class="text_area"
-			relative="false"
-			filter="url"
-			validated="url"
-			scheme="http,https"
-			message="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_MESSAGE"
-			autocomplete="on"
-		/>
-		<!-- Primary_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="primary_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_DESCRIPTION"
-			required="false"
-		/>
-		<!-- Secondary_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="secondary_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_DESCRIPTION"
-			required="false"
-		/>
-		<!-- Background_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="background_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_DESCRIPTION"
-			required="false"
-		/>
-		<!-- Background_image Field. Type: Media. (joomla) -->
-		<field
-			type="media"
-			name="background_image"
-			label="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_LABEL"
-			description="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_DESCRIPTION"
-			directory=""
-			preview="false"
-		/>
-		<!-- Header_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="header_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_HEADER_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_HEADER_COLOR_DESCRIPTION"
-			required="false"
-		/>
-		<!-- Footer_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="footer_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_DESCRIPTION"
-			required="false"
-		/>
-		<!-- Left_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="left_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_LEFT_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_LEFT_COLOR_DESCRIPTION"
-			required="false"
-		/>
-		<!-- Right_color Field. Type: Color. (joomla) -->
-		<field
-			type="color"
-			name="right_color"
-			default=""
-			label="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_LABEL"
-			description="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_DESCRIPTION"
-			required="false"
-		/>
+		<!--  Custom_css_url Field. Type: Url. (joomla) -->
+	<field type="url"
+               name="custom_css_url"
+               label="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_LABEL"
+               size="10"
+               maxlength="500"
+               default=""
+               description="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_DESCRIPTION"
+               class="text_area"
+               relative="false"
+               filter="url"
+               validated="url"
+               scheme="http,https"
+               message="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_MESSAGE"
+               autocomplete="on" />
+		<!--  Primary_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="primary_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_DESCRIPTION"
+               required="false" />
+		<!--  Secondary_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="secondary_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_DESCRIPTION"
+               required="false" />
+		<!--  Background_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="background_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_DESCRIPTION"
+               required="false" />
+		<!--  Background_image Field. Type: Media. (joomla) -->
+	<field type="media"
+               name="background_image"
+               label="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_LABEL"
+               description="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_DESCRIPTION"
+               directory=""
+               preview="false" />
+		<!--  Header_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="header_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_HEADER_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_HEADER_COLOR_DESCRIPTION"
+               required="false" />
+		<!--  Footer_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="footer_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_DESCRIPTION"
+               required="false" />
+		<!--  Left_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="left_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_LEFT_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_LEFT_COLOR_DESCRIPTION"
+               required="false" />
+		<!--  Right_color Field. Type: Color. (joomla) -->
+	<field type="color"
+               name="right_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_DESCRIPTION"
+               required="false" />
 	</fieldset>
 	<fieldset
 		name="permissions"

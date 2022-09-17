@@ -1,14 +1,5 @@
 <?php
-/**
- * @package 	plugNmeet
- * @subpackage	view.html.php
- * @version		1.0.8
- * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.org>
- * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
- * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
- * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
- */
+
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -32,7 +23,7 @@ class PlugnmeetViewRoom extends HtmlView
 		// Initialise variables.
 		$this->item = $this->get('Item');
 		
-		/***[JCBGUI.site_view.php_jview_display.28.$$$$]***/
+		/***[JCBGUI.site_view.php_jview_display.2.$$$$]***/
 		$this->displayPageTitle();/***[/JCBGUI$$$$]***/
 		
 
@@ -52,7 +43,7 @@ class PlugnmeetViewRoom extends HtmlView
 	}
 
 
-/***[JCBGUI.site_view.php_jview.28.$$$$]***/
+/***[JCBGUI.site_view.php_jview.2.$$$$]***/
     public function displayPageTitle()
     {
         if (preg_match("/room/", $this->menu->link)) {

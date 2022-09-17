@@ -11,17 +11,15 @@
 			addrulepath="/administrator/components/com_plugnmeet/models/rules"
 			addfieldpath="/administrator/components/com_plugnmeet/models/fields">
 			
-		<!-- Room_request_id Field. Type: Rooms. (custom) -->
-		<field
-			type="rooms"
-			name="id"
-			label="COM_PLUGNMEET_CONFIG_ROOM_REQUEST_ID_LABEL"
-			class="list_class"
-			multiple="false"
-			default="0"
-			required="true"
-			button="false"
-		/>
+		<!--  Room_request_id Field. Type: Rooms. (custom) -->
+	<field type="rooms"
+               name="id"
+               label="COM_PLUGNMEET_CONFIG_ROOM_REQUEST_ID_LABEL"
+               class="list_class"
+               multiple="false"
+               default="0"
+               required="true"
+               button="false" />
 		</fieldset>
 	</fields>
 </metadata>

@@ -1,14 +1,5 @@
 <?php
-/**
- * @package 	plugNmeet
- * @subpackage	default_vdm.php
- * @version		1.0.8
- * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.org>
- * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
- * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
- * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
- */
+
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -16,7 +7,7 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <img alt="<?php echo JText::_('COM_PLUGNMEET'); ?>" src="components/com_plugnmeet/assets/images/vdm-component.png">
 <ul class="list-striped">
-	<li><b><?php echo JText::_('COM_PLUGNMEET_VERSION'); ?>:</b> <?php echo $this->manifest->version; ?>&nbsp;&nbsp;<span class="update-notice" id="component-update-notice"></span></li>
+	<li><b><?php echo JText::_('COM_PLUGNMEET_VERSION'); ?>:</b> <?php echo $this->manifest->version; ?>&nbsp;&nbsp;<span class="update-notice"></span></li>
 	<li><b><?php echo JText::_('COM_PLUGNMEET_DATE'); ?>:</b> <?php echo $this->manifest->creationDate; ?></li>
 	<li><b><?php echo JText::_('COM_PLUGNMEET_AUTHOR'); ?>:</b> <a href="mailto:<?php echo $this->manifest->authorEmail; ?>"><?php echo $this->manifest->author; ?></a></li>
 	<li><b><?php echo JText::_('COM_PLUGNMEET_WEBSITE'); ?>:</b> <a href="<?php echo $this->manifest->authorUrl; ?>" target="_blank"><?php echo $this->manifest->authorUrl; ?></a></li>

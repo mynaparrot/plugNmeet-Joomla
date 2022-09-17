@@ -1,14 +1,5 @@
 <?php
-/**
- * @package 	plugNmeet
- * @subpackage	room.php
- * @version		1.0.8
- * @created		4th February, 2022
- * @author		Jibon L. Costa <https://www.plugnmeet.org>
- * @github		<https://github.com/mynaparrot/plugNmeet-Joomla>
- * @copyright	Copyright (C) 2022 mynaparrot. All Rights Reserved
- * @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
- */
+
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -79,7 +70,7 @@ class PlugnmeetModelRoom extends AdminModel
 	}
 
 
-/***[JCBGUI.admin_view.php_model.110.$$$$]***/
+/***[JCBGUI.admin_view.php_model.1.$$$$]***/
     private function formatHtml($items, $fieldName, $data)
     {
         $html = "";
@@ -704,7 +695,7 @@ class PlugnmeetModelRoom extends AdminModel
 			}
 
 
-/***[JCBGUI.admin_view.php_getitem.110.$$$$]***/
+/***[JCBGUI.admin_view.php_getitem.1.$$$$]***/
             if (empty($item->moderator_pass)) {
                 $item->moderator_pass = PlugnmeetHelper::secureRandomKey(8);
             }
@@ -1448,7 +1439,7 @@ class PlugnmeetModelRoom extends AdminModel
 		}
 
 
-/***[JCBGUI.admin_view.php_before_save.110.$$$$]***/
+/***[JCBGUI.admin_view.php_before_save.1.$$$$]***/
         $jform = $input->post->get("jform", array(), 'array');
         $data['room_metadata'] = array();
 
