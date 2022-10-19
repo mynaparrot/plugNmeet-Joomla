@@ -153,7 +153,7 @@ class com_plugnmeetInstallerScript
 			echo '<a target="_blank" href="https://www.plugnmeet.org" title="plugNmeet">
 				<img src="components/com_plugnmeet/assets/images/vdm-component.png"/>
 				</a>
-				<h3>Upgrade to Version 1.1.1 Was Successful! Let us know if anything is not working as expected.</h3>';
+				<h3>Upgrade to Version 1.1.2 Was Successful! Let us know if anything is not working as expected.</h3>';
 		}
 		return true;
 	}
