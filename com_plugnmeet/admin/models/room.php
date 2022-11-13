@@ -183,20 +183,6 @@ class PlugnmeetModelRoom extends AdminModel
                 "selected" => 1,
                 "type" => "select"
             ),
-            "allow_recording" => array(
-                "label" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING"),
-                "des" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING_DES"),
-                "options" => array(
-                    array(
-                        "label" => JText::_("COM_PLUGNMEET_YES"),
-                        "value" => 1
-                    ), array(
-                        "label" => JText::_("COM_PLUGNMEET_NO"),
-                        "value" => 0
-                    )),
-                "selected" => 1,
-                "type" => "select"
-            ),
             "allow_rtmp" => array(
                 "label" => JText::_("COM_PLUGNMEET_ALLOW_RTMP"),
                 "des" => JText::_("COM_PLUGNMEET_ALLOW_RTMP_DES"),
@@ -277,12 +263,82 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->room_features)) {
-            $data = (array)$item->room_metadata->room_features;
+        if (isset($item->room_metadata_tmp->room_features)) {
+            $data = (array)$item->room_metadata_tmp->room_features;
         }
 
         return $this->formatHtml($roomFeatures, "room_features", $data);
     }
+
+	public function getRecordingFeatures()
+	{
+		$recordingFeatures = array(
+			"is_allow" => array(
+				"label" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING"),
+				"des" => JText::_("COM_PLUGNMEET_ALLOW_RECORDING_DES"),
+				"options" => array(
+					array(
+						"label" => JText::_("COM_PLUGNMEET_YES"),
+						"value" => 1
+					), array(
+						"label" => JText::_("COM_PLUGNMEET_NO"),
+						"value" => 0
+					)),
+				"selected" => 1,
+				"type" => "select"
+			),
+			"is_allow_cloud" => array(
+				"label" => JText::_("COM_PLUGNMEET_ALLOW_CLOUD_RECORDING"),
+				"des" => JText::_("COM_PLUGNMEET_ALLOW_CLOUD_RECORDING_DES"),
+				"options" => array(
+					array(
+						"label" => JText::_("COM_PLUGNMEET_YES"),
+						"value" => 1
+					), array(
+						"label" => JText::_("COM_PLUGNMEET_NO"),
+						"value" => 0
+					)),
+				"selected" => 1,
+				"type" => "select"
+			),
+			"enable_auto_cloud_recording" => array(
+				"label" => JText::_("COM_PLUGNMEET_ENABLE_AUTO_START_CLOUD_RECORDING"),
+				"des" => JText::_("COM_PLUGNMEET_ENABLE_AUTO_START_CLOUD_RECORDING_DES"),
+				"options" => array(
+					array(
+						"label" => JText::_("COM_PLUGNMEET_YES"),
+						"value" => 1
+					), array(
+						"label" => JText::_("COM_PLUGNMEET_NO"),
+						"value" => 0
+					)),
+				"selected" => 0,
+				"type" => "select"
+			),
+			"is_allow_local" => array(
+				"label" => JText::_("COM_PLUGNMEET_ALLOW_LOCAL_RECORDING"),
+				"des" => JText::_("COM_PLUGNMEET_ALLOW_LOCAL_RECORDING_DES"),
+				"options" => array(
+					array(
+						"label" => JText::_("COM_PLUGNMEET_YES"),
+						"value" => 1
+					), array(
+						"label" => JText::_("COM_PLUGNMEET_NO"),
+						"value" => 0
+					)),
+				"selected" => 1,
+				"type" => "select"
+			),
+		);
+
+		$item = $this->getItem();
+		$data = [];
+		if (isset($item->room_metadata_tmp->recording_features)) {
+			$data = (array)$item->room_metadata_tmp->recording_features;
+		}
+
+		return $this->formatHtml($recordingFeatures, "recording_features", $data);
+	}
 
     public function getChatFeatures()
     {
@@ -319,8 +375,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->chat_features)) {
-            $data = (array)$item->room_metadata->chat_features;
+        if (isset($item->room_metadata_tmp->chat_features)) {
+            $data = (array)$item->room_metadata_tmp->chat_features;
         }
 
         return $this->formatHtml($chatFeatures, "chat_features", $data);
@@ -347,8 +403,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->shared_note_pad_features)) {
-            $data = (array)$item->room_metadata->shared_note_pad_features;
+        if (isset($item->room_metadata_tmp->shared_note_pad_features)) {
+            $data = (array)$item->room_metadata_tmp->shared_note_pad_features;
         }
 
         return $this->formatHtml($sharedNotePadFeatures, "shared_note_pad_features", $data);
@@ -375,8 +431,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->whiteboard_features)) {
-            $data = (array)$item->room_metadata->whiteboard_features;
+        if (isset($item->room_metadata_tmp->whiteboard_features)) {
+            $data = (array)$item->room_metadata_tmp->whiteboard_features;
         }
 
         return $this->formatHtml($whiteboardFeatures, "whiteboard_features", $data);
@@ -403,8 +459,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->external_media_player_features)) {
-            $data = (array)$item->room_metadata->external_media_player_features;
+        if (isset($item->room_metadata_tmp->external_media_player_features)) {
+            $data = (array)$item->room_metadata_tmp->external_media_player_features;
         }
 
         return $this->formatHtml($externalMediaPlayerFeatures, "external_media_player_features", $data);
@@ -437,8 +493,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->waiting_room_features)) {
-            $data = (array)$item->room_metadata->waiting_room_features;
+        if (isset($item->room_metadata_tmp->waiting_room_features)) {
+            $data = (array)$item->room_metadata_tmp->waiting_room_features;
         }
 
         return $this->formatHtml($waitingRoomFeatures, "waiting_room_features", $data);
@@ -471,8 +527,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->breakout_room_features)) {
-            $data = (array)$item->room_metadata->breakout_room_features;
+        if (isset($item->room_metadata_tmp->breakout_room_features)) {
+            $data = (array)$item->room_metadata_tmp->breakout_room_features;
         }
 
         return $this->formatHtml($breakoutRoomFeatures, "breakout_room_features", $data);
@@ -499,8 +555,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->display_external_link_features)) {
-            $data = (array)$item->room_metadata->display_external_link_features;
+        if (isset($item->room_metadata_tmp->display_external_link_features)) {
+            $data = (array)$item->room_metadata_tmp->display_external_link_features;
         }
 
         return $this->formatHtml($displayExternalLinkFeatures, "display_external_link_features", $data);
@@ -639,8 +695,8 @@ class PlugnmeetModelRoom extends AdminModel
 
         $item = $this->getItem();
         $data = [];
-        if (isset($item->room_metadata->default_lock_settings)) {
-            $data = (array)$item->room_metadata->default_lock_settings;
+        if (isset($item->room_metadata_tmp->default_lock_settings)) {
+            $data = (array)$item->room_metadata_tmp->default_lock_settings;
         }
 
         return $this->formatHtml($defaultLockSettings, "default_lock_settings", $data);
@@ -651,8 +707,8 @@ class PlugnmeetModelRoom extends AdminModel
         $item = $this->getItem();
         $form = JForm::getInstance("custom_design", JPATH_ADMINISTRATOR . "/components/com_plugnmeet/models/forms/design_fields.xml", array("control" => "jform"));
 
-        if (isset($item->room_metadata->custom_design)) {
-            $form->bind((array)$item->room_metadata->custom_design);
+        if (isset($item->room_metadata_tmp->custom_design)) {
+            $form->bind((array)$item->room_metadata_tmp->custom_design);
         }
 
         return $form->renderFieldset('plugnmeet_design_customization');
@@ -688,14 +744,11 @@ class PlugnmeetModelRoom extends AdminModel
 				$item->metadata = $registry->toArray();
 			}
 
-			if (!empty($item->room_metadata))
-			{
-				// JSON Decode room_metadata.
-				$item->room_metadata = json_decode($item->room_metadata);
-			}
-
 
 /***[JCBGUI.admin_view.php_getitem.1.$$$$]***/
+			if (!empty($item->room_metadata)){
+				$item->room_metadata_tmp = json_decode($item->room_metadata);
+			}
             if (empty($item->moderator_pass)) {
                 $item->moderator_pass = PlugnmeetHelper::secureRandomKey(8);
             }
@@ -1441,37 +1494,40 @@ class PlugnmeetModelRoom extends AdminModel
 
 /***[JCBGUI.admin_view.php_before_save.1.$$$$]***/
         $jform = $input->post->get("jform", array(), 'array');
-        $data['room_metadata'] = array();
+		$roomMetadata = array();
 
         if (isset($jform['room_features'])) {
-            $data['room_metadata']['room_features'] = $jform['room_features'];
+	        $roomMetadata['room_features'] = $jform['room_features'];
         }
+		if (isset($jform['recording_features'])) {
+			$roomMetadata['recording_features'] = $jform['recording_features'];
+		}
         if (isset($jform['chat_features'])) {
-            $data['room_metadata']['chat_features'] = $jform['chat_features'];
+	        $roomMetadata['chat_features'] = $jform['chat_features'];
         }
         if (isset($jform['shared_note_pad_features'])) {
-            $data['room_metadata']['shared_note_pad_features'] = $jform['shared_note_pad_features'];
+	        $roomMetadata['shared_note_pad_features'] = $jform['shared_note_pad_features'];
         }
         if (isset($jform['whiteboard_features'])) {
-            $data['room_metadata']['whiteboard_features'] = $jform['whiteboard_features'];
+	        $roomMetadata['whiteboard_features'] = $jform['whiteboard_features'];
         }
         if (isset($jform['external_media_player_features'])) {
-            $data['room_metadata']['external_media_player_features'] = $jform['external_media_player_features'];
+	        $roomMetadata['external_media_player_features'] = $jform['external_media_player_features'];
         }
         if (isset($jform['waiting_room_features'])) {
-            $data['room_metadata']['waiting_room_features'] = $jform['waiting_room_features'];
+	        $roomMetadata['waiting_room_features'] = $jform['waiting_room_features'];
         }
         if (isset($jform['breakout_room_features'])) {
-            $data['room_metadata']['breakout_room_features'] = $jform['breakout_room_features'];
+	        $roomMetadata['breakout_room_features'] = $jform['breakout_room_features'];
         }
         if (isset($jform['display_external_link_features'])) {
-            $data['room_metadata']['display_external_link_features'] = $jform['display_external_link_features'];
+	        $roomMetadata['display_external_link_features'] = $jform['display_external_link_features'];
         }
         if (isset($jform['default_lock_settings'])) {
-            $data['room_metadata']['default_lock_settings'] = $jform['default_lock_settings'];
+	        $roomMetadata['default_lock_settings'] = $jform['default_lock_settings'];
         }
 
-        $data['room_metadata']['custom_design'] = array(
+		$roomMetadata['custom_design'] = array(
             'custom_css_url' => $jform['custom_css_url'],
             'primary_color' => $jform['primary_color'],
             'secondary_color' => $jform['secondary_color'],
@@ -1483,6 +1539,7 @@ class PlugnmeetModelRoom extends AdminModel
             'left_color' => $jform['left_color'],
             'right_color' => $jform['right_color'],
         );
+		$data['room_metadata'] = json_encode($roomMetadata);
 
         if ($data['moderator_pass'] === $data['attendee_pass']) {
             $msg = JText::_("COM_PLUGNMEET_MODERATOR_AND_ATTENDEE_PASSWORD_CANT_BE_SAME");
@@ -1490,12 +1547,6 @@ class PlugnmeetModelRoom extends AdminModel
             return false;
         }/***[/JCBGUI$$$$]***/
 
-
-		// Set the room_metadata string to JSON string.
-		if (isset($data['room_metadata']))
-		{
-			$data['room_metadata'] = (string) json_encode($data['room_metadata']);
-		}
         
 		// Set the Params Items to data
 		if (isset($data['params']) && is_array($data['params']))
