@@ -58,7 +58,9 @@ $componentParams = $this->params; // will be removed just use $this->params inst
 	<?php echo JHtml::_('bootstrap.addTab', 'roomTab', 'other_features', JText::_('COM_PLUGNMEET_ROOM_OTHER_FEATURES', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span12">
-				<?php echo $this->get("ChatFeatures"); ?>
+				<?php echo $this->get("RecordingFeatures"); ?>
+				                <hr />
+								<?php echo $this->get("ChatFeatures"); ?>
 				<hr />
 								<?php echo $this->get("SharedNotePadFeatures"); ?>
 				<hr />
