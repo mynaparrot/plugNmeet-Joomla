@@ -34,6 +34,14 @@ class UserMetadataParameters
      */
     protected $profilePic;
     /**
+     * @var bool
+     */
+    protected $recordWebcam = true;
+    /**
+     * @var string
+     */
+    protected $preferredLang = null;
+    /**
      * @var LockSettingsParameters
      */
     protected $lockSettings;
@@ -62,6 +70,45 @@ class UserMetadataParameters
     }
 
     /**
+     * @return bool
+     */
+    public function isRecordWebcam(): bool
+    {
+        return $this->recordWebcam;
+    }
+
+    /**
+     * @param bool $recordWebcam
+     */
+    public function setRecordWebcam(bool $recordWebcam): void
+    {
+        $this->recordWebcam = filter_var($recordWebcam, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPreferredLang(): ?string
+    {
+        return $this->preferredLang;
+    }
+
+    /**
+     * @param string $preferredLang
+     * For list of values please check:
+     * https://github.com/mynaparrot/plugNmeet-client/blob/main/src/helpers/languages.ts
+     * The value should be indicated as `code` in the above file
+     * example: es-ES Or bn-BD etc
+     * @return void
+     */
+    public function setPreferredLang(string $preferredLang): void
+    {
+        if (!empty($preferredLang)) {
+            $this->preferredLang = $preferredLang;
+        }
+    }
+
+    /**
      * @return LockSettingsParameters
      */
     public function getLockSettings(): LockSettingsParameters
@@ -82,10 +129,16 @@ class UserMetadataParameters
      */
     public function buildBody(): array
     {
-        $body = array();
+        $body = array(
+            "record_webcam" => $this->isRecordWebcam()
+        );
 
         if (!empty($this->profilePic)) {
             $body["profile_pic"] = $this->getProfilePic();
+        }
+
+        if (!empty($this->preferredLang)) {
+            $body["preferred_lang"] = $this->getPreferredLang();
         }
 
         if ($this->lockSettings !== null) {

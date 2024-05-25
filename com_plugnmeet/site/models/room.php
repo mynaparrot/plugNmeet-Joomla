@@ -193,8 +193,12 @@ class PlugnmeetModelRoom extends ItemModel
 
         try {
             $res = $connect->isRoomActive($roomInfo->room_id);
-            $isRoomActive = $res->getStatus();
-            $output->msg = $res->getResponseMsg();
+            if (!$res->getStatus()) {
+		$output->msg = $res->getResponseMsg();
+	    } else {
+		$isRoomActive = $res->isActive();
+		$output->status = true;
+	    }
         } catch (Exception $e) {
             $output->msg = $e->getMessage();
             return $output;

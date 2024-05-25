@@ -42,6 +42,10 @@ class RoomMetadataParameters
      */
     protected $webhookUrl;
     /**
+     * @var string
+     */
+    protected $logoutUrl;
+    /**
      * @var RoomFeaturesParameters
      */
     protected $features;
@@ -50,6 +54,14 @@ class RoomMetadataParameters
      * @var LockSettingsParameters
      */
     protected $defaultLockSettings;
+    /**
+     * @var CopyrightConfParameters
+     */
+    protected $copyrightConf;
+    /**
+     * @var string
+     */
+    protected $extraData;
 
     /**
      *
@@ -107,6 +119,22 @@ class RoomMetadataParameters
     }
 
     /**
+     * @return string
+     */
+    public function getLogoutUrl(): string
+    {
+        return $this->logoutUrl;
+    }
+
+    /**
+     * @param string $logoutUrl
+     */
+    public function setLogoutUrl(string $logoutUrl): void
+    {
+        $this->logoutUrl = $logoutUrl;
+    }
+
+    /**
      * @return RoomFeaturesParameters
      */
     public function getFeatures(): RoomFeaturesParameters
@@ -139,6 +167,39 @@ class RoomMetadataParameters
     }
 
     /**
+     * @return CopyrightConfParameters
+     */
+    public function getCopyrightConf(): CopyrightConfParameters
+    {
+        return $this->copyrightConf;
+    }
+
+    /**
+     * @param CopyrightConfParameters $copyrightConf
+     * @return void
+     */
+    public function setCopyrightConf(CopyrightConfParameters $copyrightConf): void
+    {
+        $this->copyrightConf = $copyrightConf;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtraData(): string
+    {
+        return $this->extraData;
+    }
+
+    /**
+     * @param string $extraData
+     */
+    public function setExtraData(string $extraData): void
+    {
+        $this->extraData = $extraData;
+    }
+
+    /**
      * @return array
      */
     public function buildBody(): array
@@ -155,12 +216,24 @@ class RoomMetadataParameters
             $body["webhook_url"] = $this->getWebhookUrl();
         }
 
+        if (!empty($this->logoutUrl)) {
+            $body["logout_url"] = $this->getLogoutUrl();
+        }
+
         if ($this->features !== null) {
             $body["room_features"] = $this->getFeatures()->buildBody();
         }
 
         if ($this->defaultLockSettings !== null) {
             $body["default_lock_settings"] = $this->getDefaultLockSettings()->buildBody();
+        }
+
+        if ($this->copyrightConf !== null) {
+            $body["copyright_conf"] = $this->getCopyrightConf()->buildBody();
+        }
+
+        if (!empty($this->extraData)) {
+            $body["extra_data"] = $this->getExtraData();
         }
 
         return $body;

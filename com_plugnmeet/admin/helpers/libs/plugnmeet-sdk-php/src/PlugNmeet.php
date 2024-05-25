@@ -27,24 +27,34 @@ namespace Mynaparrot\Plugnmeet;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Mynaparrot\Plugnmeet\Parameters\AnalyticsDownloadTokenParameters;
 use Mynaparrot\Plugnmeet\Parameters\CreateRoomParameters;
+use Mynaparrot\Plugnmeet\Parameters\DeleteAnalyticsParameters;
 use Mynaparrot\Plugnmeet\Parameters\DeleteRecordingParameters;
 use Mynaparrot\Plugnmeet\Parameters\EndRoomParameters;
+use Mynaparrot\Plugnmeet\Parameters\FetchAnalyticsParameters;
+use Mynaparrot\Plugnmeet\Parameters\FetchPastRoomsParameters;
 use Mynaparrot\Plugnmeet\Parameters\FetchRecordingsParameters;
 use Mynaparrot\Plugnmeet\Parameters\GenerateJoinTokenParameters;
 use Mynaparrot\Plugnmeet\Parameters\GetActiveRoomInfoParameters;
 use Mynaparrot\Plugnmeet\Parameters\IsRoomActiveParameters;
 use Mynaparrot\Plugnmeet\Parameters\RecordingDownloadTokenParameters;
+use Mynaparrot\Plugnmeet\Parameters\RecordingInfoParameters;
+use Mynaparrot\Plugnmeet\Responses\AnalyticsDownloadTokenResponse;
 use Mynaparrot\Plugnmeet\Responses\ClientFilesResponses;
 use Mynaparrot\Plugnmeet\Responses\CreateRoomResponse;
+use Mynaparrot\Plugnmeet\Responses\DeleteAnalyticsResponse;
 use Mynaparrot\Plugnmeet\Responses\DeleteRecordingResponse;
 use Mynaparrot\Plugnmeet\Responses\EndRoomResponse;
+use Mynaparrot\Plugnmeet\Responses\FetchAnalyticsResponse;
+use Mynaparrot\Plugnmeet\Responses\FetchPastRoomsResponse;
 use Mynaparrot\Plugnmeet\Responses\FetchRecordingsResponse;
 use Mynaparrot\Plugnmeet\Responses\GenerateJoinTokenResponse;
 use Mynaparrot\Plugnmeet\Responses\GetActiveRoomInfoResponse;
 use Mynaparrot\Plugnmeet\Responses\GetActiveRoomsInfoResponse;
 use Mynaparrot\Plugnmeet\Responses\IsRoomActiveResponse;
 use Mynaparrot\Plugnmeet\Responses\RecordingDownloadTokenResponse;
+use Mynaparrot\Plugnmeet\Responses\RecordingInfoResponse;
 use Ramsey\Uuid\Uuid;
 use stdClass;
 
@@ -152,6 +162,18 @@ class PlugNmeet
     }
 
     /**
+     * Get all past rooms
+     * @param FetchPastRoomsParameters $fetchPastRoomsParameters
+     * @return FetchPastRoomsResponse
+     */
+    public function fetchPastRoomsInfo(FetchPastRoomsParameters $fetchPastRoomsParameters): FetchPastRoomsResponse
+    {
+        $body = $fetchPastRoomsParameters->buildBody();
+        $output = $this->sendRequest("/room/fetchPastRooms", $body);
+        return new FetchPastRoomsResponse($output);
+    }
+
+    /**
      * End active room
      *
      * @param EndRoomParameters $endRoomParameters
@@ -175,6 +197,19 @@ class PlugNmeet
         $body = $fetchRecordingsParameters->buildBody();
         $output = $this->sendRequest("/recording/fetch", $body);
         return new FetchRecordingsResponse($output);
+    }
+
+    /**
+     * To get recording info
+     *
+     * @param RecordingInfoParameters $recordingInfoParameters
+     * @return RecordingInfoResponse
+     */
+    public function getRecordingInfo(RecordingInfoParameters $recordingInfoParameters): RecordingInfoResponse
+    {
+        $body = $recordingInfoParameters->buildBody();
+        $output = $this->sendRequest("/recording/recordingInfo", $body);
+        return new RecordingInfoResponse($output);
     }
 
     /**
@@ -202,6 +237,46 @@ class PlugNmeet
         $body = $recordingDownloadTokenParameters->buildBody();
         $output = $this->sendRequest("/recording/getDownloadToken", $body);
         return new RecordingDownloadTokenResponse($output);
+    }
+
+    /**
+     * To fetch analytics
+     *
+     * @param FetchAnalyticsParameters $fetchRecordingsParameters
+     * @return FetchAnalyticsResponse
+     */
+    public function fetchAnalytics(FetchAnalyticsParameters $fetchAnalyticsParameters): FetchAnalyticsResponse
+    {
+        $body = $fetchAnalyticsParameters->buildBody();
+        $output = $this->sendRequest("/analytics/fetch", $body);
+        return new FetchAnalyticsResponse($output);
+    }
+
+    /**
+     * To delete analytics
+     *
+     * @param DeleteAnalyticsParameters $deleteAnalyticsParameters
+     * @return DeleteAnalyticsResponse
+     */
+    public function deleteAnalytics(DeleteAnalyticsParameters $deleteAnalyticsParameters): DeleteAnalyticsResponse
+    {
+        $body = $deleteAnalyticsParameters->buildBody();
+        $output = $this->sendRequest("/analytics/delete", $body);
+        return new DeleteAnalyticsResponse($output);
+    }
+
+    /**
+     * Generate token to download analytics
+     *
+     * @param AnalyticsDownloadTokenParameters $analyticsDownloadTokenParameters
+     * @return AnalyticsDownloadTokenResponse
+     */
+    public function getAnalyticsDownloadToken(
+        AnalyticsDownloadTokenParameters $analyticsDownloadTokenParameters
+    ): AnalyticsDownloadTokenResponse {
+        $body = $analyticsDownloadTokenParameters->buildBody();
+        $output = $this->sendRequest("/analytics/getDownloadToken", $body);
+        return new AnalyticsDownloadTokenResponse($output);
     }
 
     /**
@@ -248,6 +323,16 @@ class PlugNmeet
     {
         $uuid = Uuid::uuid4();
         return $uuid->toString();
+    }
+
+    /**
+     * Generate UUID v4 random string
+     *
+     * @return string
+     */
+    public static function generateUuid4(): string
+    {
+        return Uuid::uuid4()->toString();
     }
 
     /**

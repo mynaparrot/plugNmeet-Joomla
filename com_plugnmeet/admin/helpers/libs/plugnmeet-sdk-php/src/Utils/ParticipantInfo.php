@@ -30,9 +30,9 @@ namespace Mynaparrot\Plugnmeet\Utils;
 class ParticipantInfo
 {
     /**
-     * @var object
+     * @var object|null
      */
-    protected $participantInfo;
+    protected $participantInfo = null;
 
     /**
      * @param object $participantInfo
@@ -43,66 +43,102 @@ class ParticipantInfo
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSid(): string
+    public function getSid(): ?string
     {
-        return $this->participantInfo->sid;
+        if (isset($this->participantInfo->sid)) {
+            return $this->participantInfo->sid;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIdentity(): string
+    public function getIdentity(): ?string
     {
-        return $this->participantInfo->identity;
+        if (isset($this->participantInfo->identity)) {
+            return $this->participantInfo->identity;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState(): string
+    public function getState(): ?string
     {
-        return $this->participantInfo->state;
+        if (isset($this->participantInfo->state)) {
+            return $this->participantInfo->state;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMetadata(): string
+    public function getMetadata(): ?string
     {
-        return $this->participantInfo->metadata;
+        if (isset($this->participantInfo->metadata)) {
+            return $this->participantInfo->metadata;
+        }
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getJoinedAt(): int
+    public function getJoinedAt(): ?int
     {
-        return $this->participantInfo->joined_at;
+        if (isset($this->participantInfo->joined_at)) {
+            return $this->participantInfo->joined_at;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
-        return $this->participantInfo->name;
+        if (isset($this->participantInfo->name)) {
+            return $this->participantInfo->name;
+        }
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getVersion(): int
+    public function getVersion(): ?int
     {
-        return $this->participantInfo->version;
+        if (isset($this->participantInfo->version)) {
+            return $this->participantInfo->version;
+        }
+        return null;
     }
 
     /**
-     * @return mixed
+     * @return mixed|null
      */
     public function getPermission()
     {
-        return $this->participantInfo->permission;
+        if (isset($this->participantInfo->permission)) {
+            return $this->participantInfo->permission;
+        }
+        return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTracks()
+    {
+        if (isset($this->participantInfo->tracks)) {
+            return $this->participantInfo->tracks;
+        }
+
+        return [];
     }
 }

@@ -66,6 +66,18 @@ class RoomFeaturesParameters
      */
     protected $roomDuration = 0;
     /**
+     * @var bool
+     */
+    protected $enableAnalytics = false;
+    /**
+     * @var bool
+     */
+    protected $allowVirtualBg = true;
+    /**
+     * @var bool
+     */
+    protected $allowRaiseHand = true;
+    /**
      * @var RecordingFeaturesParameters
      */
     protected $recordingFeatures;
@@ -100,6 +112,21 @@ class RoomFeaturesParameters
      * @var DisplayExternalLinkFeaturesParameters
      */
     protected $displayExternalLinkFeatures;
+
+    /**
+     * @var IngressFeaturesParameters
+     */
+    protected $ingressFeatures;
+
+    /**
+     * @var SpeechToTextTranslationFeaturesParameters
+     */
+    protected $speechToTextTranslationFeatures;
+
+    /**
+     * @var EndToEndEncryptionFeaturesParameters
+     */
+    protected $endToEndEncryptionFeatures;
 
     /**
      *
@@ -249,7 +276,59 @@ class RoomFeaturesParameters
      */
     public function setRoomDuration(int $roomDuration): void
     {
-        $this->roomDuration = $roomDuration;
+        if ($roomDuration > 0) {
+            $this->roomDuration = $roomDuration;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnableAnalytics(): bool
+    {
+        return $this->enableAnalytics;
+    }
+
+    /**
+     * @param bool $enableAnalytics
+     */
+    public function setEnableAnalytics(bool $enableAnalytics): void
+    {
+        $this->enableAnalytics = filter_var($enableAnalytics, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllowVirtualBg(): bool
+    {
+        return $this->allowVirtualBg;
+    }
+
+    /**
+     * @param bool $allowVirtualBg
+     * @return void
+     */
+    public function setAllowVirtualBg(bool $allowVirtualBg): void
+    {
+        $this->allowVirtualBg = filter_var($allowVirtualBg, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllowRaiseHand(): bool
+    {
+        return $this->allowRaiseHand;
+    }
+
+    /**
+     * @param bool $allowRaiseHand
+     * @return void
+     */
+    public function setAllowRaiseHand(bool $allowRaiseHand): void
+    {
+        $this->allowRaiseHand = filter_var($allowRaiseHand, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
@@ -383,6 +462,56 @@ class RoomFeaturesParameters
     }
 
     /**
+     * @return IngressFeaturesParameters
+     */
+    public function getIngressFeatures(): IngressFeaturesParameters
+    {
+        return $this->ingressFeatures;
+    }
+
+    /**
+     * @param IngressFeaturesParameters $ingressFeatures
+     */
+    public function setIngressFeatures(IngressFeaturesParameters $ingressFeatures): void
+    {
+        $this->ingressFeatures = $ingressFeatures;
+    }
+
+    /**
+     * @return SpeechToTextTranslationFeaturesParameters
+     */
+    public function getSpeechToTextTranslationFeatures(): SpeechToTextTranslationFeaturesParameters
+    {
+        return $this->speechToTextTranslationFeatures;
+    }
+
+    /**
+     * @param SpeechToTextTranslationFeaturesParameters $speechToTextTranslationFeatures
+     */
+    public function setSpeechToTextTranslationFeatures(
+        SpeechToTextTranslationFeaturesParameters $speechToTextTranslationFeatures
+    ): void {
+        $this->speechToTextTranslationFeatures = $speechToTextTranslationFeatures;
+    }
+
+    /**
+     * @return EndToEndEncryptionFeaturesParameters
+     */
+    public function getEndToEndEncryptionFeatures(): EndToEndEncryptionFeaturesParameters
+    {
+        return $this->endToEndEncryptionFeatures;
+    }
+
+    /**
+     * @param EndToEndEncryptionFeaturesParameters $endToEndEncryptionFeatures
+     */
+    public function setEndToEndEncryptionFeatures(
+        EndToEndEncryptionFeaturesParameters $endToEndEncryptionFeatures
+    ): void {
+        $this->endToEndEncryptionFeatures = $endToEndEncryptionFeatures;
+    }
+
+    /**
      * @return array
      */
     public function buildBody(): array
@@ -396,7 +525,10 @@ class RoomFeaturesParameters
             "allow_view_other_webcams" => $this->isAllowViewOtherWebcams(),
             "allow_view_other_users_list" => $this->isAllowViewOtherParticipants(),
             "allow_polls" => $this->isAllowPolls(),
-            "room_duration" => $this->getRoomDuration()
+            "room_duration" => $this->getRoomDuration(),
+            "enable_analytics" => $this->isEnableAnalytics(),
+            "allow_virtual_bg" => $this->isAllowVirtualBg(),
+            "allow_raise_hand" => $this->isAllowRaiseHand()
         );
 
         if ($this->recordingFeatures !== null) {
@@ -429,6 +561,18 @@ class RoomFeaturesParameters
 
         if ($this->displayExternalLinkFeatures !== null) {
             $body['display_external_link_features'] = $this->getDisplayExternalLinkFeatures()->buildBody();
+        }
+
+        if ($this->ingressFeatures !== null) {
+            $body['ingress_features'] = $this->getIngressFeatures()->buildBody();
+        }
+
+        if ($this->speechToTextTranslationFeatures !== null) {
+            $body['speech_to_text_translation_features'] = $this->getSpeechToTextTranslationFeatures()->buildBody();
+        }
+
+        if ($this->endToEndEncryptionFeatures !== null) {
+            $body['end_to_end_encryption_features'] = $this->getEndToEndEncryptionFeatures()->buildBody();
         }
 
         return $body;

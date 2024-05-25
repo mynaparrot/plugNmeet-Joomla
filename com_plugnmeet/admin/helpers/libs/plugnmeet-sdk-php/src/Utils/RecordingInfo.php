@@ -30,9 +30,9 @@ namespace Mynaparrot\Plugnmeet\Utils;
 class RecordingInfo
 {
     /**
-     * @var object
+     * @var object|null
      */
-    protected $recording;
+    protected $recording = null;
 
     /**
      * @param object $recording
@@ -43,58 +43,79 @@ class RecordingInfo
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRecordId(): string
+    public function getRecordId(): ?string
     {
-        return $this->recording->record_id;
+        if (isset($this->recording->record_id)) {
+            return $this->recording->record_id;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRoomId(): string
+    public function getRoomId(): ?string
     {
-        return $this->recording->room_id;
+        if (isset($this->recording->room_id)) {
+            return $this->recording->room_id;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRoomSid(): string
+    public function getRoomSid(): ?string
     {
-        return $this->recording->room_sid;
+        if (isset($this->recording->room_sid)) {
+            return $this->recording->room_sid;
+        }
+        return null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFilePath(): string
+    public function getFilePath(): ?string
     {
-        return $this->recording->file_path;
+        if (isset($this->recording->file_path)) {
+            return $this->recording->file_path;
+        }
+        return null;
     }
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getFileSize(): int
+    public function getFileSize(): ?float
     {
-        return $this->recording->file_size;
+        if (isset($this->recording->file_size)) {
+            return $this->recording->file_size;
+        }
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCreationTime(): int
+    public function getCreationTime(): ?int
     {
-        return $this->recording->creation_time;
+        if (isset($this->recording->creation_time)) {
+            return $this->recording->creation_time;
+        }
+        return null;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRoomCreationTime(): int
+    public function getRoomCreationTime(): ?int
     {
-        return $this->recording->room_creation_time;
+        if (isset($this->recording->room_creation_time)) {
+            return $this->recording->room_creation_time;
+        }
+        return null;
     }
 }
