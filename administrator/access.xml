@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_plugnmeet">
+    <section name="component">
+        <action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN"/>
+        <action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE"/>
+        <action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE"/>
+        <action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE"/>
+        <action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT"/>
+        <action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE"/>
+        <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN"/>
+    </section>
+    <section name="category">
+        <action name="core.create" title="JACTION_CREATE" description="COM_CATEGORIES_ACCESS_CREATE_DESC"/>
+        <action name="core.delete" title="JACTION_DELETE" description="COM_CATEGORIES_ACCESS_DELETE_DESC"/>
+        <action name="core.edit" title="JACTION_EDIT" description="COM_CATEGORIES_ACCESS_EDIT_DESC"/>
+        <action name="core.edit.state" title="JACTION_EDITSTATE" description="COM_CATEGORIES_ACCESS_EDITSTATE_DESC"/>
+        <action name="core.edit.own" title="JACTION_EDITOWN" description="COM_CATEGORIES_ACCESS_EDITOWN_DESC"/>
+    </section>
+    <section name="room">
+        <action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE"/>
+        <action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE"/>
+        <action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT"/>
+        <action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE"/>
+        <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN"/>
+        <action name="join.passwordless" title="COM_PLUGNMEET_ROOM_PASSLESS_JOIN"
+                description="COM_PLUGNMEET_ROOM_PASSLESS_JOIN_DESC"/>
+        <action name="join.admin" title="COM_PLUGNMEET_ROOM_JOIN_AS_ADMIN"
+                description="COM_PLUGNMEET_ROOM_JOIN_AS_ADMIN_DESC"/>
+        <action name="recording.view" title="COM_PLUGNMEET_ROOM_CAN_VIEW_RECORDINGS"
+                description="COM_PLUGNMEET_ROOM_CAN_VIEW_RECORDINGS_DESC"/>
+        <action name="recording.play" title="COM_PLUGNMEET_ROOM_CAN_PLAY_RECORDINGS"
+                description="COM_PLUGNMEET_ROOM_CAN_PLAY_RECORDINGS_DESC"/>
+        <action name="recording.download" title="COM_PLUGNMEET_ROOM_CAN_DOWNLOAD_RECORDINGS"
+                description="COM_PLUGNMEET_ROOM_CAN_DOWNLOAD_RECORDINGS_DESC"/>
+        <action name="recording.delete" title="COM_PLUGNMEET_ROOM_CAN_DELETE_RECORDINGS"
+                description="COM_PLUGNMEET_ROOM_CAN_DELETE_RECORDINGS_DESC"/>
+    </section>
+</access>

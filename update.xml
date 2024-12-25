@@ -1,0 +1,22 @@
+<updates>
+    <update>
+        <name>plugNmeet</name>
+        <description>Plug N Meet</description>
+        <element>com_plugnmeet</element>
+        <type>component</type>
+        <client>site</client>
+        <version>2.0.0</version>
+        <infourl title="plugNmeet!">https://www.plugnmeet.org</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">
+                https://github.com/mynaparrot/plugNmeet-Joomla/releases/latest/download/com_plugnmeet.zip
+            </downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>Jibon L. Costa</maintainer>
+        <maintainerurl>https://www.mynaparrot.com</maintainerurl>
+        <targetplatform name="joomla" version="5.*"/>
+    </update>
+</updates>

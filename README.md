@@ -1,6 +1,8 @@
 # plugNmeet-Joomla
 
-Plug-N-Meet conference integration with Joomla. You can download latest version from [release page](https://github.com/mynaparrot/plugNmeet-Joomla/releases). This is a standard Joomla component which was built using [JCB](https://github.com/vdm-io/Joomla-Component-Builder).
+Plug-N-Meet conference integration with Joomla. You can download latest version
+from [release page](https://github.com/mynaparrot/plugNmeet-Joomla/releases). This is a standard Joomla component for
+Joomla 5.
 
 ## Installation & configuration
 

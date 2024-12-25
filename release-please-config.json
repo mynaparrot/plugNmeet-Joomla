@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "include-component-in-tag": false,
+  "release-as": "2.0.0",
+  "packages": {
+    ".": {
+      "extra-files": [
+        {
+          "type": "xml",
+          "path": "plugnmeet.xml",
+          "xpath": "/extension/version"
+        },
+        {
+          "type": "xml",
+          "path": "update.xml",
+          "xpath": "/updates/update/version"
+        }
+      ]
+    }
+  }
+}

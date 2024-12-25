@@ -1,28 +1,29 @@
 name: Generate component and upload as release asset
 on:
-  release:
-    types: [ published ]
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
       - name: Checkout code
+        if: ${{ steps.release.outputs.release_created }}
         uses: actions/checkout@v2
       - name: Build project
+        if: ${{ steps.release.outputs.release_created }}
         run: |
-          mkdir -p build
-          rsync -ar com_plugnmeet/* build/
-          cd build
-          zip -X -r com_plugnmeet.zip *
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: com_plugnmeet
-          path: build/com_plugnmeet.zip
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
-        with:
-          args: build/com_plugnmeet.zip application/zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          zip -r com_plugnmeet.zip *
+          gh release upload ${{ steps.release.outputs.tag_name }} com_plugnmeet.zip

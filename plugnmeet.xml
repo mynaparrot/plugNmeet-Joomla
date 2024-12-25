@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="4.0" method="upgrade">
+    <name>com_plugnmeet</name>
+    <creationDate>2024-12-23</creationDate>
+    <copyright>Copyright (C) MynaParrot SL. All Rights Reserved</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Jibon L. Costa</author>
+    <authorEmail>jibon@mynaparrot.com</authorEmail>
+    <authorUrl>https://www.mynaparrot.com</authorUrl>
+    <version>2.0.0</version>
+    <description>COM_PLUGNMEET_XML_DESCRIPTION</description>
+    <namespace path="src">Mynaparrot\Component\Plugnmeet</namespace>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates</schemapath>
+        </schemas>
+    </update>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <files folder="site">
+        <folder>src</folder>
+        <folder>forms</folder>
+        <folder>tmpl</folder>
+    </files>
+    <languages folder="site/languages">
+        <language tag="en-GB">en-GB/com_plugnmeet.ini</language>
+    </languages>
+    <administration>
+        <menu>COM_PLUGNMEET</menu>
+        <submenu>
+            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories"
+                  alt="Plugnmeet/Categories">COM_PLUGNMEET_ROOMS_CAT
+            </menu>
+            <menu link="option=com_plugnmeet&amp;view=rooms" view="rooms" alt="Plugnmeet/Rooms">
+                COM_PLUGNMEET_TITLE_ROOMS
+            </menu>
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+        </files>
+        <languages folder="administrator/languages">
+            <language tag="en-GB">en-GB/com_plugnmeet.ini</language>
+            <language tag="en-GB">en-GB/com_plugnmeet.sys.ini</language>
+        </languages>
+    </administration>
+
+    <updateservers>
+        <server type="extension" enabled="1" element="com_plugnmeet" name="plugNmeet">
+            https://raw.githubusercontent.com/mynaparrot/plugNmeet-Joomla/main/com_plugnmeet/update.xml
+        </server>
+    </updateservers>
+</extension>
