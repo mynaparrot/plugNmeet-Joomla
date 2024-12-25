@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.1...v2.0.2) (2024-12-25)
+
+
+### Bug Fixes
+
+* invalid update link ([688ecfa](https://github.com/mynaparrot/plugNmeet-Joomla/commit/688ecfabd3dc322e4f5c449069043606e6eada88))
+
 ## [2.0.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.0...v2.0.1) (2024-12-25)
 
 
