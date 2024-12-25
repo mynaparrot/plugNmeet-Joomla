@@ -36,7 +36,8 @@
     <administration>
         <menu>COM_PLUGNMEET</menu>
         <submenu>
-            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories" alt="Plugnmeet/Categories">COM_PLUGNMEET_ROOMS_CAT
+            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories"
+                  alt="Plugnmeet/Categories">COM_PLUGNMEET_ROOMS_CAT
             </menu>
             <menu link="option=com_plugnmeet&amp;view=rooms" view="rooms" alt="Plugnmeet/Rooms">
                 COM_PLUGNMEET_TITLE_ROOMS
@@ -59,7 +60,7 @@
 
     <updateservers>
         <server type="extension" enabled="1" element="com_plugnmeet" name="plugNmeet">
-            https://raw.githubusercontent.com/mynaparrot/plugNmeet-Joomla/main/com_plugnmeet/update.xml
+            https://raw.githubusercontent.com/mynaparrot/plugNmeet-Joomla/main/update.xml
         </server>
     </updateservers>
 </extension>
