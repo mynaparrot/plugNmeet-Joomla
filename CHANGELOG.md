@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.2...v2.0.3) (2024-12-26)
+
+
+### Bug Fixes
+
+* default use demo server to avoid confusion ([d3b7e94](https://github.com/mynaparrot/plugNmeet-Joomla/commit/d3b7e9496b5e5a0e04f0e59f4b64095193b3f6a4))
+
 ## [2.0.2](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.1...v2.0.2) (2024-12-25)
 
 
