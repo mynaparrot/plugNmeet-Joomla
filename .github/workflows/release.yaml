@@ -32,8 +32,6 @@ jobs:
           rsync -ar --exclude="plugnmeet.xml" ./administrator/components/com_plugnmeet/* ./build/administrator/
           rsync -a ./administrator/components/com_plugnmeet/plugnmeet.xml ./build/
           rsync -a script.php ./build/
-          
-          rsync -ar  ./administrator/language/* ./build/administrator/languages/
           rsync -ar  ./administrator/language/* ./build/administrator/languages/
           
           rsync -ar ./components/com_plugnmeet/* ./build/site/
