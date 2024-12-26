@@ -22,10 +22,23 @@ jobs:
       - name: Checkout code
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/checkout@v2
-      - name: Build project
+      - name: Build component
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          mkdir -p build
+          
+          rsync -ar --exclude="plugnmeet.xml" ./administrator/components/com_plugnmeet/* ./build/administrator/
+          rsync -a ./administrator/components/com_plugnmeet/plugnmeet.xml ./build/
+          rsync -a script.php ./build/
+          
+          rsync -ar  ./administrator/language/* ./build/administrator/languages/
+          rsync -ar  ./administrator/language/* ./build/administrator/languages/
+          
+          rsync -ar ./components/com_plugnmeet/* ./build/site/
+          rsync -ar  ./language/* ./build/site/languages/
+          
+          cd ./build
           zip -r com_plugnmeet.zip *
           gh release upload ${{ steps.release.outputs.tag_name }} com_plugnmeet.zip

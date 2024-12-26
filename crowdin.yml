@@ -1,7 +1,8 @@
 pull_request_title: "fix: new Crowdin updates"
 commit_message: "fix(locale): new translations %original_file_name% from Crowdin"
 files:
-  - source: /site/languages/en-GB/*.ini
+  - source: /language/en-GB/*.ini
     translation: /site/languages/%locale%/%original_file_name%
-  - source: /administrator/languages/en-GB/*.ini
+  - source: /administrator/language/en-GB/*.ini
     translation: /administrator/languages/%locale%/%original_file_name%
+
