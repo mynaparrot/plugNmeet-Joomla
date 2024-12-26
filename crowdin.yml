@@ -1,0 +1,5 @@
+files:
+  - source: /site/languages/en-GB/*.ini
+    translation: /site/languages/%locale%/%original_file_name%
+  - source: /administrator/languages/en-GB/*.ini
+    translation: /administrator/languages/%locale%/%original_file_name%
