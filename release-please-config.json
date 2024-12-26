@@ -7,7 +7,7 @@
       "extra-files": [
         {
           "type": "xml",
-          "path": "plugnmeet.xml",
+          "path": "administrator/components/com_plugnmeet/plugnmeet.xml",
           "xpath": "/extension/version"
         },
         {
