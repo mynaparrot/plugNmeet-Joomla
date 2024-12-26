@@ -32,11 +32,16 @@
     </files>
     <languages folder="site/languages">
         <language tag="en-GB">en-GB/com_plugnmeet.ini</language>
+        <language tag="de-DE">de-DE/com_plugnmeet.ini</language>
+        <language tag="es-ES">es-ES/com_plugnmeet.ini</language>
+        <language tag="fr-FR">fr-FR/com_plugnmeet.ini</language>
+        <language tag="pt-PT">pt-PT/com_plugnmeet.ini</language>
     </languages>
     <administration>
         <menu>COM_PLUGNMEET</menu>
         <submenu>
-            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories" alt="Plugnmeet/Categories">
+            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories"
+                  alt="Plugnmeet/Categories">
                 COM_PLUGNMEET_ROOMS_CAT
             </menu>
             <menu link="option=com_plugnmeet&amp;view=rooms" view="rooms" alt="Plugnmeet/Rooms">
@@ -55,6 +60,14 @@
         <languages folder="administrator/languages">
             <language tag="en-GB">en-GB/com_plugnmeet.ini</language>
             <language tag="en-GB">en-GB/com_plugnmeet.sys.ini</language>
+            <language tag="de-DE">de-DE/com_plugnmeet.ini</language>
+            <language tag="de-DE">de-DE/com_plugnmeet.sys.ini</language>
+            <language tag="es-ES">es-ES/com_plugnmeet.ini</language>
+            <language tag="es-ES">es-ES/com_plugnmeet.sys.ini</language>
+            <language tag="fr-FR">fr-FR/com_plugnmeet.ini</language>
+            <language tag="fr-FR">fr-FR/com_plugnmeet.sys.ini</language>
+            <language tag="pt-PT">pt-PT/com_plugnmeet.ini</language>
+            <language tag="pt-PT">pt-PT/com_plugnmeet.sys.ini</language>
         </languages>
     </administration>
     <scriptfile>script.php</scriptfile>
