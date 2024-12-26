@@ -27,6 +27,7 @@ defined('_JEXEC') or die;
  */
 
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Language\Text;
 use Mynaparrot\Plugnmeet\Parameters\AnalyticsDownloadTokenParameters;
 use Mynaparrot\Plugnmeet\Parameters\BreakoutRoomFeaturesParameters;
 use Mynaparrot\Plugnmeet\Parameters\ChatFeaturesParameters;
@@ -86,13 +87,19 @@ class plugNmeetConnect
 	protected PlugNmeet $plugnmeet;
 
 	/**
+	 * @throws \Exception
 	 */
 	public function __construct()
 	{
-		$params = ComponentHelper::getParams('com_plugnmeet');
+		$params    = ComponentHelper::getParams('com_plugnmeet');
+		$serverUrl = $params->get("plugnmeet_server_url");
+		if (empty($serverUrl))
+		{
+			throw new \Exception(Text::_("COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_EMPTY"));
+		}
 
 		$this->plugnmeet = new PlugNmeet(
-			$params->get("plugnmeet_server_url"),
+			$serverUrl,
 			$params->get("plugnmeet_api_key"),
 			$params->get("plugnmeet_secret")
 		);
@@ -125,7 +132,8 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param string $roomId
+	 * @param   string  $roomId
+	 *
 	 * @return IsRoomActiveResponse
 	 */
 	public function isRoomActive(string $roomId): IsRoomActiveResponse
@@ -137,190 +145,237 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param string $roomId
-	 * @param string $roomTitle
-	 * @param string $welcomeMessage
-	 * @param int $max_participants
-	 * @param string $webHookUrl
-	 * @param array $roomMetadata
-	 * @param int $empty_timeout
-	 * @param string $logoutUrl
-	 * @param string|null $extraData
+	 * @param   string       $roomId
+	 * @param   string       $roomTitle
+	 * @param   string       $welcomeMessage
+	 * @param   int          $max_participants
+	 * @param   string       $webHookUrl
+	 * @param   array        $roomMetadata
+	 * @param   int          $empty_timeout
+	 * @param   string       $logoutUrl
+	 * @param   string|null  $extraData
+	 *
 	 * @return CreateRoomResponse
 	 */
 	public function createRoom(string $roomId, string $roomTitle, string $welcomeMessage, int $max_participants, string $webHookUrl, array $roomMetadata, int $empty_timeout = 0, string $logoutUrl = "", string $extraData = null): CreateRoomResponse
 	{
 		$roomFeatures = $roomMetadata['room_features'];
-		$features = new RoomFeaturesParameters();
+		$features     = new RoomFeaturesParameters();
 
-		if (isset($roomFeatures['allow_webcams'])) {
+		if (isset($roomFeatures['allow_webcams']))
+		{
 			$features->setAllowWebcams($roomFeatures['allow_webcams']);
 		}
-		if (isset($roomFeatures['mute_on_start'])) {
+		if (isset($roomFeatures['mute_on_start']))
+		{
 			$features->setMuteOnStart($roomFeatures['mute_on_start']);
 		}
-		if (isset($roomFeatures['allow_screen_share'])) {
+		if (isset($roomFeatures['allow_screen_share']))
+		{
 			$features->setAllowScreenShare($roomFeatures['allow_screen_share']);
 		}
-		if (isset($roomFeatures['allow_rtmp'])) {
+		if (isset($roomFeatures['allow_rtmp']))
+		{
 			$features->setAllowRTMP($roomFeatures['allow_rtmp']);
 		}
-		if (isset($roomFeatures['allow_view_other_webcams'])) {
+		if (isset($roomFeatures['allow_view_other_webcams']))
+		{
 			$features->setAllowViewOtherWebcams($roomFeatures['allow_view_other_webcams']);
 		}
-		if (isset($roomFeatures['allow_view_other_users_list'])) {
+		if (isset($roomFeatures['allow_view_other_users_list']))
+		{
 			$features->setAllowViewOtherParticipants($roomFeatures['allow_view_other_users_list']);
 		}
-		if (isset($roomFeatures['admin_only_webcams'])) {
+		if (isset($roomFeatures['admin_only_webcams']))
+		{
 			$features->setAdminOnlyWebcams($roomFeatures['admin_only_webcams']);
 		}
-		if (isset($roomFeatures['allow_polls'])) {
+		if (isset($roomFeatures['allow_polls']))
+		{
 			$features->setAllowPolls($roomFeatures['allow_polls']);
 		}
-		if (isset($roomFeatures['room_duration']) && $roomFeatures['room_duration'] > 0) {
+		if (isset($roomFeatures['room_duration']) && $roomFeatures['room_duration'] > 0)
+		{
 			$features->setRoomDuration($roomFeatures['room_duration']);
 		}
-		if (isset($roomFeatures['enable_analytics'])) {
+		if (isset($roomFeatures['enable_analytics']))
+		{
 			$features->setEnableAnalytics($roomFeatures['enable_analytics']);
 		}
-		if (isset($roomFeatures['allow_virtual_bg'])) {
+		if (isset($roomFeatures['allow_virtual_bg']))
+		{
 			$features->setAllowVirtualBg($roomFeatures['allow_virtual_bg']);
 		}
-		if (isset($roomFeatures['allow_raise_hand'])) {
+		if (isset($roomFeatures['allow_raise_hand']))
+		{
 			$features->setAllowRaiseHand($roomFeatures['allow_raise_hand']);
 		}
-		if (isset($roomFeatures['auto_gen_user_id'])) {
+		if (isset($roomFeatures['auto_gen_user_id']))
+		{
 			$features->setAutoGenUserId($roomFeatures['auto_gen_user_id']);
 		}
 
-		if (isset($roomMetadata['recording_features'])) {
+		if (isset($roomMetadata['recording_features']))
+		{
 			$roomRecordingFeatures = $roomMetadata['recording_features'];
-			$recordingFeatures = new RecordingFeaturesParameters();
-			if (isset($roomRecordingFeatures['is_allow'])) {
+			$recordingFeatures     = new RecordingFeaturesParameters();
+			if (isset($roomRecordingFeatures['is_allow']))
+			{
 				$recordingFeatures->setIsAllow($roomRecordingFeatures['is_allow']);
 			}
-			if (isset($roomRecordingFeatures['is_allow_cloud'])) {
+			if (isset($roomRecordingFeatures['is_allow_cloud']))
+			{
 				$recordingFeatures->setIsAllowCloud($roomRecordingFeatures['is_allow_cloud']);
 			}
-			if (isset($roomRecordingFeatures['is_allow_local'])) {
+			if (isset($roomRecordingFeatures['is_allow_local']))
+			{
 				$recordingFeatures->setIsAllowLocal($roomRecordingFeatures['is_allow_local']);
 			}
-			if (isset($roomRecordingFeatures['enable_auto_cloud_recording'])) {
+			if (isset($roomRecordingFeatures['enable_auto_cloud_recording']))
+			{
 				$recordingFeatures->setEnableAutoCloudRecording($roomRecordingFeatures['enable_auto_cloud_recording']);
 			}
-			if (isset($roomRecordingFeatures['only_record_admin_webcams'])) {
+			if (isset($roomRecordingFeatures['only_record_admin_webcams']))
+			{
 				$recordingFeatures->setOnlyRecordAdminWebcams($roomRecordingFeatures['only_record_admin_webcams']);
 			}
 			$features->setRecordingFeatures($recordingFeatures);
 		}
 
-		if (isset($roomMetadata['chat_features'])) {
+		if (isset($roomMetadata['chat_features']))
+		{
 			$roomChatFeatures = $roomMetadata['chat_features'];
-			$chatFeatures = new ChatFeaturesParameters();
-			if (isset($roomChatFeatures['allow_chat'])) {
+			$chatFeatures     = new ChatFeaturesParameters();
+			if (isset($roomChatFeatures['allow_chat']))
+			{
 				$chatFeatures->setAllowChat($roomChatFeatures['allow_chat']);
 			}
-			if (isset($roomChatFeatures['allow_file_upload'])) {
+			if (isset($roomChatFeatures['allow_file_upload']))
+			{
 				$chatFeatures->setAllowFileUpload($roomChatFeatures['allow_file_upload']);
 			}
 			$features->setChatFeatures($chatFeatures);
 		}
 
-		if (isset($roomMetadata['shared_note_pad_features'])) {
+		if (isset($roomMetadata['shared_note_pad_features']))
+		{
 			$roomSharedNotepadFeatures = $roomMetadata['shared_note_pad_features'];
-			$sharedNotePadFeatures = new SharedNotePadFeaturesParameters();
-			if (isset($roomSharedNotepadFeatures['allowed_shared_note_pad'])) {
+			$sharedNotePadFeatures     = new SharedNotePadFeaturesParameters();
+			if (isset($roomSharedNotepadFeatures['allowed_shared_note_pad']))
+			{
 				$sharedNotePadFeatures->setAllowedSharedNotePad($roomSharedNotepadFeatures['allowed_shared_note_pad']);
 			}
 			$features->setSharedNotePadFeatures($sharedNotePadFeatures);
 		}
 
-		if (isset($roomMetadata['whiteboard_features'])) {
+		if (isset($roomMetadata['whiteboard_features']))
+		{
 			$roomWhiteboardFeatures = $roomMetadata['whiteboard_features'];
-			$whiteboardFeatures = new WhiteboardFeaturesParameters();
-			if (isset($roomWhiteboardFeatures['allowed_whiteboard'])) {
+			$whiteboardFeatures     = new WhiteboardFeaturesParameters();
+			if (isset($roomWhiteboardFeatures['allowed_whiteboard']))
+			{
 				$whiteboardFeatures->setAllowedWhiteboard($roomWhiteboardFeatures['allowed_whiteboard']);
 			}
-			if (isset($roomWhiteboardFeatures['preload_file'])) {
+			if (isset($roomWhiteboardFeatures['preload_file']))
+			{
 				$whiteboardFeatures->setPreloadFile($roomWhiteboardFeatures['preload_file']);
 			}
 			$features->setWhiteboardFeatures($whiteboardFeatures);
 		}
 
-		if (isset($roomMetadata['external_media_player_features'])) {
+		if (isset($roomMetadata['external_media_player_features']))
+		{
 			$roomExternalMediaPlayerFeatures = $roomMetadata['external_media_player_features'];
-			$externalMediaPlayerFeatures = new ExternalMediaPlayerFeaturesParameters();
-			if (isset($roomExternalMediaPlayerFeatures['allowed_external_media_player'])) {
+			$externalMediaPlayerFeatures     = new ExternalMediaPlayerFeaturesParameters();
+			if (isset($roomExternalMediaPlayerFeatures['allowed_external_media_player']))
+			{
 				$externalMediaPlayerFeatures->setAllowedExternalMediaPlayer($roomExternalMediaPlayerFeatures['allowed_external_media_player']);
 			}
 			$features->setExternalMediaPlayerFeatures($externalMediaPlayerFeatures);
 		}
 
-		if (isset($roomMetadata['waiting_room_features'])) {
+		if (isset($roomMetadata['waiting_room_features']))
+		{
 			$roomWaitingRoomFeatures = $roomMetadata['waiting_room_features'];
-			$waitingRoomFeatures = new WaitingRoomFeaturesParameters();
-			if (isset($roomWaitingRoomFeatures['is_active'])) {
+			$waitingRoomFeatures     = new WaitingRoomFeaturesParameters();
+			if (isset($roomWaitingRoomFeatures['is_active']))
+			{
 				$waitingRoomFeatures->setIsActive($roomWaitingRoomFeatures['is_active']);
 			}
-			if (!empty($roomWaitingRoomFeatures['waiting_room_msg'])) {
+			if (!empty($roomWaitingRoomFeatures['waiting_room_msg']))
+			{
 				$waitingRoomFeatures->setWaitingRoomMsg($roomWaitingRoomFeatures['waiting_room_msg']);
 			}
 			$features->setWaitingRoomFeatures($waitingRoomFeatures);
 		}
 
-		if (isset($roomMetadata['breakout_room_features'])) {
+		if (isset($roomMetadata['breakout_room_features']))
+		{
 			$roomBreakoutRoomFeatures = $roomMetadata['breakout_room_features'];
-			$breakoutRoomFeatures = new BreakoutRoomFeaturesParameters();
-			if (isset($roomBreakoutRoomFeatures['is_allow'])) {
+			$breakoutRoomFeatures     = new BreakoutRoomFeaturesParameters();
+			if (isset($roomBreakoutRoomFeatures['is_allow']))
+			{
 				$breakoutRoomFeatures->setIsAllow($roomBreakoutRoomFeatures['is_allow']);
 			}
-			if (isset($roomBreakoutRoomFeatures['allowed_number_rooms'])) {
-				$breakoutRoomFeatures->setAllowedNumberRooms((int)$roomBreakoutRoomFeatures['allowed_number_rooms']);
+			if (isset($roomBreakoutRoomFeatures['allowed_number_rooms']))
+			{
+				$breakoutRoomFeatures->setAllowedNumberRooms((int) $roomBreakoutRoomFeatures['allowed_number_rooms']);
 			}
 			$features->setBreakoutRoomFeatures($breakoutRoomFeatures);
 		}
 
-		if (isset($roomMetadata['display_external_link_features'])) {
+		if (isset($roomMetadata['display_external_link_features']))
+		{
 			$roomDisplayExternalLinkFeatures = $roomMetadata['display_external_link_features'];
-			$displayExternalLinkFeatures = new DisplayExternalLinkFeaturesParameters();
-			if (isset($roomDisplayExternalLinkFeatures['is_allow'])) {
+			$displayExternalLinkFeatures     = new DisplayExternalLinkFeaturesParameters();
+			if (isset($roomDisplayExternalLinkFeatures['is_allow']))
+			{
 				$displayExternalLinkFeatures->setIsAllow($roomDisplayExternalLinkFeatures['is_allow']);
 			}
 			$features->setDisplayExternalLinkFeatures($displayExternalLinkFeatures);
 		}
 
-		if (isset($roomMetadata['ingress_features'])) {
+		if (isset($roomMetadata['ingress_features']))
+		{
 			$roomIngressFeatures = $roomMetadata['ingress_features'];
-			$ingressFeatures = new IngressFeaturesParameters();
-			if (isset($roomIngressFeatures['is_allow'])) {
+			$ingressFeatures     = new IngressFeaturesParameters();
+			if (isset($roomIngressFeatures['is_allow']))
+			{
 				$ingressFeatures->setIsAllow($roomIngressFeatures['is_allow']);
 			}
 			$features->setIngressFeatures($ingressFeatures);
 		}
 
-		if (isset($roomMetadata['speech_to_text_translation_features'])) {
+		if (isset($roomMetadata['speech_to_text_translation_features']))
+		{
 			$roomSpeechToTextTranslationFeatures = $roomMetadata['speech_to_text_translation_features'];
-			$speechToTextTranslationFeatures = new SpeechToTextTranslationFeaturesParameters();
-			if (isset($roomSpeechToTextTranslationFeatures['is_allow'])) {
+			$speechToTextTranslationFeatures     = new SpeechToTextTranslationFeaturesParameters();
+			if (isset($roomSpeechToTextTranslationFeatures['is_allow']))
+			{
 				$speechToTextTranslationFeatures->setIsAllow($roomSpeechToTextTranslationFeatures['is_allow']);
 			}
-			if (isset($roomSpeechToTextTranslationFeatures['is_allow_translation'])) {
+			if (isset($roomSpeechToTextTranslationFeatures['is_allow_translation']))
+			{
 				$speechToTextTranslationFeatures->setIsAllowTranslation($roomSpeechToTextTranslationFeatures['is_allow_translation']);
 			}
 			$features->setSpeechToTextTranslationFeatures($speechToTextTranslationFeatures);
 		}
 
-		if (isset($roomMetadata['end_to_end_encryption_features'])) {
+		if (isset($roomMetadata['end_to_end_encryption_features']))
+		{
 			$roomEndToEndEncryptionFeatures = $roomMetadata['end_to_end_encryption_features'];
-			$endToEndEncryptionFeatures = new EndToEndEncryptionFeaturesParameters();
-			if (isset($roomEndToEndEncryptionFeatures['is_enabled'])) {
+			$endToEndEncryptionFeatures     = new EndToEndEncryptionFeaturesParameters();
+			if (isset($roomEndToEndEncryptionFeatures['is_enabled']))
+			{
 				$endToEndEncryptionFeatures->setIsEnable($roomEndToEndEncryptionFeatures['is_enabled']);
 
-				if (isset($roomEndToEndEncryptionFeatures['included_chat_messages'])) {
+				if (isset($roomEndToEndEncryptionFeatures['included_chat_messages']))
+				{
 					$endToEndEncryptionFeatures->setIncludedChatMessages($roomEndToEndEncryptionFeatures['included_chat_messages']);
 				}
 
-				if (isset($roomEndToEndEncryptionFeatures['included_whiteboard'])) {
+				if (isset($roomEndToEndEncryptionFeatures['included_whiteboard']))
+				{
 					$endToEndEncryptionFeatures->setIncludedWhiteboard($roomEndToEndEncryptionFeatures['included_whiteboard']);
 				}
 			}
@@ -330,64 +385,81 @@ class plugNmeetConnect
 		$metadata = new RoomMetadataParameters();
 		$metadata->setRoomTitle($roomTitle);
 
-		if (!empty($welcomeMessage)) {
+		if (!empty($welcomeMessage))
+		{
 			$metadata->setWelcomeMessage($welcomeMessage);
 		}
-		if (!empty($webHookUrl)) {
+		if (!empty($webHookUrl))
+		{
 			$metadata->setWebhookUrl($webHookUrl);
 		}
-		if (!empty($logoutUrl)) {
+		if (!empty($logoutUrl))
+		{
 			$metadata->setLogoutUrl($logoutUrl);
 		}
-		if (!empty($extraData)) {
+		if (!empty($extraData))
+		{
 			$metadata->setExtraData($extraData);
 		}
 
 		$metadata->setFeatures($features);
 
-		if (isset($roomMetadata['default_lock_settings'])) {
+		if (isset($roomMetadata['default_lock_settings']))
+		{
 			$defaultLocks = $roomMetadata['default_lock_settings'];
 			$lockSettings = new LockSettingsParameters();
 
-			if (isset($defaultLocks['lock_microphone'])) {
+			if (isset($defaultLocks['lock_microphone']))
+			{
 				$lockSettings->setLockMicrophone($defaultLocks['lock_microphone']);
 			}
-			if (isset($defaultLocks['lock_webcam'])) {
+			if (isset($defaultLocks['lock_webcam']))
+			{
 				$lockSettings->setLockWebcam($defaultLocks['lock_webcam']);
 			}
-			if (isset($defaultLocks['lock_screen_sharing'])) {
+			if (isset($defaultLocks['lock_screen_sharing']))
+			{
 				$lockSettings->setLockScreenSharing($defaultLocks['lock_screen_sharing']);
 			}
-			if (isset($defaultLocks['lock_whiteboard'])) {
+			if (isset($defaultLocks['lock_whiteboard']))
+			{
 				$lockSettings->setLockWhiteboard($defaultLocks['lock_whiteboard']);
 			}
-			if (isset($defaultLocks['lock_shared_notepad'])) {
+			if (isset($defaultLocks['lock_shared_notepad']))
+			{
 				$lockSettings->setLockSharedNotepad($defaultLocks['lock_shared_notepad']);
 			}
-			if (isset($defaultLocks['lock_chat'])) {
+			if (isset($defaultLocks['lock_chat']))
+			{
 				$lockSettings->setLockChat($defaultLocks['lock_chat']);
 			}
-			if (isset($defaultLocks['lock_chat_send_message'])) {
+			if (isset($defaultLocks['lock_chat_send_message']))
+			{
 				$lockSettings->setLockChatSendMessage($defaultLocks['lock_chat_send_message']);
 			}
-			if (isset($defaultLocks['lock_chat_file_share'])) {
+			if (isset($defaultLocks['lock_chat_file_share']))
+			{
 				$lockSettings->setLockChatFileShare($defaultLocks['lock_chat_file_share']);
 			}
-			if (isset($defaultLocks['lock_private_chat'])) {
+			if (isset($defaultLocks['lock_private_chat']))
+			{
 				$lockSettings->setLockPrivateChat($defaultLocks['lock_private_chat']);
 			}
 
 			$metadata->setDefaultLockSettings($lockSettings);
 		}
 
-		if (isset($roomMetadata['copyright_conf'])) {
-			$conf = $roomMetadata['copyright_conf'];
+		if (isset($roomMetadata['copyright_conf']))
+		{
+			$conf          = $roomMetadata['copyright_conf'];
 			$copyrightConf = new CopyrightConfParameters();
 
-			if (isset($conf["display"])) {
+			if (isset($conf["display"]))
+			{
 				$copyrightConf->setDisplay($conf["display"]);
 			}
-			if (isset($conf["text"])) {
+			if (isset($conf["text"]))
+			{
 				$copyrightConf->setText($conf["text"]);
 			}
 
@@ -396,10 +468,12 @@ class plugNmeetConnect
 
 		$roomCreateParams = new CreateRoomParameters();
 		$roomCreateParams->setRoomId($roomId);
-		if ($max_participants > 0) {
+		if ($max_participants > 0)
+		{
 			$roomCreateParams->setMaxParticipants($max_participants);
 		}
-		if ($empty_timeout > 0) {
+		if ($empty_timeout > 0)
+		{
 			$roomCreateParams->setEmptyTimeout($empty_timeout);
 		}
 		$roomCreateParams->setRoomMetadata($metadata);
@@ -408,13 +482,14 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param string $roomId
-	 * @param string $name
-	 * @param string $userId
-	 * @param bool $isAdmin
-	 * @param bool $isHidden
-	 * @param UserMetadataParameters|null $userMetadata
-	 * @param LockSettingsParameters|null $lockSettings
+	 * @param   string                       $roomId
+	 * @param   string                       $name
+	 * @param   string                       $userId
+	 * @param   bool                         $isAdmin
+	 * @param   bool                         $isHidden
+	 * @param   UserMetadataParameters|null  $userMetadata
+	 * @param   LockSettingsParameters|null  $lockSettings
+	 *
 	 * @return GenerateJoinTokenResponse
 	 */
 	public function getJoinToken(string $roomId, string $name, string $userId, bool $isAdmin, bool $isHidden = false, UserMetadataParameters $userMetadata = null, LockSettingsParameters $lockSettings = null): GenerateJoinTokenResponse
@@ -426,9 +501,11 @@ class plugNmeetConnect
 		$generateJoinTokenParameters->setIsAdmin($isAdmin);
 		$generateJoinTokenParameters->setIsHidden($isHidden);
 
-		if ($userMetadata !== null) {
+		if ($userMetadata !== null)
+		{
 			$generateJoinTokenParameters->setUserMetadata($userMetadata);
-			if ($lockSettings !== null) {
+			if ($lockSettings !== null)
+			{
 				$generateJoinTokenParameters->setLockSettings($lockSettings);
 			}
 		}
@@ -437,7 +514,8 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param string $roomId
+	 * @param   string  $roomId
+	 *
 	 * @return EndRoomResponse
 	 */
 	public function endRoom(string $roomId): EndRoomResponse
@@ -449,7 +527,8 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param string $roomId
+	 * @param   string  $roomId
+	 *
 	 * @return GetActiveRoomInfoResponse
 	 */
 	public function getActiveRoomInfo(string $roomId): GetActiveRoomInfoResponse
@@ -469,10 +548,11 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param array $roomIds
-	 * @param int $from
-	 * @param int $limit
-	 * @param string $orderBy
+	 * @param   array   $roomIds
+	 * @param   int     $from
+	 * @param   int     $limit
+	 * @param   string  $orderBy
+	 *
 	 * @return FetchPastRoomsResponse
 	 */
 	public function getPastRooms(array $roomIds, int $from = 0, int $limit = 20, string $orderBy = "DESC"): FetchPastRoomsResponse
@@ -487,10 +567,11 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param array $roomIds
-	 * @param int $from
-	 * @param int $limit
-	 * @param string $orderBy
+	 * @param   array   $roomIds
+	 * @param   int     $from
+	 * @param   int     $limit
+	 * @param   string  $orderBy
+	 *
 	 * @return FetchRecordingsResponse
 	 */
 	public function getRecordings(array $roomIds, int $from = 0, int $limit = 20, string $orderBy = "DESC"): FetchRecordingsResponse
@@ -505,7 +586,8 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param string $recordingId
+	 * @param   string  $recordingId
+	 *
 	 * @return RecordingInfoResponse
 	 */
 	public function getRecordingInfo(string $recordingId): RecordingInfoResponse
@@ -518,6 +600,7 @@ class plugNmeetConnect
 
 	/**
 	 * @param  $recordingId
+	 *
 	 * @return RecordingDownloadTokenResponse
 	 */
 	public function getRecordingDownloadLink($recordingId): RecordingDownloadTokenResponse
@@ -530,6 +613,7 @@ class plugNmeetConnect
 
 	/**
 	 * @param  $recordingId
+	 *
 	 * @return DeleteRecordingResponse
 	 */
 	public function deleteRecording($recordingId): DeleteRecordingResponse
@@ -541,10 +625,11 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param array $roomIds
-	 * @param int $from
-	 * @param int $limit
-	 * @param string $orderBy
+	 * @param   array   $roomIds
+	 * @param   int     $from
+	 * @param   int     $limit
+	 * @param   string  $orderBy
+	 *
 	 * @return FetchAnalyticsResponse
 	 */
 	public function getAnalytics(array $roomIds, int $from = 0, int $limit = 20, string $orderBy = "DESC"): FetchAnalyticsResponse
@@ -560,6 +645,7 @@ class plugNmeetConnect
 
 	/**
 	 * @param  $fileId
+	 *
 	 * @return AnalyticsDownloadTokenResponse
 	 */
 	public function getAnalyticsDownloadLink($fileId): AnalyticsDownloadTokenResponse
@@ -572,6 +658,7 @@ class plugNmeetConnect
 
 	/**
 	 * @param  $fileId
+	 *
 	 * @return DeleteAnalyticsResponse
 	 */
 	public function deleteAnalytics($fileId): DeleteAnalyticsResponse

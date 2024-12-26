@@ -54,3 +54,12 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
         </div>
     </div>
 </div>
+
+<script>
+    // check if returned from conference
+    const params = new URLSearchParams(document.location.search);
+    if (params.has("returned", "true")) {
+        // this will only work if link opened with window.open()
+        window.close();
+    }
+</script>

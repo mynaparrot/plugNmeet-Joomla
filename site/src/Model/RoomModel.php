@@ -189,7 +189,7 @@ class RoomModel extends ItemModel
 					"component-version" => (string) $xml->version
 				));
 				$logoutUrl  = Uri::getInstance();
-				$logoutUrl->setQuery("return=true");
+				$logoutUrl->setQuery("returned=true");
 
 				$create = $connect->createRoom($room_id, $this->_item->room_title, $this->_item->welcome_message, $this->_item->max_participants, "", $room_metadata, 0, $logoutUrl->toString(), $extra_data);
 
