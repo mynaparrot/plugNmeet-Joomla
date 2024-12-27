@@ -1,4 +1,11 @@
 <?php
+/**
+ * @since       2.0.0
+ * @package     com_plugnmeet
+ * @author      Jibon L. Costa <jibon@mynaparrot.com>
+ * @copyright   Copyright (C) MynaParrot SL. All Rights Reserved
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
@@ -59,9 +66,9 @@ return new class () implements InstallerScriptInterface {
 				->where($db->qn('type') . ' = ' . $db->q("component"))
 				->where($db->qn('element') . ' = ' . $db->q("com_plugnmeet"));
 			$db->setQuery($query);
-			$db->execute();
+
+			return $db->execute();
 		}
-		Factory::getApplication()->enqueueMessage(Text::_("COM_PLUGNMEET_XML_DESCRIPTION"));
 
 		return true;
 	}
