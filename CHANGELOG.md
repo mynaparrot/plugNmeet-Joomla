@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.4](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.3...v2.0.4) (2024-12-27)
+
+
+### Bug Fixes
+
+* added language ([dfb7a54](https://github.com/mynaparrot/plugNmeet-Joomla/commit/dfb7a5451d578b365d60e2a8662e518c13204709))
+* added language ([ed1bd10](https://github.com/mynaparrot/plugNmeet-Joomla/commit/ed1bd10b5ea30d893e3b56f8d3a4ae4de1dbb783))
+* changed project structure ([423a151](https://github.com/mynaparrot/plugNmeet-Joomla/commit/423a151285197387843cec46132b7b0822d55471))
+* **ci:** removed duplicate ([062a615](https://github.com/mynaparrot/plugNmeet-Joomla/commit/062a615ca5c8f91ef0a23a471b134380ca383003))
+* invalid path ([060bda6](https://github.com/mynaparrot/plugNmeet-Joomla/commit/060bda666b98f3cfb30c203d4635c73bcdcecf8b))
+* languages location ([109c2bb](https://github.com/mynaparrot/plugNmeet-Joomla/commit/109c2bb66d9aa3468af019101d6b585b24b94766))
+* missed language ([d773a19](https://github.com/mynaparrot/plugNmeet-Joomla/commit/d773a198e333984174cee18a2918b15372dd564a))
+* new Crowdin updates ([#11](https://github.com/mynaparrot/plugNmeet-Joomla/issues/11)) ([395e746](https://github.com/mynaparrot/plugNmeet-Joomla/commit/395e746c3cfd6c9366644e1ccfc24c0ffe62ec7c))
+* new Crowdin updates ([#12](https://github.com/mynaparrot/plugNmeet-Joomla/issues/12)) ([2bee070](https://github.com/mynaparrot/plugNmeet-Joomla/commit/2bee070bd85d1367d94a69fe70530dd717047066))
+
 ## [2.0.3](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.2...v2.0.3) (2024-12-26)
 
 
