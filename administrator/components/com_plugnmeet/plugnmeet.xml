@@ -36,6 +36,7 @@
         <language tag="es-ES">es-ES/com_plugnmeet.ini</language>
         <language tag="fr-FR">fr-FR/com_plugnmeet.ini</language>
         <language tag="pt-PT">pt-PT/com_plugnmeet.ini</language>
+        <language tag="it-IT">it-IT/com_plugnmeet.ini</language>
     </languages>
     <administration>
         <menu>COM_PLUGNMEET</menu>
@@ -68,6 +69,8 @@
             <language tag="fr-FR">fr-FR/com_plugnmeet.sys.ini</language>
             <language tag="pt-PT">pt-PT/com_plugnmeet.ini</language>
             <language tag="pt-PT">pt-PT/com_plugnmeet.sys.ini</language>
+            <language tag="it-IT">it-IT/com_plugnmeet.ini</language>
+            <language tag="it-IT">it-IT/com_plugnmeet.sys.ini</language>
         </languages>
     </administration>
     <scriptfile>script.php</scriptfile>
