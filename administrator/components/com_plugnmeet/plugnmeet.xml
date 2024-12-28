@@ -7,7 +7,7 @@
     <author>Jibon L. Costa</author>
     <authorEmail>jibon@mynaparrot.com</authorEmail>
     <authorUrl>https://www.mynaparrot.com</authorUrl>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <description>COM_PLUGNMEET_XML_DESCRIPTION</description>
     <namespace path="src">Mynaparrot\Component\Plugnmeet</namespace>
     <install>
@@ -41,8 +41,7 @@
     <administration>
         <menu>COM_PLUGNMEET</menu>
         <submenu>
-            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories"
-                  alt="Plugnmeet/Categories">
+            <menu link="option=com_categories&amp;extension=com_plugnmeet.rooms" view="categories" alt="Plugnmeet/Categories">
                 COM_PLUGNMEET_ROOMS_CAT
             </menu>
             <menu link="option=com_plugnmeet&amp;view=rooms" view="rooms" alt="Plugnmeet/Rooms">
