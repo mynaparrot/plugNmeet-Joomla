@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.5...v2.0.6) (2025-10-24)
+
+
+### Bug Fixes
+
+* preparing for new client version ([f5b46bd](https://github.com/mynaparrot/plugNmeet-Joomla/commit/f5b46bd358765fc0eda3c8051b036100c70799fa))
+
 ## [2.0.5](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.4...v2.0.5) (2025-01-23)
 
 
