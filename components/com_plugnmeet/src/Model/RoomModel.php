@@ -183,11 +183,11 @@ class RoomModel extends ItemModel
 			try
 			{
 				$xml        = simplexml_load_file(JPATH_ADMINISTRATOR . '/components/com_plugnmeet/plugnmeet.xml');
-				$extra_data = json_encode(array(
+				$extra_data = array(
 					"platform"          => "joomla-" . JVERSION,
 					"php-version"       => phpversion(),
 					"component-version" => (string) $xml->version
-				));
+				);
 				$logoutUrl  = Uri::getInstance();
 				$logoutUrl->setQuery("returned=true");
 

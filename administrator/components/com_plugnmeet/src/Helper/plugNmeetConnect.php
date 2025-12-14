@@ -134,27 +134,29 @@ class plugNmeetConnect
 	}
 
 	/**
-	 * @param   string       $roomId
-	 * @param   string       $roomTitle
-	 * @param   array        $roomMetadata
-	 * @param   string       $welcomeMessage
-	 * @param   string       $logoutUrl
-	 * @param   string       $webHookUrl
-	 * @param   int          $max_participants
-	 * @param   int          $empty_timeout
-	 * @param   string|null  $extraData
+	 * @param   string          $roomId
+	 * @param   string          $roomTitle
+	 * @param   array           $roomMetadata
+	 * @param   string          $welcomeMessage
+	 * @param   string          $logoutUrl
+	 * @param   string          $webHookUrl
+	 * @param   int             $max_participants
+	 * @param   int             $empty_timeout
+	 * @param   array|MapField  $extraData
 	 *
 	 * @return CreateRoomRes
 	 * @throws Exception
 	 */
-	public function createRoom(string $roomId, string $roomTitle, array $roomMetadata, string $welcomeMessage = "", string $logoutUrl = "", string $webHookUrl = "", int $max_participants = 0, int $empty_timeout = 0, string $extraData = null): CreateRoomRes
+	public function createRoom(string $roomId, string $roomTitle, array $roomMetadata, string $welcomeMessage = "", string $logoutUrl = "", string $webHookUrl = "", int $max_participants = 0, int $empty_timeout = 0, array|MapField $extraData = array()): CreateRoomRes
 	{
 		if (!isset($roomMetadata['room_features']) || !is_array($roomMetadata['room_features']))
 		{
 			throw new Exception("room_features required and should be an array");
 		}
 
-		// backward compatibility with existing plugins
+		// Features can be passed in `room_features` or as top-level keys in `$roomMetadata`.
+		// We're doing this with all of our plugins
+		// We'll merge them, with `room_features` taking precedence.
 		$roomMetadataFeatures = $roomMetadata['room_features'];
 		foreach ($roomMetadata as $k => $data)
 		{
