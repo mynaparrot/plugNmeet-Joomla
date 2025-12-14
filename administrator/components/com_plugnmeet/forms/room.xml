@@ -237,7 +237,7 @@
     <fieldset name="chatFeatures">
         <fields name="chat_features">
             <field type="list"
-                   name="allow_chat"
+                   name="is_allow"
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_CHAT"
                    description="COM_PLUGNMEET_ALLOW_CHAT_DES">
@@ -245,7 +245,7 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="allow_file_upload"
+                   name="is_allow_file_upload"
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_FILE_UPLOAD"
                    description="COM_PLUGNMEET_ALLOW_FILE_UPLOAD_DES">
@@ -258,7 +258,7 @@
     <fieldset name="sharedNotePadFeatures">
         <fields name="shared_note_pad_features">
             <field type="list"
-                   name="allowed_shared_note_pad"
+                   name="is_allow"
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_SHARED_NOTEPAD"
                    description="COM_PLUGNMEET_ALLOW_SHARED_NOTEPAD_DES">
@@ -271,7 +271,7 @@
     <fieldset name="whiteboardFeatures">
         <fields name="whiteboard_features">
             <field type="list"
-                   name="allowed_whiteboard"
+                   name="is_allow"
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_WHITEBOARD"
                    description="COM_PLUGNMEET_ALLOW_WHITEBOARD_DES">
@@ -290,7 +290,7 @@
     <fieldset name="externalMediaPlayerFeatures">
         <fields name="external_media_player_features">
             <field type="list"
-                   name="allowed_external_media_player"
+                   name="is_allow"
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_EXTERNAL_MEDIAL_PLAYER"
                    description="COM_PLUGNMEET_ALLOW_EXTERNAL_MEDIAL_PLAYER_DES">
@@ -383,8 +383,18 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
+                   name="enabled_self_insert_encryption_key"
+                   default="0"
+                   showon="is_enabled:1"
+                   label="COM_PLUGNMEET_ENABLE_E2EE_SELF_INSERT_KEY"
+                   description="COM_PLUGNMEET_ENABLE_E2EE_SELF_INSERT_KEY_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
                    name="included_chat_messages"
                    default="0"
+                   showon="is_enabled:1"
                    label="COM_PLUGNMEET_ENABLE_E2EE_CHAT"
                    description="COM_PLUGNMEET_ENABLE_E2EE_CHAT_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
@@ -393,6 +403,7 @@
             <field type="list"
                    name="included_whiteboard"
                    default="0"
+                   showon="is_enabled:1"
                    label="COM_PLUGNMEET_ENABLE_E2EE_WHITEBOARD"
                    description="COM_PLUGNMEET_ENABLE_E2EE_WHITEBOARD_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
