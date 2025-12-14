@@ -156,14 +156,6 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="allow_polls"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_POLLS"
-                   description="COM_PLUGNMEET_ALLOW_POLLS_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="list"
                    name="enable_analytics"
                    default="1"
                    label="COM_PLUGNMEET_ENABLE_ANALYTICS"
@@ -380,27 +372,6 @@
         </fields>
     </fieldset>
 
-    <fieldset name="speechToTextTranslationFeatures">
-        <fields name="speech_to_text_translation_features">
-            <field type="list"
-                   name="is_allow"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_SPEECH"
-                   description="COM_PLUGNMEET_ALLOW_SPEECH_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="list"
-                   name="is_allow_translation"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_SPEECH_TRANSLATION"
-                   description="COM_PLUGNMEET_ALLOW_SPEECH_TRANSLATION_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-        </fields>
-    </fieldset>
-
     <fieldset name="endToEndEncryptionFeatures">
         <fields name="end_to_end_encryption_features">
             <field type="list"
@@ -429,6 +400,126 @@
             </field>
         </fields>
     </fieldset>
+
+    <fieldset name="pollsFeatures">
+        <fields name="polls_features">
+            <field type="list"
+                   name="is_allow"
+                   default="0"
+                   label="COM_PLUGNMEET_ALLOW_POLLS"
+                   description="COM_PLUGNMEET_ALLOW_POLLS_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+        </fields>
+    </fieldset>
+
+    <fieldset name="insightsFeatures">
+        <fields name="insights_features">
+            <field type="list"
+                   name="is_allow"
+                   default="1"
+                   label="COM_PLUGNMEET_INSIGHTS_IS_ALLOW"
+                   description="COM_PLUGNMEET_INSIGHTS_IS_ALLOW_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field
+                    type="spacer"
+                    name="1"
+                    hr="true"
+            />
+            <fields name="transcription_features">
+                <field type="list"
+                       name="is_allow"
+                       default="0"
+                       label="COM_PLUGNMEET_INSIGHTS_TRANSCRIPTION_IS_ALLOW"
+                       description="COM_PLUGNMEET_INSIGHTS_TRANSCRIPTION_IS_ALLOW_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="is_allow_translation"
+                       default="0"
+                       showon="is_allow:1"
+                       label="COM_PLUGNMEET_INSIGHTS_TRANSCRIPTION_IS_ALLOW_TRANSLATION"
+                       description="COM_PLUGNMEET_INSIGHTS_TRANSCRIPTION_IS_ALLOW_TRANSLATION_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="is_allow_speech_synthesis"
+                       default="0"
+                       showon="is_allow:1"
+                       label="COM_PLUGNMEET_INSIGHTS_TRANSCRIPTION_IS_ALLOW_SPEECH_SYNTHESIS"
+                       description="COM_PLUGNMEET_INSIGHTS_TRANSCRIPTION_IS_ALLOW_SPEECH_SYNTHESIS_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+            </fields>
+            <field
+                    type="spacer"
+                    name="2"
+                    hr="true"
+            />
+            <fields name="chat_translation_features">
+                <field type="list"
+                       name="is_allow"
+                       default="0"
+                       label="COM_PLUGNMEET_INSIGHTS_CHAT_TRANSLATION_IS_ALLOW"
+                       description="COM_PLUGNMEET_INSIGHTS_CHAT_TRANSLATION_IS_ALLOW_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+            </fields>
+            <field
+                    type="spacer"
+                    name="3"
+                    hr="true"
+            />
+            <fields name="ai_features">
+                <field type="list"
+                       name="is_allow"
+                       default="0"
+                       label="COM_PLUGNMEET_INSIGHTS_AI_FEATURES_IS_ALLOW"
+                       description="COM_PLUGNMEET_INSIGHTS_AI_FEATURES_IS_ALLOW_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field
+                        type="spacer"
+                        name="4"
+                        hr="true"
+                />
+                <fields name="ai_text_chat_features">
+                    <field type="list"
+                           name="is_allow"
+                           default="0"
+                           label="COM_PLUGNMEET_INSIGHTS_AI_TEXT_CHAT_IS_ALLOW"
+                           description="COM_PLUGNMEET_INSIGHTS_AI_TEXT_CHAT_IS_ALLOW_DES">
+                        <option value="0">COM_PLUGNMEET_NO</option>
+                        <option value="1">COM_PLUGNMEET_YES</option>
+                    </field>
+                </fields>
+                <field
+                        type="spacer"
+                        name="5"
+                        hr="true"
+                />
+                <fields name="meeting_summarization_features">
+                    <field type="list"
+                           name="is_allow"
+                           default="0"
+                           label="COM_PLUGNMEET_INSIGHTS_MEETING_SUMMARIZATION_IS_ALLOW"
+                           description="COM_PLUGNMEET_INSIGHTS_MEETING_SUMMARIZATION_IS_ALLOW_DES">
+                        <option value="0">COM_PLUGNMEET_NO</option>
+                        <option value="1">COM_PLUGNMEET_YES</option>
+                    </field>
+                </fields>
+            </fields>
+        </fields>
+    </fieldset>
+
     <!--- End room features-->
 
     <!--- Start lock settings -->

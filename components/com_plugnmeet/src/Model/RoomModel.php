@@ -165,11 +165,11 @@ class RoomModel extends ItemModel
 			$res     = $connect->isRoomActive($room_id);
 			if (!$res->getStatus())
 			{
-				$output->msg = $res->getResponseMsg();
+				$output->msg = $res->getMsg();
 
 				return $output;
 			}
-			$isRoomActive = $res->isActive();
+			$isRoomActive = $res->getIsActive();
 		}
 		catch (\Exception $e)
 		{
@@ -191,12 +191,12 @@ class RoomModel extends ItemModel
 				$logoutUrl  = Uri::getInstance();
 				$logoutUrl->setQuery("returned=true");
 
-				$create = $connect->createRoom($room_id, $this->_item->room_title, $this->_item->welcome_message, $this->_item->max_participants, "", $room_metadata, 0, $logoutUrl->toString(), $extra_data);
+				$res = $connect->createRoom($room_id, $this->_item->room_title, $room_metadata, $this->_item->welcome_message, $logoutUrl->toString(), "", $this->_item->max_participants, 0, $extra_data);
 
-				$isRoomActive = $create->getStatus();
-				if (!$create->getStatus())
+				$isRoomActive = $res->getStatus();
+				if (!$res->getStatus())
 				{
-					$output->msg = $res->getResponseMsg();
+					$output->msg = $res->getMsg();
 
 					return $output;
 				}
@@ -213,16 +213,16 @@ class RoomModel extends ItemModel
 		{
 			try
 			{
-				$join = $connect->getJoinToken($room_id, $name, $userId, $isAdmin);
-				if (!$join->getStatus())
+				$res = $connect->getJoinToken($room_id, $name, $userId, $isAdmin);
+				if (!$res->getStatus())
 				{
-					$output->msg = $res->getResponseMsg();
+					$output->msg = $res->getMsg();
 
 					return $output;
 				}
 				$output->status = true;
 				$output->msg    = "success";
-				$output->url    = Route::_('index.php?option=com_plugnmeet&view=room&layout=conference&access_token=' . $join->getToken() . '&id=' . $id, false, 0, true);
+				$output->url    = Route::_('index.php?option=com_plugnmeet&view=room&layout=conference&access_token=' . $res->getToken() . '&id=' . $id, false, 0, true);
 
 				return $output;
 			}
@@ -266,13 +266,13 @@ class RoomModel extends ItemModel
 		try
 		{
 			$connect = new plugNmeetConnect();
-			$res     = $connect->getRecordings(array($this->_item->room_id), $from, $limit, $orderBy);
+			$res     = $connect->getRecordings(array($this->_item->room_id), null, $from, $limit, $orderBy);
 
 			$output->status = $res->getStatus();
-			$output->msg    = $res->getResponseMsg();
-			if ($res->getTotalRecordings())
+			$output->msg    = $res->getMsg();
+			if ($output->status)
 			{
-				$output->result = $res->getRawResponse()->result;
+				$output->result = $res->getResult()->serializeToJsonString();
 			}
 		}
 		catch (\Exception $e)
@@ -316,7 +316,7 @@ class RoomModel extends ItemModel
 		$res     = $connect->getRecordingInfo($recordingId);
 		if (!$res->getStatus())
 		{
-			$output->msg = $res->getResponseMsg();
+			$output->msg = $res->getMsg();
 
 			return $output;
 		}
@@ -331,14 +331,14 @@ class RoomModel extends ItemModel
 		$res = $connect->getRecordingDownloadLink($recordingId);
 		if (!$res->getStatus())
 		{
-			$output->msg = $res->getResponseMsg();
+			$output->msg = $res->getMsg();
 
 			return $output;
 		}
 
 		$params         = ComponentHelper::getParams('com_plugnmeet');
 		$output->status = $res->getStatus();
-		$output->msg    = $res->getResponseMsg();
+		$output->msg    = $res->getMsg();
 		$output->url    = sprintf("%s/download/recording/%s", $params->get("plugnmeet_server_url"), $res->getToken());
 
 		return $output;
@@ -377,7 +377,7 @@ class RoomModel extends ItemModel
 		$res     = $connect->getRecordingInfo($recordingId);
 		if (!$res->getStatus())
 		{
-			$output->msg = $res->getResponseMsg();
+			$output->msg = $res->getMsg();
 
 			return $output;
 		}
@@ -392,7 +392,7 @@ class RoomModel extends ItemModel
 		$res = $connect->deleteRecording($recordingId);
 		if (!$res->getStatus())
 		{
-			$output->msg = $res->getResponseMsg();
+			$output->msg = $res->getMsg();
 
 			return $output;
 		}

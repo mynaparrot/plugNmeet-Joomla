@@ -21,6 +21,7 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
     <table class="table table-hover">
         <thead class="table-light">
         <tr class="text-center">
+            <th scope="col"><?php echo Text::_("COM_PLUGNMEET_RECORDING_METADATA_TITLE"); ?></th>
             <th scope="col"><?php echo Text::_("COM_PLUGNMEET_RECORDING_DATE"); ?></th>
             <th scope="col"><?php echo Text::_("COM_PLUGNMEET_RECORDING_MEETING_DATE"); ?></th>
             <th scope="col"><?php echo Text::_("COM_PLUGNMEET_RECORDING_SIZE"); ?></th>
@@ -94,13 +95,13 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
             showMessage(data.msg);
             return;
         }
-
-        const recordings = data.result.recordings_list;
+        const result = JSON.parse(data.result);
+        const recordings = result.recordingsList;
         if (!recordings) {
             showMessage('no recordings found');
             return;
         }
-        totalRecordings = data.result.total_recordings;
+        totalRecordings = result.totalRecordings;
         if (
             totalRecordings > limitPerPage &&
             !isShowingPagination
@@ -194,36 +195,41 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
         let html = '';
         for (let i = 0; i < recordings.length; i++) {
             const recording = recordings[i];
-            html += '<tr class="table-item" id="' + recording.record_id + '">';
+            let title = "<?php echo $this->item->title;  ?>";
+            if (typeof recording.metadata !== "undefined" && recording.metadata.title) {
+                title = recording.metadata.title;
+            }
+            html += '<tr class="table-item" id="' + recording.recordId + '">';
+            html += '<td class="meeting-title">' + title + '</td>';
             html +=
                 '<td class="recording-date" id="r_creation_' + i + '">' +
-                new Date(recording.creation_time * 1e3).toLocaleString() +
+                new Date(recording.creationTime * 1e3).toLocaleString() +
                 '</td>';
             html +=
                 '<td class="meeting-date">' +
-                new Date(recording.room_creation_time * 1e3).toLocaleString() +
+                new Date(recording.roomCreationTime * 1e3).toLocaleString() +
                 '</td>';
-            html += '<td class="file-size">' + recording.file_size + '</td>';
+            html += '<td class="file-size">' + recording.fileSize + '</td>';
 
             html += '<td><div class="action">';
             if (CAN_PLAY) {
                 html +=
                     '<button type="button" class="btn btn-primary btn-sm mx-1" data-recording="' +
-                    recording.record_id +
+                    recording.recordId +
                     '" onclick="playRecording(event, ' + i + ')"><?php echo Text::_("Play"); ?></button>';
             }
 
             if (CAN_DOWNLOAD) {
                 html +=
                     '<button type="button" class="btn btn-success btn-sm mx-2" data-recording="' +
-                    recording.record_id +
+                    recording.recordId +
                     '" onclick="downloadRecording(event)"><?php echo Text::_("Download"); ?></button>';
             }
 
             if (CAN_DELETE) {
                 html +=
                     '<button type="button" class="btn btn-danger btn-sm" data-recording="' +
-                    recording.record_id +
+                    recording.recordId +
                     '" onclick="deleteRecording(event)"><?php echo Text::_("Delete"); ?></button>';
             }
             html += '</div></td>';
