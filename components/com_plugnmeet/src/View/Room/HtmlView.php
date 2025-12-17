@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use JUri;
+use Joomla\CMS\Uri\Uri;
 use Mynaparrot\Component\Plugnmeet\Site\Model\RoomModel;
 
 /**
@@ -167,7 +167,7 @@ class HtmlView extends BaseHtmlView
 		}
 		if (!empty($custom_designs['design_background_image']))
 		{
-			$designCustomization['background_image'] = JUri::root() . strstr($custom_designs['design_background_image'], "#", true);
+			$designCustomization['background_image'] = Uri::root() . strstr($custom_designs['design_background_image'], "#", true);
 		}
 		if (!empty($custom_designs['header_color']))
 		{
@@ -187,7 +187,7 @@ class HtmlView extends BaseHtmlView
 		}
 		if (!empty($custom_designs['design_logo']))
 		{
-			$designCustomization['custom_logo'] = JUri::root() . strstr($custom_designs['design_logo'], "#", true);
+			$designCustomization['custom_logo'] = Uri::root() . strstr($custom_designs['design_logo'], "#", true);
 		}
 
 		if (!empty($designCustomization))

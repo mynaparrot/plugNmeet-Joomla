@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 $user      = Factory::getApplication()->getIdentity();
 $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
@@ -274,7 +275,7 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
     }
 
     const sendRequest = async (formData) => {
-        const res = await fetch("<?php echo JUri::base(); ?>", {
+        const res = await fetch("<?php echo Uri::base(); ?>", {
             method: 'POST',
             body: formData
         })
