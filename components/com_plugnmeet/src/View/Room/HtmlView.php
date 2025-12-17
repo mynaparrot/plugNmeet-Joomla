@@ -97,93 +97,107 @@ class HtmlView extends BaseHtmlView
 
 	public function getGlobalVariables()
 	{
-		$config = $this->params;
-		$assetsPath = $config->get("plugnmeet_server_url") . "/assets";
+		$config        = $this->params;
+		$assetsPath    = $config->get("plugnmeet_server_url") . "/assets";
 		$room_metadata = json_decode($this->item->room_metadata, true);
 
 		// Start with default values
 		$plugNmeetConfig = [
-			'serverUrl' => $config->get('plugnmeet_server_url'),
-			'staticAssetsPath' => $assetsPath,
-			'enableDynacast' => true,
-			'enableSimulcast' => true,
-			'videoCodec' => 'vp8',
-			'defaultWebcamResolution' => 'h720',
+			'serverUrl'                    => $config->get('plugnmeet_server_url'),
+			'staticAssetsPath'             => $assetsPath,
+			'enableDynacast'               => true,
+			'enableSimulcast'              => true,
+			'videoCodec'                   => 'vp8',
+			'defaultWebcamResolution'      => 'h720',
 			'defaultScreenShareResolution' => 'h1080fps15',
-			'defaultAudioPreset' => 'music',
-			'stopMicTrackOnMute' => true,
-			'focusActiveSpeakerWebcam' => true,
+			'defaultAudioPreset'           => 'music',
+			'stopMicTrackOnMute'           => true,
+			'focusActiveSpeakerWebcam'     => true,
 		];
 
 		// Override with advanced settings from the database if they exist
 		if (isset($room_metadata["advanced_settings"]))
 		{
 			$advancedSettings = $room_metadata["advanced_settings"];
-			if (isset($advancedSettings["enable_simulcast"])) {
+			if (isset($advancedSettings["enable_simulcast"]))
+			{
 				$plugNmeetConfig['enableSimulcast'] = filter_var($advancedSettings["enable_simulcast"], FILTER_VALIDATE_BOOLEAN);
 			}
-			if (isset($advancedSettings["enable_dynacast"])) {
+			if (isset($advancedSettings["enable_dynacast"]))
+			{
 				$plugNmeetConfig['enableDynacast'] = filter_var($advancedSettings["enable_dynacast"], FILTER_VALIDATE_BOOLEAN);
 			}
-			if (isset($advancedSettings["default_webcam_resolution"])) {
+			if (isset($advancedSettings["default_webcam_resolution"]))
+			{
 				$plugNmeetConfig['defaultWebcamResolution'] = $advancedSettings["default_webcam_resolution"];
 			}
-			if (isset($advancedSettings["default_screen_share_resolution"])) {
+			if (isset($advancedSettings["default_screen_share_resolution"]))
+			{
 				$plugNmeetConfig['defaultScreenShareResolution'] = $advancedSettings["default_screen_share_resolution"];
 			}
-			if (isset($advancedSettings["stop_mic_track_on_mute"])) {
+			if (isset($advancedSettings["stop_mic_track_on_mute"]))
+			{
 				$plugNmeetConfig['stopMicTrackOnMute'] = filter_var($advancedSettings["stop_mic_track_on_mute"], FILTER_VALIDATE_BOOLEAN);
 			}
-			if (isset($advancedSettings["video_codec"])) {
+			if (isset($advancedSettings["video_codec"]))
+			{
 				$plugNmeetConfig['videoCodec'] = $advancedSettings["video_codec"];
 			}
-			if (isset($advancedSettings["default_audio_preset"])) {
+			if (isset($advancedSettings["default_audio_preset"]))
+			{
 				$plugNmeetConfig['defaultAudioPreset'] = $advancedSettings["default_audio_preset"];
 			}
 		}
 
 		// Handle design customizations
-		$custom_designs = json_decode($this->item->design_customisation, true);
+		$custom_designs      = json_decode($this->item->design_customisation, true);
 		$designCustomization = [];
 
-		if (!empty($custom_designs['primary_color'])) {
+		if (!empty($custom_designs['primary_color']))
+		{
 			$designCustomization['primary_color'] = $custom_designs['primary_color'];
 		}
-		if (!empty($custom_designs['secondary_color'])) {
+		if (!empty($custom_designs['secondary_color']))
+		{
 			$designCustomization['secondary_color'] = $custom_designs['secondary_color'];
 		}
-		if (!empty($custom_designs['background_color'])) {
+		if (!empty($custom_designs['background_color']))
+		{
 			$designCustomization['background_color'] = $custom_designs['background_color'];
 		}
-		if (!empty($custom_designs['design_background_image'])) {
+		if (!empty($custom_designs['design_background_image']))
+		{
 			$designCustomization['background_image'] = JUri::root() . strstr($custom_designs['design_background_image'], "#", true);
 		}
-		if (!empty($custom_designs['header_color'])) {
+		if (!empty($custom_designs['header_color']))
+		{
 			$designCustomization['header_bg_color'] = $custom_designs['header_color'];
 		}
-		if (!empty($custom_designs['footer_color'])) {
+		if (!empty($custom_designs['footer_color']))
+		{
 			$designCustomization['footer_bg_color'] = $custom_designs['footer_color'];
 		}
-		if (!empty($custom_designs['left_color'])) {
-			$designCustomization['left_side_bg_color'] = $custom_designs['left_color'];
+		if (!empty($custom_designs['right_color']))
+		{
+			$designCustomization['right_panel_bg_color'] = $custom_designs['right_color'];
 		}
-		if (!empty($custom_designs['right_color'])) {
-			$designCustomization['right_side_bg_color'] = $custom_designs['right_color'];
-		}
-		if (!empty($custom_designs['custom_css_url'])) {
+		if (!empty($custom_designs['custom_css_url']))
+		{
 			$designCustomization['custom_css_url'] = $custom_designs['custom_css_url'];
 		}
-		if (!empty($custom_designs['design_logo'])) {
+		if (!empty($custom_designs['design_logo']))
+		{
 			$designCustomization['custom_logo'] = JUri::root() . strstr($custom_designs['design_logo'], "#", true);
 		}
 
-		if (!empty($designCustomization)) {
+		if (!empty($designCustomization))
+		{
 			$plugNmeetConfig['designCustomization'] = $designCustomization;
 		}
 
 		$jsonConfig = json_encode($plugNmeetConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-		$js = "window.plugNmeetConfig = JSON.parse(`" . addslashes($jsonConfig) . "`);";
-		$cnfScript = "<script type=\"text/javascript\">\n" . $js . "\n</script>\n";
+		$js         = "window.plugNmeetConfig = JSON.parse(`" . addslashes($jsonConfig) . "`);";
+		$cnfScript  = "<script type=\"text/javascript\">\n" . $js . "\n</script>\n";
 
 		return $cnfScript;
 	}
