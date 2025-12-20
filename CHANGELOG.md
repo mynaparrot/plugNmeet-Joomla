@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.0.0](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.6...v3.0.0) (2025-12-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* new UI + API
+
+### Features
+
+* new UI + API ([5deac01](https://github.com/mynaparrot/plugNmeet-Joomla/commit/5deac01162931e2894ad3fc0a3922e81464488ca))
+
+
+### Bug Fixes
+
+* added new features ([95f3dae](https://github.com/mynaparrot/plugNmeet-Joomla/commit/95f3dae36351d5d9d5e61c336d1911c9952ea4aa))
+* bump SDK ([ace664a](https://github.com/mynaparrot/plugNmeet-Joomla/commit/ace664a0622fb97b77c36e0fbf7b13546e4d40ea))
+* bump SDK ([f019b8c](https://github.com/mynaparrot/plugNmeet-Joomla/commit/f019b8c12f037978ca4b5b2e0e33676e385c9546))
+* new Crowdin updates ([0d59e8d](https://github.com/mynaparrot/plugNmeet-Joomla/commit/0d59e8da66c7fa175041e3c31309487ce3449c56))
+* new Crowdin updates ([9e5d69d](https://github.com/mynaparrot/plugNmeet-Joomla/commit/9e5d69d5b15c85efe3cbff170aa26caef87d394c))
+
 ## [2.0.6](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.5...v2.0.6) (2025-10-24)
 
 
