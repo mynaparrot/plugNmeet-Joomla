@@ -671,15 +671,7 @@
             />
             <field
                     type="color"
-                    name="left_color"
-                    default=""
-                    label="COM_PLUGNMEET_CONFIG_LEFT_COLOR_LABEL"
-                    description="COM_PLUGNMEET_CONFIG_LEFT_COLOR_DESCRIPTION"
-                    required="false"
-            />
-            <field
-                    type="color"
-                    name="right_color"
+                    name="side_panel_bg_color"
                     default=""
                     label="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_LABEL"
                     description="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_DESCRIPTION"

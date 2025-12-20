@@ -177,9 +177,9 @@ class HtmlView extends BaseHtmlView
 		{
 			$designCustomization['footer_bg_color'] = $custom_designs['footer_color'];
 		}
-		if (!empty($custom_designs['right_color']))
+		if (!empty($custom_designs['side_panel_bg_color']))
 		{
-			$designCustomization['right_panel_bg_color'] = $custom_designs['right_color'];
+			$designCustomization['side_panel_bg_color'] = $custom_designs['side_panel_bg_color'];
 		}
 		if (!empty($custom_designs['custom_css_url']))
 		{
