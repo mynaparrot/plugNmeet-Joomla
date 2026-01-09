@@ -13,15 +13,22 @@ use Mynaparrot\Component\Plugnmeet\Administrator\Helper\plugNmeetConnect;
 
 defined('_JEXEC') or die;
 
-$app      = Factory::getApplication();
-$jsFiles  = [];
-$cssFiles = [];
+$app        = Factory::getApplication();
+$jsFiles    = [];
+$cssFiles   = [];
+$assetsPath = $this->params->get("plugnmeet_server_url") . "/assets";
+
 try
 {
     $connect  = new plugNmeetConnect();
     $files    = $connect->getClientFiles();
     $jsFiles  = $files->getJSFiles();
     $cssFiles = $files->getCSSFiles();
+    
+    if (!empty($files->getStaticAssetsPath()))
+    {
+        $assetsPath = $files->getStaticAssetsPath();
+    }
 }
 catch (Exception $e)
 {
@@ -38,8 +45,6 @@ if (empty($jsFiles) || empty($cssFiles))
 
     return;
 }
-
-$assetsPath = $this->params->get("plugnmeet_server_url") . "/assets";
 
 $jsTags        = "";
 $jsTagsPreload = "";
