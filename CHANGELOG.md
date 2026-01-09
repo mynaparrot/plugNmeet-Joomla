@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.0.0...v3.0.1) (2026-01-09)
+
+
+### Bug Fixes
+
+* bump SDK ([55c72b4](https://github.com/mynaparrot/plugNmeet-Joomla/commit/55c72b49820104aca496fc85e835092f2f75b0b5))
+
 ## [3.0.0](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v2.0.6...v3.0.0) (2025-12-20)
 
 
