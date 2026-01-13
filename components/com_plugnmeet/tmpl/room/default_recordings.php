@@ -210,7 +210,7 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
                 '<td class="meeting-date">' +
                 new Date(recording.roomCreationTime * 1e3).toLocaleString() +
                 '</td>';
-            html += '<td class="file-size">' + recording.fileSize + '</td>';
+            html += '<td class="file-size">' + recording.fileSize.toFixed(2) + '</td>';
 
             html += '<td><div class="action">';
             if (CAN_PLAY) {
