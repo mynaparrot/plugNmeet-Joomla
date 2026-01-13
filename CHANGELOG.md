@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.0.1...v3.0.2) (2026-01-13)
+
+
+### Bug Fixes
+
+* use `toFixed(2)` for recording file size ([68b75c6](https://github.com/mynaparrot/plugNmeet-Joomla/commit/68b75c6d784b0f0373ad915b4908eaa9a3242fde))
+
 ## [3.0.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.0.0...v3.0.1) (2026-01-09)
 
 
