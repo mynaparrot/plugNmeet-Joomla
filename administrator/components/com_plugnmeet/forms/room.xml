@@ -425,6 +425,37 @@
         </fields>
     </fieldset>
 
+    <fieldset name="sipDialInFeatures">
+        <fields name="sip_dial_in_features">
+            <field type="list"
+                   name="is_allow"
+                   default="0"
+                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_IS_ALLOW"
+                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_IS_ALLOW_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="enable_dial_in_on_create"
+                   default="0"
+                   showon="is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_ENABLE_ON_CREATE"
+                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_ENABLE_ON_CREATE_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="hide_phone_number"
+                   default="1"
+                   showon="is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_HIDE_PHONE"
+                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_HIDE_PHONE_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+        </fields>
+    </fieldset>
+
     <fieldset name="insightsFeatures">
         <fields name="insights_features">
             <field type="list"

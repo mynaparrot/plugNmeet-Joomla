@@ -62,6 +62,8 @@ if ((int) $this->item->id > 0)
     <hr/>
     <?php echo $this->form->renderFieldset("pollsFeatures"); ?>
     <hr/>
+    <?php echo $this->form->renderFieldset("sipDialInFeatures"); ?>
+    <hr/>
     <?php echo $this->form->renderFieldset("endToEndEncryptionFeatures"); ?>
     <?php echo HTMLHelper::_('uitab.endTab'); ?>
 

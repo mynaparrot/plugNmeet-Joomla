@@ -22,7 +22,7 @@ use Joomla\Registry\Registry;
  */
 class PlugnmeetHelper
 {
-	public static $roomMetadataItems = array("room_features", "recording_features", "chat_features", "shared_note_pad_features", "whiteboard_features", "external_media_player_features", "waiting_room_features", "breakout_room_features", "display_external_link_features", "ingress_features", "end_to_end_encryption_features", "insights_features", "polls_features", "default_lock_settings", "advanced_settings");
+	public static $roomMetadataItems = array("room_features", "recording_features", "chat_features", "shared_note_pad_features", "whiteboard_features", "external_media_player_features", "waiting_room_features", "breakout_room_features", "display_external_link_features", "ingress_features", "end_to_end_encryption_features", "insights_features", "polls_features", "sip_dial_in_features", "default_lock_settings", "advanced_settings");
 
 	/**
 	 * Gets a list of the actions that can be performed.
