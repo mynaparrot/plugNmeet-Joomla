@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.0.2...v3.1.0) (2026-01-22)
+
+
+### Features
+
+* SIP/VoIP dial in ([dca6bfb](https://github.com/mynaparrot/plugNmeet-Joomla/commit/dca6bfbcb1045695dd7bee0b662c6fac1132b18a))
+
+
+### Bug Fixes
+
+* new Crowdin updates ([8bdf884](https://github.com/mynaparrot/plugNmeet-Joomla/commit/8bdf8849519a9abab9a29b9ff19f089328ad2176))
+
 ## [3.0.2](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.0.1...v3.0.2) (2026-01-13)
 
 
