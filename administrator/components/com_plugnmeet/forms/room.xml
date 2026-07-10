@@ -124,14 +124,6 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="allow_rtmp"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_RTMP"
-                   description="COM_PLUGNMEET_ALLOW_RTMP_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="list"
                    name="allow_view_other_webcams"
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_VIEW_OTHER_WEBCAMS"
@@ -176,6 +168,14 @@
                    default="1"
                    label="COM_PLUGNMEET_ALLOW_RAISE_HAND"
                    description="COM_PLUGNMEET_ALLOW_RAISE_HAND_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="allow_reactions"
+                   default="1"
+                   label="COM_PLUGNMEET_ALLOW_REACTIONS"
+                   description="COM_PLUGNMEET_ALLOW_REACTIONS_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -372,6 +372,27 @@
         </fields>
     </fieldset>
 
+    <fieldset name="externalBroadcastingFeatures">
+        <fields name="external_broadcasting_features">
+            <field type="list"
+                   name="is_allow"
+                   default="1"
+                   label="COM_PLUGNMEET_EXTERNAL_BROADCASTING_IS_ALLOW"
+                   description="COM_PLUGNMEET_EXTERNAL_BROADCASTING_IS_ALLOW_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="is_allow_rtmp"
+                   default="1"
+                   showon="external_broadcasting_features.is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_RTMP"
+                   description="COM_PLUGNMEET_ALLOW_RTMP_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+        </fields>
+    </fieldset>
     <fieldset name="endToEndEncryptionFeatures">
         <fields name="end_to_end_encryption_features">
             <field type="list"
@@ -798,7 +819,7 @@
             </field>
             <field type="list"
                    name="video_codec"
-                   default="vp8"
+                   default="vp9"
                    label="COM_PLUGNMEET_VIDEO_CODEC_LABEL"
                    description="COM_PLUGNMEET_VIDEO_CODEC_DES"
             >

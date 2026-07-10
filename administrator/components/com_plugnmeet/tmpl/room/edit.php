@@ -54,6 +54,8 @@ if ((int) $this->item->id > 0)
     <hr/>
     <?php echo $this->form->renderFieldset("displayExternalLinkFeatures"); ?>
     <hr/>
+    <?php echo $this->form->renderFieldset("externalBroadcastingFeatures"); ?>
+    <hr/>
     <?php echo $this->form->renderFieldset("waitingRoomFeatures"); ?>
     <hr/>
     <?php echo $this->form->renderFieldset("breakoutRoomFeatures"); ?>
