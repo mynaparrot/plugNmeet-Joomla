@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.1.0...v3.1.1) (2026-07-10)
+
+
+### Bug Fixes
+
+* added new reactions option ([ffdb699](https://github.com/mynaparrot/plugNmeet-Joomla/commit/ffdb699db14b57904482e124c4795afca18dec62))
+* new Crowdin updates ([#22](https://github.com/mynaparrot/plugNmeet-Joomla/issues/22)) ([eca7a5a](https://github.com/mynaparrot/plugNmeet-Joomla/commit/eca7a5a0c71776bfcedba4c8dcb2e5e091cc2622))
+
 ## [3.1.0](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.0.2...v3.1.0) (2026-01-22)
 
 
