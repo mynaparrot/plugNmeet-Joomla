@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.1.1...v3.1.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* added `.gitkeep` file to ensure dir always include ([e650326](https://github.com/mynaparrot/plugNmeet-Joomla/commit/e650326b79299e2611494eac7b56c5d1b51b8b8c))
+
 ## [3.1.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.1.0...v3.1.1) (2026-07-10)
 
 
