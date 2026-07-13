@@ -33,9 +33,8 @@ class PlugnmeetHelper
 	 */
 	public static function getActions()
 	{
-		$user              = Factory::getApplication()->getIdentity();
-		$result            = new Registry();
-		$result->separator = "_";
+		$user   = Factory::getApplication()->getIdentity();
+		$result = new Registry(null, "_");
 
 		$assetName = 'com_plugnmeet';
 		$actions   = array(
