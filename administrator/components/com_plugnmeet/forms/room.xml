@@ -819,7 +819,7 @@
             </field>
             <field type="list"
                    name="video_codec"
-                   default="vp9"
+                   default="vp8"
                    label="COM_PLUGNMEET_VIDEO_CODEC_LABEL"
                    description="COM_PLUGNMEET_VIDEO_CODEC_DES"
             >
