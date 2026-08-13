@@ -37,6 +37,8 @@ jobs:
           rsync -ar ./components/com_plugnmeet/* ./build/site/
           rsync -ar  ./language/* ./build/site/languages/
           
+          rsync -ar ./media/com_plugnmeet/* ./build/media/
+          
           cd ./build
           zip -r com_plugnmeet.zip *
           gh release upload ${{ steps.release.outputs.tag_name }} com_plugnmeet.zip
