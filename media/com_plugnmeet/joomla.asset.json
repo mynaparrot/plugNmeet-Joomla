@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_plugnmeet",
+  "version": "CVS: 1.0.0",
+  "license": "GNU General Public License version 2 or later; see LICENSE.txt",
+  "assets": [
+    {
+      "name": "com_plugnmeet.admin",
+      "type": "style",
+      "uri": "com_plugnmeet/admin.css"
+    },
+    {
+      "name": "com_plugnmeet.admin",
+      "type": "script",
+      "uri": "com_plugnmeet/admin.js",
+      "dependencies": [
+        "jquery"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_plugnmeet.list",
+      "type": "style",
+      "uri": "com_plugnmeet/list.css"
+    },
+    {
+      "name": "com_plugnmeet.recordings",
+      "type": "style",
+      "uri": "com_plugnmeet/recordings.css"
+    },
+    {
+      "name": "com_plugnmeet.recordings",
+      "type": "script",
+      "uri": "com_plugnmeet/recordings.js",
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_plugnmeet.artifacts",
+      "type": "style",
+      "uri": "com_plugnmeet/artifacts.css"
+    },
+    {
+      "name": "com_plugnmeet.artifacts",
+      "type": "script",
+      "uri": "com_plugnmeet/artifacts.js",
+      "attributes": {
+        "defer": true
+      }
+    }
+  ]
+}

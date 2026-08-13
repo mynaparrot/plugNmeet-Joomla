@@ -1,0 +1,59 @@
+/**
+ * @version     CVS: 1.0.0
+ * @package     com_plugnmeet
+ * @copyright   2024 Jibon
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Jibon <jiboncosta57@gmail.com>
+ */
+
+.plugnmeet-room-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.plugnmeet-room-selector .form-select {
+    max-width: 360px;
+}
+
+.plugnmeet-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.plugnmeet-action-buttons .btn {
+    white-space: nowrap;
+}
+
+.plugnmeet-pagination-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.plugnmeet-pagination-wrapper #plugnmeet-recordings-info {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+#plugnmeet-merge-list {
+    max-height: 220px;
+    overflow-y: auto;
+    word-break: break-all;
+}
+
+#plugnmeet-merge-list li {
+    padding: 4px 0;
+}
+
+/* Allow long unbreakable values (recordId UUIDs) in the recordings list table to
+   wrap instead of forcing the page width */
+#recordingLists td,
+#recordingLists th {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}

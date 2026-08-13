@@ -30,6 +30,11 @@
         <folder>forms</folder>
         <folder>tmpl</folder>
     </files>
+    <media destination="com_plugnmeet" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+        <filename>joomla.asset.json</filename>
+    </media>
     <languages folder="site/languages">
         <language tag="en-GB">en-GB/com_plugnmeet.ini</language>
         <language tag="de-DE">de-DE/com_plugnmeet.ini</language>
@@ -46,6 +51,12 @@
             </menu>
             <menu link="option=com_plugnmeet&amp;view=rooms" view="rooms" alt="Plugnmeet/Rooms">
                 COM_PLUGNMEET_TITLE_ROOMS
+            </menu>
+            <menu link="option=com_plugnmeet&amp;view=recordings" view="recordings" alt="Plugnmeet/Recordings">
+                COM_PLUGNMEET_TITLE_RECORDINGS
+            </menu>
+            <menu link="option=com_plugnmeet&amp;view=artifacts" view="artifacts" alt="Plugnmeet/Artifacts">
+                COM_PLUGNMEET_TITLE_ARTIFACTS
             </menu>
         </submenu>
         <files folder="administrator">

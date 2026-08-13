@@ -1,0 +1,113 @@
+/**
+ * @version     CVS: 1.0.0
+ * @package     com_plugnmeet
+ * @copyright   2024 Jibon
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Jibon <jiboncosta57@gmail.com>
+ */
+
+.plugnmeet-room-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.plugnmeet-room-selector .form-select {
+    max-width: 360px;
+}
+
+.plugnmeet-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.plugnmeet-action-buttons .btn {
+    white-space: nowrap;
+}
+
+.plugnmeet-pagination-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.plugnmeet-pagination-wrapper #plugnmeet-artifacts-info {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.plugnmeet-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.plugnmeet-header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.details th {
+    width: 25%;
+}
+
+.plugnmeet-meeting-summary {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Force the two-column details and Room Analytics tables to fit the container */
+.details,
+.table-bordered {
+    table-layout: fixed;
+}
+
+/* Allow long unbreakable values (artifact_id, room_id UUIDs, etc.) to wrap inside
+   the metadata/details table and the Room Analytics table cells */
+.details th,
+.details td,
+.table-bordered th,
+.table-bordered td {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+/* Keep the User Analytics scroll container constrained so its horizontal scroll
+   stays inside the page */
+.table-responsive {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Allow the User Analytics table inside .table-responsive to keep its natural
+   wide layout and scroll horizontally within the container */
+.table-responsive table {
+    width: auto;
+    min-width: 100%;
+    max-width: none;
+    table-layout: auto;
+}
+
+/* Joomla Atum's admin layout is flexbox. Flex items default to min-width:auto,
+   which prevents them from shrinking below their widest child and causes the
+   whole page to scroll. Allow the content column ancestors to shrink so only
+   .table-responsive scrolls internally. */
+body.view-artifacts .container-main,
+body.view-artifacts #content,
+body.view-artifacts #content .row,
+body.view-artifacts #content .col-md-12,
+body.view-artifacts main {
+    min-width: 0;
+}

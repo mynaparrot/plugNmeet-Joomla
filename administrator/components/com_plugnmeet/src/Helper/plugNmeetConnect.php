@@ -63,6 +63,7 @@ use Mynaparrot\PlugnmeetProto\GetDownloadTokenRes;
 use Mynaparrot\PlugnmeetProto\IsRoomActiveReq;
 use Mynaparrot\PlugnmeetProto\IsRoomActiveRes;
 use Mynaparrot\PlugnmeetProto\LockSettings;
+use Mynaparrot\PlugnmeetProto\MergeRecordingsByIds;
 use Mynaparrot\PlugnmeetProto\MergeRecordingsReq;
 use Mynaparrot\PlugnmeetProto\RecordingInfoReq;
 use Mynaparrot\PlugnmeetProto\RecordingInfoRes;
@@ -77,7 +78,7 @@ use Mynaparrot\PlugnmeetProto\UserInfo;
 use Mynaparrot\PlugnmeetProto\UserMetadata;
 
 
-require JPATH_ADMINISTRATOR . "/components/com_plugnmeet/src/Helper/libs/plugNmeet-sdk-php/vendor/autoload.php";
+require JPATH_ADMINISTRATOR . "/components/com_plugnmeet/src/Helper/libs/packages/vendor/autoload.php";
 
 /**
  *
@@ -435,14 +436,22 @@ class plugNmeetConnect
 	/**
 	 * Merge multiple parts of recording into a single new recording.
 	 *
-	 * @param   MergeRecordingsReq  $mergeRecordingsReq
+	 * @param   string  $roomId        The room id.
+	 * @param   array   $recordingIds  The list of recording ids to merge.
 	 *
 	 * @return CommonResponse The response from the API call.
 	 * @throws Exception
 	 */
-	public function mergeRecordings(MergeRecordingsReq $mergeRecordingsReq): CommonResponse
+	public function mergeRecordings(string $roomId, array $recordingIds): CommonResponse
 	{
-		return $this->plugnmeet->mergeRecordings($mergeRecordingsReq);
+		$byIds = new MergeRecordingsByIds();
+		$byIds->setRoomId($roomId);
+		$byIds->setRecordingIds($recordingIds);
+
+		$req = new MergeRecordingsReq();
+		$req->setByIds($byIds);
+
+		return $this->plugnmeet->mergeRecordings($req);
 	}
 
 	/**

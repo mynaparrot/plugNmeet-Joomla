@@ -26,6 +26,8 @@ $userId    = $user->get('id');
 $listOrder = $this->state->get('list.ordering');
 $listDirn  = $this->state->get('list.direction');
 $canOrder  = $user->authorise('core.edit.state', 'com_plugnmeet');
+$canManage = $user->authorise('core.manage', 'com_plugnmeet');
+$colspan   = 7 + (isset($this->items[0]->ordering) ? 1 : 0);
 
 $saveOrder = $listOrder == 'a.ordering';
 
@@ -71,6 +73,9 @@ if (!empty($saveOrder))
                         <th class='text-center'>
 							<?php echo Text::_("COM_PLUGNMEET_ROOM_ATTENDEE_PASS"); ?>
                         </th>
+                        <th class="text-center">
+							<?php echo Text::_('COM_PLUGNMEET_ROOMS_RECORDINGS_ARTIFACTS'); ?>
+                        </th>
                         <th scope="col" class="w-1 text-center">
 							<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
                         </th>
@@ -82,7 +87,7 @@ if (!empty($saveOrder))
                     </thead>
                     <tfoot>
                     <tr>
-                        <td colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>">
+                        <td colspan="<?php echo $colspan; ?>">
 							<?php echo $this->pagination->getListFooter(); ?>
                         </td>
                     </tr>
@@ -147,6 +152,18 @@ if (!empty($saveOrder))
                             </td>
                             <td class="text-center">
 								<?php echo $item->attendee_pass; ?>
+                            </td>
+                            <td class="text-center">
+								<?php if ($canManage) : ?>
+                                    <a href="<?php echo Route::_('index.php?option=com_plugnmeet&view=recordings&room_id=' . urlencode($item->room_id)); ?>"
+                                       class="btn btn-sm btn-outline-primary">
+										<?php echo Text::_('COM_PLUGNMEET_ROOMS_RECORDINGS_LINK'); ?>
+                                    </a>
+                                    <a href="<?php echo Route::_('index.php?option=com_plugnmeet&view=artifacts&room_id=' . urlencode($item->room_id)); ?>"
+                                       class="btn btn-sm btn-outline-secondary">
+										<?php echo Text::_('COM_PLUGNMEET_ROOMS_ARTIFACTS_LINK'); ?>
+                                    </a>
+								<?php endif; ?>
                             </td>
                             <td class="text-center">
 								<?php echo HTMLHelper::_('jgrid.published', $item->state, $i, 'rooms.', $canChange, 'cb'); ?>
