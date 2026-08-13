@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.1.3...v3.2.0) (2026-08-13)
+
+
+### Features
+
+* added recordings and artifacts view ([1b89a8c](https://github.com/mynaparrot/plugNmeet-Joomla/commit/1b89a8ca791f5e98eb1c7fc315f5232c8b8f200f))
+
 ## [3.1.3](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.1.2...v3.1.3) (2026-08-12)
 
 
