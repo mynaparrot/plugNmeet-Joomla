@@ -556,7 +556,7 @@ class AnalyticsHelper
 			'rtmp_status'                  => Text::_('COM_PLUGNMEET_ANALYTICS_RTMP_STATUS'),
 			'speech_service_total_usage'   => Text::_('COM_PLUGNMEET_ANALYTICS_SPEECH_SERVICE_TOTAL_USAGE'),
 			'external_media_player_status' => Text::_('COM_PLUGNMEET_ANALYTICS_EXTERNAL_MEDIA_PLAYER_STATUS'),
-			'etherpad_status'              => Text::_('COM_PLUGNMEET_ANALYTICS_ETHERPAD_STATUS'),
+			'shared_notepad_status'        => Text::_('COM_PLUGNMEET_ANALYTICS_SHARED_NOTEPAD_STATUS'),
 			'external_display_link_status' => Text::_('COM_PLUGNMEET_ANALYTICS_EXTERNAL_DISPLAY_LINK_STATUS'),
 			'ingress_created'              => Text::_('COM_PLUGNMEET_ANALYTICS_INGRESS_CREATED'),
 			'breakout_room'                => Text::_('COM_PLUGNMEET_ANALYTICS_BREAKOUT_ROOM'),
