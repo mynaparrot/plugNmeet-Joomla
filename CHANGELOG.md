@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.2.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.2.0...v3.2.1) (2026-09-10)
+
+
+### Bug Fixes
+
+* bump SDK ([14ccd0f](https://github.com/mynaparrot/plugNmeet-Joomla/commit/14ccd0f1b9d0a113b999700182005f6770ed465c))
+* **deps:** update dependency mynaparrot/plugnmeet-sdk to v2.2.7 ([#39](https://github.com/mynaparrot/plugNmeet-Joomla/issues/39)) ([6a81b5b](https://github.com/mynaparrot/plugNmeet-Joomla/commit/6a81b5b48e549e942b7d683b1cde99bb70156a2c))
+* **deps:** update dependency phpoffice/phpspreadsheet to v5.9.0 ([#31](https://github.com/mynaparrot/plugNmeet-Joomla/issues/31)) ([eb328be](https://github.com/mynaparrot/plugNmeet-Joomla/commit/eb328bedb36c4574879ba3e2ba68c88fb76348d2))
+* new Crowdin updates ([#38](https://github.com/mynaparrot/plugNmeet-Joomla/issues/38)) ([57f234d](https://github.com/mynaparrot/plugNmeet-Joomla/commit/57f234d4eb8fa28b2c3b4176793d8b2fd2e4b9f1))
+
 ## [3.2.0](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.1.3...v3.2.0) (2026-08-13)
 
 
