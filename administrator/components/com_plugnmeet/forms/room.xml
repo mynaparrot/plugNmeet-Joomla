@@ -6,6 +6,7 @@
         <field type="text"
                name="room_id"
                label="COM_PLUGNMEET_ROOM_ID"
+               description="COM_PLUGNMEET_ROOM_ID_DES"
                class="text_area"
                readonly="true"
                required="false"
@@ -22,6 +23,7 @@
         <field type="text"
                name="room_title"
                label="COM_PLUGNMEET_ROOM_TITLE"
+               description="COM_PLUGNMEET_ROOM_TITLE_DES"
                size="10"
                maxlength="50"
                default=""
@@ -43,6 +45,7 @@
         <field type="editor"
                name="description"
                label="COM_PLUGNMEET_ROOM_DES"
+               description="COM_PLUGNMEET_ROOM_DES_DES"
                default=""
                cols="5"
                rows="10"
@@ -54,6 +57,7 @@
         <field type="text"
                name="moderator_pass"
                label="COM_PLUGNMEET_ROOM_MODERATOR_PASS"
+               description="COM_PLUGNMEET_ROOM_MODERATOR_PASS_DES"
                size="10"
                maxlength="50"
                default=""
@@ -67,6 +71,7 @@
         <field type="text"
                name="attendee_pass"
                label="COM_PLUGNMEET_ROOM_ATTENDEE_PASS"
+               description="COM_PLUGNMEET_ROOM_ATTENDEE_PASS_DES"
                size="10"
                maxlength="50"
                default=""
@@ -80,6 +85,7 @@
         <field type="textarea"
                name="welcome_message"
                label="COM_PLUGNMEET_ROOM_WELCOME_MSG"
+               description="COM_PLUGNMEET_ROOM_WELCOME_MSG_DES"
                rows="3"
                cols="1"
                default=""
@@ -97,13 +103,21 @@
                step="1"/>
     </fieldset>
     <!--Start room features-->
+    <!--WordPress parity: room duration & moderator gate first, then media, then engagement-->
     <fieldset name="roomFeatures">
         <fields name="room_features">
+            <field type="number"
+                   name="room_duration"
+                   default="0"
+                   label="COM_PLUGNMEET_ROOM_DURATION"
+                   description="COM_PLUGNMEET_ROOM_DURATION_DES"
+                   min="0"
+                   step="1"/>
             <field type="list"
-                   name="allow_webcams"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_WEBCAMS"
-                   description="COM_PLUGNMEET_ALLOW_WEBCAMS_DES">
+                   name="moderator_join_first"
+                   default="0"
+                   label="COM_PLUGNMEET_MODERATOR_JOIN_FIRST"
+                   description="COM_PLUGNMEET_MODERATOR_JOIN_FIRST_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -116,10 +130,10 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="allow_screen_share"
+                   name="allow_webcams"
                    default="1"
-                   label="COM_PLUGNMEET_ALLOW_SCREEN_SHARING"
-                   description="COM_PLUGNMEET_ALLOW_SCREEN_SHARING_DES">
+                   label="COM_PLUGNMEET_ALLOW_WEBCAMS"
+                   description="COM_PLUGNMEET_ALLOW_WEBCAMS_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -132,14 +146,6 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="allow_view_other_users_list"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS"
-                   description="COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="list"
                    name="admin_only_webcams"
                    default="0"
                    label="COM_PLUGNMEET_ADMIN_ONLY_WEBCAMS"
@@ -148,10 +154,18 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="enable_analytics"
+                   name="allow_screen_share"
                    default="1"
-                   label="COM_PLUGNMEET_ENABLE_ANALYTICS"
-                   description="COM_PLUGNMEET_ENABLE_ANALYTICS_DES">
+                   label="COM_PLUGNMEET_ALLOW_SCREEN_SHARING"
+                   description="COM_PLUGNMEET_ALLOW_SCREEN_SHARING_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="allow_view_other_users_list"
+                   default="1"
+                   label="COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS"
+                   description="COM_PLUGNMEET_ALLOW_VIEW_OTHER_USERS_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -180,6 +194,14 @@
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
+                   name="enable_analytics"
+                   default="1"
+                   label="COM_PLUGNMEET_ENABLE_ANALYTICS"
+                   description="COM_PLUGNMEET_ENABLE_ANALYTICS_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
                    name="auto_gen_user_id"
                    default="0"
                    label="COM_PLUGNMEET_AUTO_GEN_USER_ID"
@@ -187,13 +209,6 @@
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
-            <field type="number"
-                   name="room_duration"
-                   default="0"
-                   label="COM_PLUGNMEET_ROOM_DURATION"
-                   description="COM_PLUGNMEET_ROOM_DURATION_DES"
-                   min="0"
-                   step="1"/>
         </fields>
     </fieldset>
 
@@ -210,6 +225,7 @@
             <field type="list"
                    name="is_allow_cloud"
                    default="1"
+                   showon="is_allow:1"
                    label="COM_PLUGNMEET_ALLOW_CLOUD_RECORDING"
                    description="COM_PLUGNMEET_ALLOW_CLOUD_RECORDING_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
@@ -218,6 +234,7 @@
             <field type="list"
                    name="enable_auto_cloud_recording"
                    default="0"
+                   showon="is_allow:1[AND]is_allow_cloud:1"
                    label="COM_PLUGNMEET_START_AUTO_CLOUD_RECORDING"
                    description="COM_PLUGNMEET_START_AUTO_CLOUD_RECORDING_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
@@ -226,6 +243,7 @@
             <field type="list"
                    name="is_allow_local"
                    default="1"
+                   showon="is_allow:1"
                    label="COM_PLUGNMEET_ALLOW_LOCAL_RECORDING"
                    description="COM_PLUGNMEET_ALLOW_LOCAL_RECORDING_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
@@ -234,6 +252,7 @@
         </fields>
     </fieldset>
 
+    <!--WordPress parity: collaboration focus order - recording, chat, waiting, polls, notepad, whiteboard, breakout, media, link, broadcast, ingress, SIP, E2EE-->
     <fieldset name="chatFeatures">
         <fields name="chat_features">
             <field type="list"
@@ -247,8 +266,48 @@
             <field type="list"
                    name="is_allow_file_upload"
                    default="1"
+                   showon="is_allow:1"
                    label="COM_PLUGNMEET_ALLOW_FILE_UPLOAD"
                    description="COM_PLUGNMEET_ALLOW_FILE_UPLOAD_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+        </fields>
+    </fieldset>
+
+    <fieldset name="waitingRoomFeatures">
+        <fields name="waiting_room_features">
+            <field type="list"
+                   name="is_active"
+                   default="0"
+                   label="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM"
+                   description="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="textarea"
+                   name="waiting_room_msg"
+                   label="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_MSG"
+                   description="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_MSG_DES"
+                   showon="is_active:1"
+                   rows="3"
+                   cols="1"
+                   default=""
+                   class="text_area"
+                   filter="raw"
+                   required="false"
+                   readonly="false"
+                   disabled="false"/>
+        </fields>
+    </fieldset>
+
+    <fieldset name="pollsFeatures">
+        <fields name="polls_features">
+            <field type="list"
+                   name="is_allow"
+                   default="1"
+                   label="COM_PLUGNMEET_ALLOW_POLLS"
+                   description="COM_PLUGNMEET_ALLOW_POLLS_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -281,9 +340,32 @@
             <field type="url"
                    name="preload_file"
                    default=""
+                   showon="is_allow:1"
                    label="COM_PLUGNMEET_WHITEBOARD_PRE_LOAD_FILE"
                    description="COM_PLUGNMEET_WHITEBOARD_PRE_LOAD_FILE_DES"
                    size="10"/>
+        </fields>
+    </fieldset>
+
+    <fieldset name="breakoutRoomFeatures">
+        <fields name="breakout_room_features">
+            <field type="list"
+                   name="is_allow"
+                   default="1"
+                   label="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS"
+                   description="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="number"
+                   name="allowed_number_rooms"
+                   default="4"
+                   showon="is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_NUMBER"
+                   description="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_NUMBER_DES"
+                   min="0"
+                   max="10"
+                   step="1"/>
         </fields>
     </fieldset>
 
@@ -313,49 +395,25 @@
         </fields>
     </fieldset>
 
-    <fieldset name="waitingRoomFeatures">
-        <fields name="waiting_room_features">
-            <field type="list"
-                   name="is_active"
-                   default="0"
-                   label="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM"
-                   description="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="textarea"
-                   name="waiting_room_msg"
-                   label="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_MSG"
-                   description="COM_PLUGNMEET_ACTIVATE_WAITING_ROOM_MSG_DES"
-                   rows="3"
-                   cols="1"
-                   default=""
-                   class="text_area"
-                   filter="raw"
-                   required="false"
-                   readonly="false"
-                   disabled="false"/>
-        </fields>
-    </fieldset>
-
-    <fieldset name="breakoutRoomFeatures">
-        <fields name="breakout_room_features">
+    <fieldset name="externalBroadcastingFeatures">
+        <fields name="external_broadcasting_features">
             <field type="list"
                    name="is_allow"
                    default="1"
-                   label="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS"
-                   description="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_DES">
+                   label="COM_PLUGNMEET_EXTERNAL_BROADCASTING_IS_ALLOW"
+                   description="COM_PLUGNMEET_EXTERNAL_BROADCASTING_IS_ALLOW_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
-            <field type="number"
-                   name="allowed_number_rooms"
-                   default="4"
-                   label="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_NUMBER"
-                   description="COM_PLUGNMEET_ALLOW_BREAKOUT_ROOMS_NUMBER_DES"
-                   min="0"
-                   max="10"
-                   step="1"/>
+            <field type="list"
+                   name="is_allow_rtmp"
+                   default="1"
+                   showon="is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_RTMP"
+                   description="COM_PLUGNMEET_ALLOW_RTMP_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
         </fields>
     </fieldset>
 
@@ -372,27 +430,37 @@
         </fields>
     </fieldset>
 
-    <fieldset name="externalBroadcastingFeatures">
-        <fields name="external_broadcasting_features">
+    <fieldset name="sipDialInFeatures">
+        <fields name="sip_dial_in_features">
             <field type="list"
                    name="is_allow"
-                   default="1"
-                   label="COM_PLUGNMEET_EXTERNAL_BROADCASTING_IS_ALLOW"
-                   description="COM_PLUGNMEET_EXTERNAL_BROADCASTING_IS_ALLOW_DES">
+                   default="0"
+                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_IS_ALLOW"
+                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_IS_ALLOW_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
             <field type="list"
-                   name="is_allow_rtmp"
+                   name="enable_dial_in_on_create"
+                   default="0"
+                   showon="is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_ENABLE_ON_CREATE"
+                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_ENABLE_ON_CREATE_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="hide_phone_number"
                    default="1"
-                   showon="external_broadcasting_features.is_allow:1"
-                   label="COM_PLUGNMEET_ALLOW_RTMP"
-                   description="COM_PLUGNMEET_ALLOW_RTMP_DES">
+                   showon="is_allow:1"
+                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_HIDE_PHONE"
+                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_HIDE_PHONE_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
         </fields>
     </fieldset>
+
     <fieldset name="endToEndEncryptionFeatures">
         <fields name="end_to_end_encryption_features">
             <field type="list"
@@ -427,50 +495,6 @@
                    showon="is_enabled:1"
                    label="COM_PLUGNMEET_ENABLE_E2EE_WHITEBOARD"
                    description="COM_PLUGNMEET_ENABLE_E2EE_WHITEBOARD_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-        </fields>
-    </fieldset>
-
-    <fieldset name="pollsFeatures">
-        <fields name="polls_features">
-            <field type="list"
-                   name="is_allow"
-                   default="1"
-                   label="COM_PLUGNMEET_ALLOW_POLLS"
-                   description="COM_PLUGNMEET_ALLOW_POLLS_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-        </fields>
-    </fieldset>
-
-    <fieldset name="sipDialInFeatures">
-        <fields name="sip_dial_in_features">
-            <field type="list"
-                   name="is_allow"
-                   default="0"
-                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_IS_ALLOW"
-                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_IS_ALLOW_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="list"
-                   name="enable_dial_in_on_create"
-                   default="0"
-                   showon="is_allow:1"
-                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_ENABLE_ON_CREATE"
-                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_ENABLE_ON_CREATE_DES">
-                <option value="0">COM_PLUGNMEET_NO</option>
-                <option value="1">COM_PLUGNMEET_YES</option>
-            </field>
-            <field type="list"
-                   name="hide_phone_number"
-                   default="1"
-                   showon="is_allow:1"
-                   label="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_HIDE_PHONE"
-                   description="COM_PLUGNMEET_ALLOW_SIP_DIAL_IN_HIDE_PHONE_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -591,8 +615,8 @@
             <field type="list"
                    name="lock_microphone"
                    default="0"
-                   label="COM_PLUGNMEET_LOCK_CHAT"
-                   description="COM_PLUGNMEET_LOCK_CHAT_DES">
+                   label="COM_PLUGNMEET_LOCK_MICROPHONE"
+                   description="COM_PLUGNMEET_LOCK_MICROPHONE_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -657,6 +681,14 @@
                    default="0"
                    label="COM_PLUGNMEET_LOCK_CHAT_SEND_FILE"
                    description="COM_PLUGNMEET_LOCK_CHAT_SEND_FILE_DES">
+                <option value="0">COM_PLUGNMEET_NO</option>
+                <option value="1">COM_PLUGNMEET_YES</option>
+            </field>
+            <field type="list"
+                   name="lock_reactions"
+                   default="0"
+                   label="COM_PLUGNMEET_LOCK_REACTIONS"
+                   description="COM_PLUGNMEET_LOCK_REACTIONS_DES">
                 <option value="0">COM_PLUGNMEET_NO</option>
                 <option value="1">COM_PLUGNMEET_YES</option>
             </field>
@@ -725,8 +757,8 @@
                     type="color"
                     name="side_panel_bg_color"
                     default=""
-                    label="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_LABEL"
-                    description="COM_PLUGNMEET_CONFIG_RIGHT_COLOR_DESCRIPTION"
+                    label="COM_PLUGNMEET_CONFIG_SIDE_PANEL_BG_COLOR_LABEL"
+                    description="COM_PLUGNMEET_CONFIG_SIDE_PANEL_BG_COLOR_DESCRIPTION"
                     required="false"
             />
             <field

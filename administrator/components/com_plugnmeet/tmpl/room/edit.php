@@ -41,31 +41,59 @@ if ((int) $this->item->id > 0)
 
     <?php echo HTMLHelper::_('uitab.addTab', 'roomTab', 'roomFeatures', Text::_('COM_PLUGNMEET_ROOM_TAB_ROOM_FEATURES', true)); ?>
     <?php echo $this->form->renderFieldset("roomFeatures"); ?>
-    <hr/>
+    <?php echo HTMLHelper::_('uitab.endTab'); ?>
+
+    <?php echo HTMLHelper::_('uitab.addTab', 'roomTab', 'otherFeatures', Text::_('COM_PLUGNMEET_ROOM_TAB_OTHER_FEATURES', true)); ?>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_RECORDING_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_RECORDING_DES'); ?></p>
     <?php echo $this->form->renderFieldset("recordingFeatures"); ?>
     <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_CHAT_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_CHAT_DES'); ?></p>
     <?php echo $this->form->renderFieldset("chatFeatures"); ?>
     <hr/>
-    <?php echo $this->form->renderFieldset("sharedNotePadFeatures"); ?>
-    <hr/>
-    <?php echo $this->form->renderFieldset("whiteboardFeatures"); ?>
-    <hr/>
-    <?php echo $this->form->renderFieldset("externalMediaPlayerFeatures"); ?>
-    <hr/>
-    <?php echo $this->form->renderFieldset("displayExternalLinkFeatures"); ?>
-    <hr/>
-    <?php echo $this->form->renderFieldset("externalBroadcastingFeatures"); ?>
-    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_WAITING_ROOM_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_WAITING_ROOM_DES'); ?></p>
     <?php echo $this->form->renderFieldset("waitingRoomFeatures"); ?>
     <hr/>
-    <?php echo $this->form->renderFieldset("breakoutRoomFeatures"); ?>
-    <hr/>
-    <?php echo $this->form->renderFieldset("ingressFeatures"); ?>
-    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_POLLS_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_POLLS_DES'); ?></p>
     <?php echo $this->form->renderFieldset("pollsFeatures"); ?>
     <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_NOTEPAD_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_NOTEPAD_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("sharedNotePadFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_WHITEBOARD_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_WHITEBOARD_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("whiteboardFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_BREAKOUT_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_BREAKOUT_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("breakoutRoomFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_MEDIA_PLAYER_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_MEDIA_PLAYER_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("externalMediaPlayerFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_EXTERNAL_LINK_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_EXTERNAL_LINK_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("displayExternalLinkFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_BROADCAST_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_BROADCAST_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("externalBroadcastingFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_INGRESS_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_INGRESS_DES'); ?></p>
+    <?php echo $this->form->renderFieldset("ingressFeatures"); ?>
+    <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_SIP_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_SIP_DES'); ?></p>
     <?php echo $this->form->renderFieldset("sipDialInFeatures"); ?>
     <hr/>
+    <h3><?php echo Text::_('COM_PLUGNMEET_SECTION_E2EE_LABEL'); ?></h3>
+    <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_SECTION_E2EE_DES'); ?></p>
     <?php echo $this->form->renderFieldset("endToEndEncryptionFeatures"); ?>
     <?php echo HTMLHelper::_('uitab.endTab'); ?>
 

@@ -150,7 +150,15 @@ class RoomModel extends ItemModel
 		}
 		$room_id       = $this->_item->room_id;
 		$room_metadata = json_decode($this->_item->room_metadata, true);
-		$userId        = $user->id;
+		if (!is_array($room_metadata))
+		{
+			$room_metadata = array();
+		}
+		if (!isset($room_metadata['room_features']) || !is_array($room_metadata['room_features']))
+		{
+			$room_metadata['room_features'] = array();
+		}
+		$userId = $user->id;
 
 		if (!$userId)
 		{
@@ -178,6 +186,13 @@ class RoomModel extends ItemModel
 			return $output;
 		}
 
+		if (!$isRoomActive && !$isAdmin && !empty($room_metadata['room_features']['moderator_join_first']))
+		{
+			$output->msg = Text::_('COM_PLUGNMEET_MEETING_NOT_STARTED');
+
+			return $output;
+		}
+
 		if (!$isRoomActive)
 		{
 			try
@@ -190,6 +205,17 @@ class RoomModel extends ItemModel
 				);
 				$logoutUrl  = Uri::getInstance();
 				$logoutUrl->setQuery("returned=true");
+
+				$params = ComponentHelper::getParams('com_plugnmeet');
+				if (!isset($room_metadata['copyright_conf']))
+				{
+					$copyrightDisplay = (int) $params->get('copyright_display', 0);
+					$copyrightText    = trim((string) $params->get('copyright_text', ''));
+					if ($copyrightDisplay === 1 && $copyrightText !== '')
+					{
+						$room_metadata['copyright_conf'] = array('display' => true, 'text' => $copyrightText);
+					}
+				}
 
 				$res = $connect->createRoom($room_id, $this->_item->room_title, $room_metadata, $this->_item->welcome_message, $logoutUrl->toString(), "", $this->_item->max_participants, 0, $extra_data);
 
@@ -222,7 +248,15 @@ class RoomModel extends ItemModel
 				}
 				$output->status = true;
 				$output->msg    = "success";
-				$output->url    = Route::_('index.php?option=com_plugnmeet&view=room&layout=conference&access_token=' . $res->getToken() . '&id=' . $id, false, 0, true);
+				$params         = ComponentHelper::getParams('com_plugnmeet');
+				if ($params->get('client_load', 'remote') === 'redirect')
+				{
+					$output->url = rtrim($params->get('plugnmeet_server_url'), '/') . '/?access_token=' . $res->getToken();
+				}
+				else
+				{
+					$output->url = Route::_('index.php?option=com_plugnmeet&view=room&layout=conference&access_token=' . $res->getToken() . '&id=' . $id, false, 0, true);
+				}
 
 				return $output;
 			}

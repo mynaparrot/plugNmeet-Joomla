@@ -100,57 +100,87 @@ class HtmlView extends BaseHtmlView
 		$config        = $this->params;
 		$assetsPath    = $config->get("plugnmeet_server_url") . "/assets";
 		$room_metadata = json_decode($this->item->room_metadata, true);
+		if (!is_array($room_metadata))
+		{
+			$room_metadata = array();
+		}
 
-		// Start with default values
+		// Global component params act as defaults, per-room advanced settings override them.
 		$plugNmeetConfig = [
 			'serverUrl'                    => $config->get('plugnmeet_server_url'),
 			'staticAssetsPath'             => $assetsPath,
-			'enableDynacast'               => true,
-			'enableSimulcast'              => true,
-			'videoCodec'                   => 'vp8',
-			'defaultWebcamResolution'      => 'h720',
-			'defaultScreenShareResolution' => 'h1080fps15',
-			'defaultAudioPreset'           => 'music',
-			'stopMicTrackOnMute'           => true,
+			'enableDynacast'               => (int) $config->get('enable_dynacast', 1) === 1,
+			'enableSimulcast'              => (int) $config->get('enable_simulcast', 1) === 1,
+			'videoCodec'                   => $config->get('video_codec', 'vp8'),
+			'defaultWebcamResolution'      => $config->get('default_webcam_resolution', 'h720'),
+			'defaultScreenShareResolution' => $config->get('default_screen_share_resolution', 'h1080fps15'),
+			'defaultAudioPreset'           => $config->get('default_audio_preset', 'music'),
+			'stopMicTrackOnMute'           => (int) $config->get('stop_mic_track_on_mute', 1) === 1,
 			'focusActiveSpeakerWebcam'     => true,
 		];
 
-		// Override with advanced settings from the database if they exist
-		if (isset($room_metadata["advanced_settings"]))
+		// Override with advanced settings from the room if they exist
+		if (isset($room_metadata["advanced_settings"]) && is_array($room_metadata["advanced_settings"]))
 		{
 			$advancedSettings = $room_metadata["advanced_settings"];
-			if (isset($advancedSettings["enable_simulcast"]))
+			if (isset($advancedSettings["enable_simulcast"]) && $advancedSettings["enable_simulcast"] !== '')
 			{
 				$plugNmeetConfig['enableSimulcast'] = filter_var($advancedSettings["enable_simulcast"], FILTER_VALIDATE_BOOLEAN);
 			}
-			if (isset($advancedSettings["enable_dynacast"]))
+			if (isset($advancedSettings["enable_dynacast"]) && $advancedSettings["enable_dynacast"] !== '')
 			{
 				$plugNmeetConfig['enableDynacast'] = filter_var($advancedSettings["enable_dynacast"], FILTER_VALIDATE_BOOLEAN);
 			}
-			if (isset($advancedSettings["default_webcam_resolution"]))
+			if (!empty($advancedSettings["default_webcam_resolution"]))
 			{
 				$plugNmeetConfig['defaultWebcamResolution'] = $advancedSettings["default_webcam_resolution"];
 			}
-			if (isset($advancedSettings["default_screen_share_resolution"]))
+			if (!empty($advancedSettings["default_screen_share_resolution"]))
 			{
 				$plugNmeetConfig['defaultScreenShareResolution'] = $advancedSettings["default_screen_share_resolution"];
 			}
-			if (isset($advancedSettings["stop_mic_track_on_mute"]))
+			if (isset($advancedSettings["stop_mic_track_on_mute"]) && $advancedSettings["stop_mic_track_on_mute"] !== '')
 			{
 				$plugNmeetConfig['stopMicTrackOnMute'] = filter_var($advancedSettings["stop_mic_track_on_mute"], FILTER_VALIDATE_BOOLEAN);
 			}
-			if (isset($advancedSettings["video_codec"]))
+			if (!empty($advancedSettings["video_codec"]))
 			{
 				$plugNmeetConfig['videoCodec'] = $advancedSettings["video_codec"];
 			}
-			if (isset($advancedSettings["default_audio_preset"]))
+			if (!empty($advancedSettings["default_audio_preset"]))
 			{
 				$plugNmeetConfig['defaultAudioPreset'] = $advancedSettings["default_audio_preset"];
 			}
 		}
 
-		// Handle design customizations
-		$custom_designs      = json_decode($this->item->design_customisation, true);
+		// Design: global component params are defaults, per-room values override when set.
+		$custom_designs = json_decode($this->item->design_customisation, true);
+		if (!is_array($custom_designs))
+		{
+			$custom_designs = array();
+		}
+		$globalKeys = array(
+			'primary_color' => 'primary_color',
+			'secondary_color' => 'secondary_color',
+			'background_color' => 'background_color',
+			'design_background_image' => 'design_background_image',
+			'header_color' => 'header_color',
+			'footer_color' => 'footer_color',
+			'side_panel_bg_color' => 'side_panel_bg_color',
+			'custom_css_url' => 'custom_css_url',
+			'design_logo' => 'design_logo',
+		);
+		foreach ($globalKeys as $roomKey => $globalKey)
+		{
+			if (empty($custom_designs[$roomKey]))
+			{
+				$globalValue = $config->get($globalKey, '');
+				if (!empty($globalValue))
+				{
+					$custom_designs[$roomKey] = $globalValue;
+				}
+			}
+		}
 		$designCustomization = [];
 
 		if (!empty($custom_designs['primary_color']))
@@ -167,7 +197,7 @@ class HtmlView extends BaseHtmlView
 		}
 		if (!empty($custom_designs['design_background_image']))
 		{
-			$designCustomization['background_image'] = Uri::root() . strstr($custom_designs['design_background_image'], "#", true);
+			$designCustomization['background_image'] = Uri::root() . strstr($custom_designs['design_background_image'] . '#', "#", true);
 		}
 		if (!empty($custom_designs['header_color']))
 		{
@@ -187,7 +217,7 @@ class HtmlView extends BaseHtmlView
 		}
 		if (!empty($custom_designs['design_logo']))
 		{
-			$designCustomization['custom_logo'] = Uri::root() . strstr($custom_designs['design_logo'], "#", true);
+			$designCustomization['custom_logo'] = Uri::root() . strstr($custom_designs['design_logo'] . '#', "#", true);
 		}
 
 		if (!empty($designCustomization))

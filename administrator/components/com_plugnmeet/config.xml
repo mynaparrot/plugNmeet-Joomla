@@ -14,7 +14,6 @@
                filter="url"
                validated="url"
                scheme="http,https,ws,wss"
-               message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_MESSAGE"
                autocomplete="on"/>
         <field type="text"
                name="plugnmeet_api_key"
@@ -28,7 +27,6 @@
                disabled="false"
                required="true"
                filter="STRING"
-               message="COM_PLUGNMEET_CONFIG_PLUGNMEET_API_KEY_MESSAGE"
                autocomplete="on"/>
         <field type="text"
                name="plugnmeet_secret"
@@ -42,8 +40,172 @@
                disabled="false"
                required="true"
                filter="STRING"
-               message="COM_PLUGNMEET_CONFIG_PLUGNMEET_SECRET_MESSAGE"
                autocomplete="on"/>
+        <field type="list"
+               name="client_load"
+               default="remote"
+               label="COM_PLUGNMEET_CONFIG_CLIENT_LOAD_LABEL"
+               description="COM_PLUGNMEET_CONFIG_CLIENT_LOAD_DESCRIPTION"
+               filter="STRING">
+            <option value="remote">COM_PLUGNMEET_CONFIG_CLIENT_LOAD_REMOTE</option>
+            <option value="redirect">COM_PLUGNMEET_CONFIG_CLIENT_LOAD_REDIRECT</option>
+        </field>
+    </fieldset>
+
+    <fieldset label="COM_PLUGNMEET_CONFIG_COPYRIGHT_LABEL" name="copyright">
+        <field type="list"
+               name="copyright_display"
+               default="1"
+               label="COM_PLUGNMEET_CONFIG_COPYRIGHT_DISPLAY_LABEL"
+               description="COM_PLUGNMEET_CONFIG_COPYRIGHT_DISPLAY_DESCRIPTION"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="text"
+               name="copyright_text"
+               default="Powered by plugNmeet"
+               label="COM_PLUGNMEET_CONFIG_COPYRIGHT_TEXT_LABEL"
+               description="COM_PLUGNMEET_CONFIG_COPYRIGHT_TEXT_DESCRIPTION"
+               size="60"
+               maxlength="255"
+               filter="STRING"/>
+    </fieldset>
+
+    <fieldset label="COM_PLUGNMEET_CONFIG_DESIGN_CUSTOMIZATION" name="design">
+        <field type="media"
+               name="design_logo"
+               label="COM_PLUGNMEET_CONFIG_LOGO_LABEL"
+               description="COM_PLUGNMEET_CONFIG_LOGO_DESCRIPTION"
+               types="images"/>
+        <field type="color"
+               name="primary_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_PRIMARY_COLOR_DESCRIPTION"/>
+        <field type="color"
+               name="secondary_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_SECONDARY_COLOR_DESCRIPTION"/>
+        <field type="color"
+               name="background_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_BACKGROUND_COLOR_DESCRIPTION"/>
+        <field type="media"
+               name="design_background_image"
+               label="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_LABEL"
+               description="COM_PLUGNMEET_CONFIG_BACKGROUND_IMAGE_DESCRIPTION"
+               types="images"/>
+        <field type="color"
+               name="header_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_HEADER_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_HEADER_COLOR_DESCRIPTION"/>
+        <field type="color"
+               name="footer_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_FOOTER_COLOR_DESCRIPTION"/>
+        <field type="color"
+               name="side_panel_bg_color"
+               default=""
+               label="COM_PLUGNMEET_CONFIG_SIDE_PANEL_BG_COLOR_LABEL"
+               description="COM_PLUGNMEET_CONFIG_SIDE_PANEL_BG_COLOR_DESCRIPTION"/>
+        <field type="url"
+               name="custom_css_url"
+               label="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_CUSTOM_CSS_URL_DESCRIPTION"
+               size="60"
+               maxlength="500"
+               default=""
+               filter="url"
+               validate="url"
+               relative="false"
+               scheme="https"/>
+    </fieldset>
+
+    <fieldset label="COM_PLUGNMEET_CONFIG_ADVANCED_LABEL" name="advanced">
+        <field type="list"
+               name="enable_simulcast"
+               default="1"
+               label="COM_PLUGNMEET_ENABLE_SIMULCAST_LABEL"
+               description="COM_PLUGNMEET_ENABLE_SIMULCAST_LABEL_DES"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="list"
+               name="enable_dynacast"
+               default="1"
+               label="COM_PLUGNMEET_ENABLE_DYNACAST_LABEL"
+               description="COM_PLUGNMEET_ENABLE_DYNACAST_LABEL_DES"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="list"
+               name="stop_mic_track_on_mute"
+               default="1"
+               label="COM_PLUGNMEET_STOP_MIC_TRACK_ON_MUTE_LABEL"
+               description="COM_PLUGNMEET_STOP_MIC_TRACK_ON_MUTE_DES"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="list"
+               name="default_webcam_resolution"
+               default="h720"
+               label="COM_PLUGNMEET_DEFAULT_WEBCAM_RESOLUTION_LABEL"
+               description="COM_PLUGNMEET_DEFAULT_WEBCAM_RESOLUTION_DES"
+               filter="STRING">
+            <option value="h90">h90</option>
+            <option value="h180">h180</option>
+            <option value="h216">h216</option>
+            <option value="h360">h360</option>
+            <option value="h540">h540</option>
+            <option value="h720">h720</option>
+            <option value="h1080">h1080</option>
+            <option value="h1440">h1440</option>
+            <option value="h2160">h2160</option>
+        </field>
+        <field type="list"
+               name="default_screen_share_resolution"
+               default="h1080fps15"
+               label="COM_PLUGNMEET_DEFAULT_SCREEN_SHARE_RESOLUTION_LABEL"
+               description="COM_PLUGNMEET_DEFAULT_SECREEN_SHARE_RESOLUTION_DES"
+               filter="STRING">
+            <option value="h360fps3">h360fps3</option>
+            <option value="h720fps5">h720fps5</option>
+            <option value="h720fps15">h720fps15</option>
+            <option value="h1080fps15">h1080fps15</option>
+            <option value="h1080fps30">h1080fps30</option>
+        </field>
+        <field type="list"
+               name="default_audio_preset"
+               default="music"
+               label="COM_PLUGNMEET_DEFAULT_AUDIO_PRESET_LABEL"
+               description="COM_PLUGNMEET_DEFAULT_AUDIO_PRESET_LABEL_DES"
+               filter="STRING">
+            <option value="telephone">telephone</option>
+            <option value="speech">speech</option>
+            <option value="music">music</option>
+            <option value="musicStereo">musicStereo</option>
+            <option value="musicHighQuality">musicHighQuality</option>
+            <option value="musicHighQualityStereo">musicHighQualityStereo</option>
+        </field>
+        <field type="list"
+               name="video_codec"
+               default="vp8"
+               label="COM_PLUGNMEET_VIDEO_CODEC_LABEL"
+               description="COM_PLUGNMEET_VIDEO_CODEC_DES"
+               filter="STRING">
+            <option value="vp8">vp8</option>
+            <option value="h264">h264</option>
+            <option value="vp9">vp9</option>
+            <option value="av1">av1</option>
+        </field>
     </fieldset>
 
     <fieldset name="permissions" description="JCONFIG_PERMISSIONS_DESC" label="JCONFIG_PERMISSIONS_LABEL">
