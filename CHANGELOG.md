@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.2](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.2.1...v3.2.2) (2026-10-27)
+
+
+### Bug Fixes
+
+* bump SDK ([2e87a30](https://github.com/mynaparrot/plugNmeet-Joomla/commit/2e87a30fc1680e8188efe3c1a0e77abc70f272e1))
+* **UX:** re-organized features + added global config option ([dba2c68](https://github.com/mynaparrot/plugNmeet-Joomla/commit/dba2c68ef82e5f7e453559b709393711417aa89e))
+
 ## [3.2.1](https://github.com/mynaparrot/plugNmeet-Joomla/compare/v3.2.0...v3.2.1) (2026-09-10)
 
 
