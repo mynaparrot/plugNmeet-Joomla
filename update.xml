@@ -17,6 +17,6 @@
         </tags>
         <maintainer>Jibon L. Costa</maintainer>
         <maintainerurl>https://www.mynaparrot.com</maintainerurl>
-        <targetplatform name="joomla" version="5.*"/>
+        <targetplatform name="joomla" version="^[56]\..*" />
     </update>
 </updates>
