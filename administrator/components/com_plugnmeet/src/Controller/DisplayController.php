@@ -44,7 +44,7 @@ class DisplayController extends BaseController
 	public function display($cachable = false, $urlparams = array())
 	{
 		$params = ComponentHelper::getParams("com_plugnmeet");
-		if (empty($params->get("plugnmeet_server_url")))
+		if ('' === trim((string) $params->get('plugnmeet_server_url', '')))
 		{
 			$this->app->enqueueMessage(Text::_("COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_EMPTY"), "error");
 		}

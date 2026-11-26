@@ -208,6 +208,334 @@
         </field>
     </fieldset>
 
+    <fieldset label="COM_PLUGNMEET_CONFIG_AI_AGENT_LABEL" name="ai_agent_settings">
+        <field type="spacer" name="ai_agent_general" label="COM_PLUGNMEET_CONFIG_AI_AGENT_GENERAL_LABEL"/>
+        <field type="list"
+               name="enable_ai_agent"
+               default="1"
+               label="COM_PLUGNMEET_CONFIG_AI_ENABLE_AGENT_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_ENABLE_AGENT_DESCRIPTION"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="list"
+               name="ai_avatar_enabled_global"
+               default="0"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_ENABLED_GLOBAL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_ENABLED_GLOBAL_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="number"
+               name="ai_max_concurrent_sessions_limit"
+               default="10"
+               min="1"
+               max="100"
+               step="1"
+               label="COM_PLUGNMEET_CONFIG_AI_MAX_CONCURRENT_SESSIONS_LIMIT_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MAX_CONCURRENT_SESSIONS_LIMIT_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer"/>
+        <field type="number"
+               name="ai_default_max_session_minutes"
+               default="30"
+               min="5"
+               max="120"
+               step="1"
+               label="COM_PLUGNMEET_CONFIG_AI_DEFAULT_MAX_SESSION_MINUTES_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_DEFAULT_MAX_SESSION_MINUTES_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer"/>
+        <field type="number"
+               name="ai_max_session_minutes_limit"
+               default="60"
+               min="5"
+               max="120"
+               step="1"
+               label="COM_PLUGNMEET_CONFIG_AI_MAX_SESSION_MINUTES_LIMIT_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MAX_SESSION_MINUTES_LIMIT_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer"/>
+
+        <field type="spacer" hr="true" showon="enable_ai_agent:1"/>
+        <field type="spacer" name="ai_agent_web" label="COM_PLUGNMEET_CONFIG_AI_AGENT_WEB_LABEL" showon="enable_ai_agent:1"/>
+        <field type="list"
+               name="ai_allow_web_fetch_global"
+               default="0"
+               label="COM_PLUGNMEET_CONFIG_AI_ALLOW_WEB_FETCH_GLOBAL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_ALLOW_WEB_FETCH_GLOBAL_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+
+        <field type="spacer" hr="true" showon="enable_ai_agent:1"/>
+        <field type="spacer" name="ai_agent_provider" label="COM_PLUGNMEET_CONFIG_AI_AGENT_PROVIDER_LABEL" showon="enable_ai_agent:1"/>
+        <field type="list"
+               name="ai_custom_provider_enabled"
+               default="0"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_PROVIDER_ENABLED_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_PROVIDER_ENABLED_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="list"
+               name="ai_custom_provider"
+               default="google"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_PROVIDER_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_PROVIDER_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string">
+            <option value="google">COM_PLUGNMEET_CONFIG_AI_CUSTOM_PROVIDER_GOOGLE</option>
+            <option value="openai">COM_PLUGNMEET_CONFIG_AI_CUSTOM_PROVIDER_OPENAI</option>
+        </field>
+        <field type="password"
+               name="ai_custom_api_key"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_API_KEY_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_API_KEY_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_custom_endpoint"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_ENDPOINT_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_ENDPOINT_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_custom_auth_header"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_AUTH_HEADER_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_AUTH_HEADER_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_custom_realtime_model"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_REALTIME_MODEL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_REALTIME_MODEL_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_custom_delegation_model"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_DELEGATION_MODEL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_DELEGATION_MODEL_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_custom_summarize_model"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_CUSTOM_SUMMARIZE_MODEL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_CUSTOM_SUMMARIZE_MODEL_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_custom_provider_enabled:1"
+               filter="string"/>
+
+        <field type="spacer" hr="true" showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1"/>
+        <field type="spacer" name="ai_agent_avatar" label="COM_PLUGNMEET_CONFIG_AI_AGENT_AVATAR_LABEL" showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1"/>
+        <field type="list"
+               name="ai_avatar_custom_enabled"
+               default="0"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_CUSTOM_ENABLED_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_CUSTOM_ENABLED_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="list"
+               name="ai_avatar_provider"
+               default="beyond_presence"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_PROVIDER_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_PROVIDER_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1[AND]ai_avatar_custom_enabled:1"
+               filter="string">
+            <option value="beyond_presence">COM_PLUGNMEET_CONFIG_AI_AVATAR_PROVIDER_BEYOND_PRESENCE</option>
+            <option value="anam">COM_PLUGNMEET_CONFIG_AI_AVATAR_PROVIDER_ANAM</option>
+            <option value="simli">COM_PLUGNMEET_CONFIG_AI_AVATAR_PROVIDER_SIMLI</option>
+        </field>
+        <field type="text"
+               name="ai_avatar_id"
+               default=""
+               size="40"
+               maxlength="256"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_ID_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_ID_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1[AND]ai_avatar_custom_enabled:1"
+               filter="string"/>
+        <field type="password"
+               name="ai_avatar_api_key"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_API_KEY_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_API_KEY_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1[AND]ai_avatar_custom_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_avatar_endpoint"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_ENDPOINT_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_ENDPOINT_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1[AND]ai_avatar_custom_enabled:1"
+               filter="string"/>
+        <field type="text"
+               name="ai_avatar_auth_header"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_AVATAR_AUTH_HEADER_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_AVATAR_AUTH_HEADER_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_avatar_enabled_global:1[AND]ai_avatar_custom_enabled:1"
+               filter="string"/>
+
+        <field type="spacer" hr="true" showon="enable_ai_agent:1"/>
+        <field type="spacer" name="ai_agent_mcp" label="COM_PLUGNMEET_CONFIG_AI_AGENT_MCP_LABEL" showon="enable_ai_agent:1"/>
+        <field type="list"
+               name="ai_mcp_1_enabled"
+               default="0"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_1_ENABLED_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_ENABLED_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="text"
+               name="ai_mcp_1_name"
+               default=""
+               size="30"
+               maxlength="64"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_1_NAME_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_NAME_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_1_enabled:1"
+               filter="string"/>
+        <field type="url"
+               name="ai_mcp_1_url"
+               default=""
+               size="60"
+               maxlength="1024"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_1_URL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_URL_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_1_enabled:1"
+               filter="url"
+               validate="url"
+               relative="false"
+               scheme="https"/>
+        <field type="textarea"
+               name="ai_mcp_1_headers"
+               default=""
+               rows="3"
+               cols="40"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_1_HEADERS_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_HEADERS_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_1_enabled:1"
+               filter="raw"/>
+        <field type="text"
+               name="ai_mcp_1_allowed_tools"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_1_ALLOWED_TOOLS_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_ALLOWED_TOOLS_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_1_enabled:1"
+               filter="string"/>
+        <field type="list"
+               name="ai_mcp_1_scope"
+               default="ai_agent"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_1_SCOPE_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_1_enabled:1"
+               filter="string">
+            <option value="ai_agent">COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_AI_AGENT</option>
+            <option value="text_chat">COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_TEXT_CHAT</option>
+            <option value="shared">COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_SHARED</option>
+        </field>
+
+        <field type="spacer" hr="true" showon="enable_ai_agent:1"/>
+        <field type="list"
+               name="ai_mcp_2_enabled"
+               default="0"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_2_ENABLED_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_ENABLED_DESCRIPTION"
+               showon="enable_ai_agent:1"
+               filter="integer">
+            <option value="0">COM_PLUGNMEET_NO</option>
+            <option value="1">COM_PLUGNMEET_YES</option>
+        </field>
+        <field type="text"
+               name="ai_mcp_2_name"
+               default=""
+               size="30"
+               maxlength="64"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_2_NAME_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_NAME_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_2_enabled:1"
+               filter="string"/>
+        <field type="url"
+               name="ai_mcp_2_url"
+               default=""
+               size="60"
+               maxlength="1024"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_2_URL_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_URL_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_2_enabled:1"
+               filter="url"
+               validate="url"
+               relative="false"
+               scheme="https"/>
+        <field type="textarea"
+               name="ai_mcp_2_headers"
+               default=""
+               rows="3"
+               cols="40"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_2_HEADERS_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_HEADERS_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_2_enabled:1"
+               filter="raw"/>
+        <field type="text"
+               name="ai_mcp_2_allowed_tools"
+               default=""
+               size="40"
+               maxlength="255"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_2_ALLOWED_TOOLS_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_ALLOWED_TOOLS_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_2_enabled:1"
+               filter="string"/>
+        <field type="list"
+               name="ai_mcp_2_scope"
+               default="ai_agent"
+               label="COM_PLUGNMEET_CONFIG_AI_MCP_2_SCOPE_LABEL"
+               description="COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_DESCRIPTION"
+               showon="enable_ai_agent:1[AND]ai_mcp_2_enabled:1"
+               filter="string">
+            <option value="ai_agent">COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_AI_AGENT</option>
+            <option value="text_chat">COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_TEXT_CHAT</option>
+            <option value="shared">COM_PLUGNMEET_CONFIG_AI_MCP_SCOPE_SHARED</option>
+        </field>
+    </fieldset>
+
     <fieldset name="permissions" description="JCONFIG_PERMISSIONS_DESC" label="JCONFIG_PERMISSIONS_LABEL">
         <field name="rules" type="rules" component="com_plugnmeet" class="inputbox" filter="rules" validate="rules"
                label="JCONFIG_PERMISSIONS_LABEL" section="component"/>

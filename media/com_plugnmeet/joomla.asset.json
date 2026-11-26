@@ -26,6 +26,11 @@
       "uri": "com_plugnmeet/list.css"
     },
     {
+      "name": "com_plugnmeet.room",
+      "type": "style",
+      "uri": "com_plugnmeet/room.css"
+    },
+    {
       "name": "com_plugnmeet.recordings",
       "type": "style",
       "uri": "com_plugnmeet/recordings.css"

@@ -121,8 +121,9 @@ class RecordingsModel extends BaseDatabaseModel
 		$output->msg    = $res->getMsg();
 		if ($res->getStatus())
 		{
-			$params = ComponentHelper::getParams('com_plugnmeet');
-			$output->url = rtrim($params->get('plugnmeet_server_url'), '/') . '/download/recording/' . $res->getToken();
+			$params      = ComponentHelper::getParams('com_plugnmeet');
+			$serverUrl   = rtrim(trim((string) $params->get('plugnmeet_server_url', '')), '/');
+			$output->url = $serverUrl . '/download/recording/' . $res->getToken();
 		}
 
 		return $output;

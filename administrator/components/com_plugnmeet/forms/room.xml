@@ -602,6 +602,264 @@
                         <option value="0">COM_PLUGNMEET_NO</option>
                         <option value="1">COM_PLUGNMEET_YES</option>
                     </field>
+                    <field type="textarea"
+                           name="summarization_prompt"
+                           rows="3"
+                           label="COM_PLUGNMEET_INSIGHTS_AI_MEETING_SUMMARIZATION_PROMPT_LABEL"
+                           description="COM_PLUGNMEET_INSIGHTS_AI_MEETING_SUMMARIZATION_PROMPT_DES"/>
+                </fields>
+            </fields>
+        </fields>
+    </fieldset>
+
+    <fieldset name="aiAgentFeatures">
+        <fields name="insights_features">
+            <fields name="ai_agent_features">
+                <field type="list"
+                       name="is_allow"
+                       default="0"
+                       label="COM_PLUGNMEET_AI_AGENT_IS_ALLOW_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_IS_ALLOW_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="session_mode"
+                       default="2"
+                       label="COM_PLUGNMEET_AI_AGENT_SESSION_MODE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_SESSION_MODE_DES">
+                    <option value="2">COM_PLUGNMEET_AI_SESSION_MODE_OPEN</option>
+                    <option value="1">COM_PLUGNMEET_AI_SESSION_MODE_CONTROLLED</option>
+                </field>
+                <fields name="auto_session_config">
+                    <field type="sql"
+                           name="allowed_participant_ids"
+                           multiple="true"
+                           layout="joomla.form.field.list-fancy-select"
+                           query="SELECT id, CONCAT(name, ' (', username, ' - ', email, ')') AS title FROM #__users WHERE block = 0 ORDER BY name ASC"
+                           key_field="id"
+                           value_field="title"
+                           label="COM_PLUGNMEET_AI_AGENT_ALLOWED_USERS_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_ALLOWED_USERS_DES"/>
+                    <field type="number"
+                           name="max_concurrent_sessions"
+                           default="10"
+                           min="1"
+                           max="100"
+                           label="COM_PLUGNMEET_AI_AGENT_MAX_CONCURRENT_SESSIONS_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_MAX_CONCURRENT_SESSIONS_DES"/>
+                </fields>
+                <fields name="avatar">
+                    <field type="list"
+                           name="is_enabled"
+                           default="0"
+                           label="COM_PLUGNMEET_AI_AGENT_AVATAR_IS_ENABLED_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_AVATAR_IS_ENABLED_DES">
+                        <option value="0">COM_PLUGNMEET_NO</option>
+                        <option value="1">COM_PLUGNMEET_YES</option>
+                    </field>
+                    <field type="number"
+                           name="max_avatar_minutes"
+                           default="0"
+                           min="0"
+                           max="120"
+                           label="COM_PLUGNMEET_AI_AGENT_MAX_AVATAR_MINUTES_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_MAX_AVATAR_MINUTES_DES"/>
+                </fields>
+                <field type="list"
+                       name="preset_template"
+                       default="custom"
+                       label="COM_PLUGNMEET_AI_AGENT_PRESET_TEMPLATE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_PRESET_TEMPLATE_DES">
+                    <option value="custom">COM_PLUGNMEET_AI_AGENT_PRESET_CUSTOM</option>
+                    <option value="customer_support">COM_PLUGNMEET_AI_AGENT_PRESET_CUSTOMER_SUPPORT</option>
+                    <option value="sales_demo">COM_PLUGNMEET_AI_AGENT_PRESET_SALES_DEMO</option>
+                    <option value="tutor_whiteboard">COM_PLUGNMEET_AI_AGENT_PRESET_TUTOR_WHITEBOARD</option>
+                    <option value="language_coach">COM_PLUGNMEET_AI_AGENT_PRESET_LANGUAGE_COACH</option>
+                    <option value="interview_screener">COM_PLUGNMEET_AI_AGENT_PRESET_INTERVIEW_SCREENER</option>
+                </field>
+                <field type="text"
+                       name="agent_display_name"
+                       default="AI Assistant"
+                       label="COM_PLUGNMEET_AI_AGENT_DISPLAY_NAME_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_DISPLAY_NAME_DES"/>
+                <field type="text"
+                       name="topic"
+                       maxlength="200"
+                       label="COM_PLUGNMEET_AI_AGENT_TOPIC_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_TOPIC_DES"/>
+                <field type="textarea"
+                       name="system_prompt"
+                       rows="6"
+                       label="COM_PLUGNMEET_AI_AGENT_SYSTEM_PROMPT_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_SYSTEM_PROMPT_DES"/>
+                <field type="number"
+                       name="max_session_minutes"
+                       default="30"
+                       min="1"
+                       max="120"
+                       label="COM_PLUGNMEET_AI_AGENT_MAX_SESSION_MINUTES_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_MAX_SESSION_MINUTES_DES"/>
+                <field type="spacer" name="ai_voice_hr" hr="true"/>
+                <field type="spacer" name="ai_voice_label" label="COM_PLUGNMEET_AI_SECTION_LANGUAGE_VOICE"/>
+                <field type="text"
+                       name="spoken_lang"
+                       default=""
+                       hint="en-US"
+                       label="COM_PLUGNMEET_AI_AGENT_SPOKEN_LANG_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_SPOKEN_LANG_DES"/>
+                <field type="text"
+                       name="target_lang"
+                       default=""
+                       hint="es-ES"
+                       label="COM_PLUGNMEET_AI_AGENT_TARGET_LANG_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_TARGET_LANG_DES"/>
+                <field type="text"
+                       name="instruction_lang"
+                       default=""
+                       hint="en-US"
+                       label="COM_PLUGNMEET_AI_AGENT_INSTRUCTION_LANG_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_INSTRUCTION_LANG_DES"/>
+                <field type="text"
+                       name="voice"
+                       default=""
+                       label="COM_PLUGNMEET_AI_AGENT_VOICE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_VOICE_DES"/>
+                <field type="number"
+                       name="speaking_rate"
+                       default="1.0"
+                       min="0.5"
+                       max="2.0"
+                       step="0.1"
+                       label="COM_PLUGNMEET_AI_AGENT_SPEAKING_RATE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_SPEAKING_RATE_DES"/>
+                <field type="spacer" name="ai_tools_hr" hr="true"/>
+                <field type="spacer" name="ai_tools_label" label="COM_PLUGNMEET_AI_SECTION_WORKSPACE_TOOLS"/>
+                <field type="list"
+                       name="allow_whiteboard_write"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOW_WHITEBOARD_WRITE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOW_WHITEBOARD_WRITE_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="allow_vision_capture"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOW_VISION_CAPTURE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOW_VISION_CAPTURE_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="allow_polls"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOW_POLLS_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOW_POLLS_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="allow_notepad_write"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOW_NOTEPAD_WRITE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOW_NOTEPAD_WRITE_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="allow_chat_message"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOW_CHAT_MESSAGE_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOW_CHAT_MESSAGE_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="list"
+                       name="allow_web_fetch"
+                       default="0"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOW_WEB_FETCH_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOW_WEB_FETCH_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="textarea"
+                       name="allowed_knowledge_urls"
+                       rows="3"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOWED_KNOWLEDGE_URLS_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOWED_KNOWLEDGE_URLS_DES"/>
+                <field type="list"
+                       name="enable_mcp_servers"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_ENABLE_MCP_SERVERS_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ENABLE_MCP_SERVERS_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="spacer" name="ai_guardrails_hr" hr="true"/>
+                <field type="spacer" name="ai_guardrails_label" label="COM_PLUGNMEET_AI_SECTION_GUARDRAILS"/>
+                <field type="textarea"
+                       name="allowed_subtopics"
+                       rows="3"
+                       label="COM_PLUGNMEET_AI_AGENT_ALLOWED_SUBTOPICS_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_ALLOWED_SUBTOPICS_DES"/>
+                <field type="textarea"
+                       name="forbidden_topics"
+                       rows="3"
+                       label="COM_PLUGNMEET_AI_AGENT_FORBIDDEN_TOPICS_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_FORBIDDEN_TOPICS_DES"/>
+                <field type="list"
+                       name="strict_topic_enforcement"
+                       default="1"
+                       label="COM_PLUGNMEET_AI_AGENT_STRICT_TOPIC_ENFORCEMENT_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_STRICT_TOPIC_ENFORCEMENT_DES">
+                    <option value="0">COM_PLUGNMEET_NO</option>
+                    <option value="1">COM_PLUGNMEET_YES</option>
+                </field>
+                <field type="number"
+                       name="topic_anchor_interval_turns"
+                       default="5"
+                       min="3"
+                       max="12"
+                       label="COM_PLUGNMEET_AI_AGENT_TOPIC_ANCHOR_INTERVAL_TURNS_LABEL"
+                       description="COM_PLUGNMEET_AI_AGENT_TOPIC_ANCHOR_INTERVAL_TURNS_DES"/>
+                <field type="spacer" name="ai_activity_hr" hr="true"/>
+                <field type="spacer" name="ai_activity_label" label="COM_PLUGNMEET_AI_SECTION_ACTIVITY_RULES"/>
+                <fields name="activity_rules">
+                    <field type="number"
+                           name="min_whiteboard_drawings"
+                           default="0"
+                           min="0"
+                           max="20"
+                           label="COM_PLUGNMEET_AI_AGENT_MIN_WHITEBOARD_DRAWINGS_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_MIN_WHITEBOARD_DRAWINGS_DES"/>
+                    <field type="number"
+                           name="min_quizzes"
+                           default="0"
+                           min="0"
+                           max="20"
+                           label="COM_PLUGNMEET_AI_AGENT_MIN_QUIZZES_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_MIN_QUIZZES_DES"/>
+                    <field type="number"
+                           name="min_notepad_entries"
+                           default="0"
+                           min="0"
+                           max="20"
+                           label="COM_PLUGNMEET_AI_AGENT_MIN_NOTEPAD_ENTRIES_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_MIN_NOTEPAD_ENTRIES_DES"/>
+                    <field type="number"
+                           name="min_participant_exercises"
+                           default="0"
+                           min="0"
+                           max="20"
+                           label="COM_PLUGNMEET_AI_AGENT_MIN_PARTICIPANT_EXERCISES_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_MIN_PARTICIPANT_EXERCISES_DES"/>
+                    <field type="textarea"
+                           name="required_milestones"
+                           rows="3"
+                           hint="Understand the problem statement&#10;Complete a practice example"
+                           label="COM_PLUGNMEET_AI_AGENT_REQUIRED_MILESTONES_LABEL"
+                           description="COM_PLUGNMEET_AI_AGENT_REQUIRED_MILESTONES_DES"/>
                 </fields>
             </fields>
         </fields>
@@ -908,5 +1166,14 @@
                component="com_plugnmeet"
                section="room"
         />
+    </fieldset>
+    <!--
+        room_mode is submitted by the mode switcher radios rendered manually in tmpl/room/edit.php.
+        It must be declared as a form field so that Model::validate() -> Form::filter() keeps
+        jform[room_mode] in the submitted data. It lives in its own "roomMode" fieldset which is
+        never passed to renderFieldset(), so no duplicate (value overriding) input is output.
+    -->
+    <fieldset name="roomMode">
+        <field name="room_mode" type="hidden" default="conference" filter="cmd"/>
     </fieldset>
 </form>

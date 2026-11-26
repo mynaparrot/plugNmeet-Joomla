@@ -1,9 +1,7 @@
-/**
- * @version     CVS: 1.0.0
+/*
  * @package     com_plugnmeet
- * @copyright   2024 Jibon
+ * @copyright   Copyright (C) MynaParrot SL. All Rights Reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Jibon <jiboncosta57@gmail.com>
  */
 window.Joomla = window.Joomla || {};
 
@@ -264,6 +262,41 @@ window.Joomla = window.Joomla || {};
                     });
                 });
             }
+        }
+
+        // AI session report: stream the generated .xlsx file through a posted form
+        const aiSummaryButton = document.querySelector('.download-ai-summary-excel');
+
+        if (aiSummaryButton) {
+            aiSummaryButton.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const artifactId = aiSummaryButton.getAttribute('data-artifact-id');
+                if (!artifactId) {
+                    return;
+                }
+
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = opts.baseUrl
+                    + 'index.php?option=com_plugnmeet&task=artifacts.downloadAiSummary&format=raw';
+                form.style.display = 'none';
+
+                const addField = (name, value) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = name;
+                    input.value = value;
+                    form.appendChild(input);
+                };
+
+                addField(token, 1);
+                addField('artifact_id', artifactId);
+
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+            });
         }
     });
 })();

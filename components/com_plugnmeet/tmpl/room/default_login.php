@@ -17,9 +17,18 @@ use Joomla\CMS\Router\Route;
 
 $user      = Factory::getApplication()->getIdentity();
 $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
+
+$isAiAgentMode  = !empty($this->isAiAgentMode);
+$aiAgent        = $this->aiAgent ?? [];
+$isAiRestricted = $isAiAgentMode && (int) ($aiAgent['session_mode'] ?? 2) === 1 && $user->guest;
 ?>
 <form name="adminForm" id="pnmJoinForm"
       action="<?php echo Route::_('index.php?option=com_plugnmeet&view=room&task=room.join&id=' . (int) $this->item->id); ?>">
+	<?php if ($isAiRestricted) : ?>
+        <div class="alert alert-warning small mb-3" role="alert">
+			<?php echo Text::_('COM_PLUGNMEET_AI_RESTRICTED_NOTICE'); ?>
+        </div>
+	<?php endif; ?>
     <div class="d-flex justify-content-center mb-3">
         <div class="spinner-border" role="status" id="status" hidden="hidden">
             <span class="visually-hidden">Loading...</span>
@@ -37,7 +46,7 @@ $assetName = sprintf("com_plugnmeet.room.%d", $this->item->id);
         </div>
 	<?php endif; ?>
     <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary btn-sm"><?php echo Text::_("COM_PLUGNMEET_JOIN") ?></button>
+        <button type="submit" class="btn btn-primary btn-sm"><?php echo Text::_($isAiAgentMode ? 'COM_PLUGNMEET_START_AI_SESSION' : 'COM_PLUGNMEET_JOIN') ?></button>
     </div>
 	<?php echo HTMLHelper::_('form.token'); ?>
 </form>

@@ -48,6 +48,13 @@ endif;
                 </button>
             </form>
         <?php endif; ?>
+        <?php if (!empty($this->artifact->isAiSessionSummary)) : ?>
+            <button type="button" class="btn btn-primary download-ai-summary-excel"
+                    data-artifact-id="<?php echo htmlspecialchars($this->artifact->artifactId, ENT_QUOTES, 'UTF-8'); ?>">
+                <span class="icon-download" aria-hidden="true"></span>
+                <?php echo Text::_('COM_PLUGNMEET_DOWNLOAD_EXCEL_REPORT'); ?>
+            </button>
+        <?php endif; ?>
         <?php if ($this->artifact->isFileBased) : ?>
             <button type="button" class="btn btn-danger plugnmeet-delete-artifact"
                     data-artifact-id="<?php echo $this->escape($this->artifact->artifactId); ?>">
@@ -120,4 +127,8 @@ endif;
             <?php echo $this->artifact->meetingSummaryContent; ?>
         </div>
     </div>
+<?php endif; ?>
+
+<?php if (!empty($this->artifact->isAiSessionSummary)) : ?>
+    <?php echo $this->loadTemplate('aisummary'); ?>
 <?php endif; ?>

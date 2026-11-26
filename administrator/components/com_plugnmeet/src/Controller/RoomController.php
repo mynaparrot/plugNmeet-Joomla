@@ -13,11 +13,6 @@ namespace Mynaparrot\Component\Plugnmeet\Administrator\Controller;
 
 use Joomla\CMS\MVC\Controller\FormController;
 
-/**
- * Room controller class.
- *
- * @since  1.0.0
- */
 class RoomController extends FormController
 {
 	protected $view_list = 'rooms';

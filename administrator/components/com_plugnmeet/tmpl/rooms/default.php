@@ -17,6 +17,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
+use Mynaparrot\Component\Plugnmeet\Administrator\Helper\PlugnmeetHelper;
 
 HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.multiselect');
@@ -27,7 +28,7 @@ $listOrder = $this->state->get('list.ordering');
 $listDirn  = $this->state->get('list.direction');
 $canOrder  = $user->authorise('core.edit.state', 'com_plugnmeet');
 $canManage = $user->authorise('core.manage', 'com_plugnmeet');
-$colspan   = 7 + (isset($this->items[0]->ordering) ? 1 : 0);
+$colspan   = 9 + (isset($this->items[0]->ordering) ? 1 : 0);
 
 $saveOrder = $listOrder == 'a.ordering';
 
@@ -67,6 +68,12 @@ if (!empty($saveOrder))
                         <th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort', 'COM_PLUGNMEET_ROOM_TITLE', 'a.title', $listDirn, $listOrder); ?>
                         </th>
+                        <th class="text-center">
+							<?php echo Text::_('COM_PLUGNMEET_HEADING_MODE'); ?>
+                        </th>
+                        <th class="text-center">
+							<?php echo HTMLHelper::_('searchtools.sort', 'JCATEGORY', 'c.title', $listDirn, $listOrder); ?>
+                        </th>
                         <th class='text-center'>
 							<?php echo Text::_("COM_PLUGNMEET_ROOM_MODERATOR_PASS"); ?>
                         </th>
@@ -99,6 +106,26 @@ if (!empty($saveOrder))
 						$canEdit = $user->authorise('core.edit', 'com_plugnmeet');
 						$canCheckin = $user->authorise('core.manage', 'com_plugnmeet');
 						$canChange = $user->authorise('core.edit.state', 'com_plugnmeet');
+
+						$roomMetadata = !empty($item->room_metadata)
+							? (array) (is_array($item->room_metadata) ? $item->room_metadata : json_decode($item->room_metadata, true))
+							: array();
+
+						if (PlugnmeetHelper::getRoomMode($roomMetadata) === 'ai_agent')
+						{
+							$modeClass = 'bg-primary pnm-mode-ai_agent';
+							$modeLabel = Text::_('COM_PLUGNMEET_MODE_AI_AGENT');
+						}
+						elseif (!empty($roomMetadata['insights_features']['ai_agent_features']['is_allow']))
+						{
+							$modeClass = 'bg-info text-dark pnm-mode-conference_ai';
+							$modeLabel = Text::_('COM_PLUGNMEET_MODE_CONFERENCE_AI');
+						}
+						else
+						{
+							$modeClass = 'bg-secondary pnm-mode-conference';
+							$modeLabel = Text::_('COM_PLUGNMEET_MODE_CONFERENCE');
+						}
 						?>
                         <tr class="row<?php echo $i % 2; ?>" data-draggable-group='1' data-transition>
                             <td class="text-center">
@@ -146,6 +173,12 @@ if (!empty($saveOrder))
 								<?php else : ?>
 									<?php echo $this->escape($item->room_title); ?>
 								<?php endif; ?>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge <?php echo $modeClass; ?>"><?php echo $modeLabel; ?></span>
+                            </td>
+                            <td class="text-center">
+								<?php echo $this->escape($item->category_title ?? ''); ?>
                             </td>
                             <td class="text-center">
 								<?php echo $item->moderator_pass; ?>

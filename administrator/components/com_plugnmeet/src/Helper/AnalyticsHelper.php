@@ -19,39 +19,16 @@ use Joomla\CMS\Language\Text;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-/**
- * Helper to parse analytics artifacts and generate Excel reports.
- *
- * @since  1.0.0
- */
 class AnalyticsHelper
 {
-	/**
-	 * @var \Mynaparrot\Plugnmeet\AnalyticsFormatter
-	 */
 	private $formatter;
 
-	/**
-	 * @var array
-	 */
 	private $roomData = array();
 
-	/**
-	 * @var array
-	 */
 	private $usersData = array();
 
-	/**
-	 * @var string
-	 */
 	private $artifactId;
 
-	/**
-	 * @param   string  $artifactId  The artifact id.
-	 *
-	 * @throws  Exception
-	 * @since   1.0.0
-	 */
 	public function __construct(string $artifactId)
 	{
 		$this->artifactId = $artifactId;
@@ -65,7 +42,8 @@ class AnalyticsHelper
 		}
 
 		$params = ComponentHelper::getParams('com_plugnmeet');
-		$url    = rtrim($params->get('plugnmeet_server_url'), '/') . '/download/artifact/' . $res->getToken();
+		$serverUrl = rtrim(trim((string) $params->get('plugnmeet_server_url', '')), '/');
+		$url       = $serverUrl . '/download/artifact/' . $res->getToken();
 
 		$response = HttpFactory::getHttp()->get($url, array(), 60);
 
@@ -97,13 +75,6 @@ class AnalyticsHelper
 		$this->usersData = $formattedData['users'];
 	}
 
-	/**
-	 * Get the context data for the artifact details page.
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.0
-	 */
 	public function getContextData()
 	{
 		$context = array(
@@ -200,14 +171,6 @@ class AnalyticsHelper
 		return $context;
 	}
 
-	/**
-	 * Generate an Excel file for the analytics artifact.
-	 *
-	 * @return  array  An array with the generated file path and name.
-	 *
-	 * @throws  Exception
-	 * @since   1.0.0
-	 */
 	public function generateXlsxFile()
 	{
 		$spreadsheet = new Spreadsheet();
@@ -234,69 +197,26 @@ class AnalyticsHelper
 		return array('path' => $path, 'filename' => $filename);
 	}
 
-	/**
-	 * Get the formatted room fields.
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.0
-	 */
 	private function getRoomFields()
 	{
 		return $this->formatter->getRoomFields();
 	}
 
-	/**
-	 * Get the formatted user fields.
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.0
-	 */
 	private function getUserFields()
 	{
 		return $this->formatter->getUserFields();
 	}
 
-	/**
-	 * Format seconds to a H:i:s string.
-	 *
-	 * @param   mixed  $seconds  The number of seconds.
-	 *
-	 * @return  string
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatSecondsToTime($seconds)
 	{
 		return $this->formatter->formatSecondsToTime($seconds);
 	}
 
-	/**
-	 * Format a timestamp to a readable date.
-	 *
-	 * @param   mixed  $timestamp  The timestamp value.
-	 * @param   bool   $ms         Whether the timestamp is in milliseconds.
-	 *
-	 * @return  string
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatTimestamp($timestamp, $ms = true)
 	{
 		return $this->formatter->formatTimestamp($timestamp, $ms);
 	}
 
-	/**
-	 * Format the room analytics sheet.
-	 *
-	 * @param   Spreadsheet  $spreadsheet  The spreadsheet object.
-	 * @param   array        $headerStyle  The header style array.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatRoomXlsx($spreadsheet, $headerStyle)
 	{
 		$sheet = $spreadsheet->getActiveSheet();
@@ -322,16 +242,6 @@ class AnalyticsHelper
 		}
 	}
 
-	/**
-	 * Format the users analytics sheet.
-	 *
-	 * @param   Spreadsheet  $spreadsheet  The spreadsheet object.
-	 * @param   array        $headerStyle  The header style array.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatUsersXlsx($spreadsheet, $headerStyle)
 	{
 		$sheet = $spreadsheet->createSheet();
@@ -368,16 +278,6 @@ class AnalyticsHelper
 		}
 	}
 
-	/**
-	 * Format the polls sheet.
-	 *
-	 * @param   Spreadsheet  $spreadsheet  The spreadsheet object.
-	 * @param   array        $headerStyle  The header style array.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatPollsXlsx($spreadsheet, $headerStyle)
 	{
 		if (empty($this->roomData['polls']))
@@ -414,16 +314,6 @@ class AnalyticsHelper
 		}
 	}
 
-	/**
-	 * Format the whiteboard files sheet.
-	 *
-	 * @param   Spreadsheet  $spreadsheet  The spreadsheet object.
-	 * @param   array        $headerStyle  The header style array.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatWhiteboardFilesXlsx($spreadsheet, $headerStyle)
 	{
 		if (empty($this->roomData['whiteboard_files']))
@@ -453,16 +343,6 @@ class AnalyticsHelper
 		}
 	}
 
-	/**
-	 * Format a room data value for the Excel sheet.
-	 *
-	 * @param   mixed   $data   The data value.
-	 * @param   string  $field  The field name.
-	 *
-	 * @return  mixed
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatRoomDataForXlsx($data, $field)
 	{
 		if ($field === 'room_duration' || $field === 'speech_service_total_usage')
@@ -478,16 +358,6 @@ class AnalyticsHelper
 		return $data;
 	}
 
-	/**
-	 * Format a user data value for the Excel sheet.
-	 *
-	 * @param   mixed   $data   The data value.
-	 * @param   string  $field  The field name.
-	 *
-	 * @return  mixed
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatUserDataForXlsx($data, $field)
 	{
 		if ($field === 'joined' || $field === 'left')
@@ -535,13 +405,6 @@ class AnalyticsHelper
 		return $data;
 	}
 
-	/**
-	 * Get the room analytics labels.
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.0
-	 */
 	private function getRoomAnalyticsLabels()
 	{
 		return array(
@@ -563,13 +426,6 @@ class AnalyticsHelper
 		);
 	}
 
-	/**
-	 * Get the user analytics labels.
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.0
-	 */
 	private function getUserAnalyticsLabels()
 	{
 		return array(
@@ -602,13 +458,6 @@ class AnalyticsHelper
 		);
 	}
 
-	/**
-	 * Get the connection quality labels.
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.0
-	 */
 	private function getConnectionQualityLabels()
 	{
 		return array(

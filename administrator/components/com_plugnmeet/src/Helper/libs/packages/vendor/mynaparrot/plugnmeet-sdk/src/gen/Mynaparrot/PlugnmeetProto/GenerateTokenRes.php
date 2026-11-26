@@ -30,6 +30,10 @@ class GenerateTokenRes extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>optional string token = 4;</code>
      */
     protected $token = null;
+    /**
+     * Generated from protobuf field <code>optional string msg_key = 5;</code>
+     */
+    protected $msg_key = null;
 
     /**
      * Constructor.
@@ -41,6 +45,7 @@ class GenerateTokenRes extends \Google\Protobuf\Internal\Message
      *     @type string $msg
      *     @type int $status_code
      *     @type string $token
+     *     @type string $msg_key
      * }
      */
     public function __construct($data = NULL) {
@@ -141,6 +146,38 @@ class GenerateTokenRes extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, true);
         $this->token = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string msg_key = 5;</code>
+     * @return string
+     */
+    public function getMsgKey()
+    {
+        return isset($this->msg_key) ? $this->msg_key : '';
+    }
+
+    public function hasMsgKey()
+    {
+        return isset($this->msg_key);
+    }
+
+    public function clearMsgKey()
+    {
+        unset($this->msg_key);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string msg_key = 5;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setMsgKey(string $var)
+    {
+        GPBUtil::checkString($var, true);
+        $this->msg_key = $var;
 
         return $this;
     }

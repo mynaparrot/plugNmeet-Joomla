@@ -96,7 +96,7 @@ class plugNmeetConnect
 	public function __construct()
 	{
 		$params    = ComponentHelper::getParams('com_plugnmeet');
-		$serverUrl = $params->get("plugnmeet_server_url");
+		$serverUrl = rtrim(trim((string) $params->get("plugnmeet_server_url")), "/");
 		if (empty($serverUrl))
 		{
 			throw new \Exception(Text::_("COM_PLUGNMEET_CONFIG_PLUGNMEET_SERVER_URL_EMPTY"));
@@ -104,8 +104,8 @@ class plugNmeetConnect
 
 		$this->plugnmeet = new PlugNmeet(
 			$serverUrl,
-			$params->get("plugnmeet_api_key"),
-			$params->get("plugnmeet_secret")
+			trim((string) $params->get("plugnmeet_api_key")),
+			trim((string) $params->get("plugnmeet_secret"))
 		);
 	}
 

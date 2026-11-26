@@ -9,3 +9,58 @@
 .other-filters{
     padding: 0 14px;
 }
+
+/* Room mode switcher: two selectable cards */
+#pnm-mode-switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 16px;
+}
+
+.pnm-mode-option {
+    position: relative;
+    flex: 1 1 240px;
+    display: block;
+    padding: 10px 14px;
+    border: 1px solid #c9ccd1;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.pnm-mode-option input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+}
+
+.pnm-mode-option:hover {
+    border-color: #2271b1;
+}
+
+.pnm-mode-option:has(input:checked),
+.pnm-mode-option.is-active {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.pnm-mode-option:focus-within {
+    outline: 2px solid #2271b1;
+    outline-offset: 1px;
+}
+
+.pnm-mode-label {
+    display: block;
+    color: #1d2327;
+    font-weight: 600;
+}
+
+.pnm-mode-hint {
+    display: block;
+    margin-top: 2px;
+    color: #6b7280;
+    font-size: 12px;
+}

@@ -17,24 +17,13 @@ use Joomla\CMS\Http\HttpFactory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Router\Route;
+use Mynaparrot\Component\Plugnmeet\Administrator\Helper\AiSummaryHelper;
 use Mynaparrot\Component\Plugnmeet\Administrator\Helper\AnalyticsHelper;
 use Mynaparrot\Component\Plugnmeet\Administrator\Helper\plugNmeetConnect;
 use Mynaparrot\PlugnmeetProto\RoomArtifactType;
 
-/**
- * Methods supporting a list of Artifacts.
- *
- * @since  1.0.0
- */
 class ArtifactsModel extends BaseDatabaseModel
 {
-	/**
-	 * Get the list of published rooms to select from.
-	 *
-	 * @return  array  An array of room objects on success, false on failure.
-	 *
-	 * @since   1.0.0
-	 */
 	public function getRooms()
 	{
 		$db    = $this->getDatabase();
@@ -49,19 +38,6 @@ class ArtifactsModel extends BaseDatabaseModel
 		return $db->loadObjectList();
 	}
 
-	/**
-	 * Fetch the artifacts of a room.
-	 *
-	 * @param   string  $roomId   The room id.
-	 * @param   int     $from     The starting index for pagination.
-	 * @param   int     $limit    The maximum number of artifacts to return.
-	 * @param   string  $orderBy  The order in which to sort the artifacts (e.g. "DESC").
-	 *
-	 * @return  \stdClass  The output object.
-	 *
-	 * @throws  \Exception
-	 * @since   1.0.0
-	 */
 	public function getArtifacts(string $roomId, int $from, int $limit, string $orderBy)
 	{
 		$output         = new \stdClass();
@@ -100,9 +76,19 @@ class ArtifactsModel extends BaseDatabaseModel
 
 			foreach ($res->getResult()->getArtifactsList() as $artifact)
 			{
+				$userName = trim((string) ($artifact->getMetadata()?->getUserInfo()?->getName() ?? ''));
+				$typeHtml = '<div class="pnm-artifact-type"><span>' . htmlspecialchars($this->formatTypeName($artifact->getType()), ENT_QUOTES, 'UTF-8') . '</span>';
+
+				if ($userName !== '')
+				{
+					$typeHtml .= '<span class="pnm-artifact-user">' . htmlspecialchars($userName, ENT_QUOTES, 'UTF-8') . '</span>';
+				}
+
+				$typeHtml .= '</div>';
+
 				$resultArtifacts[] = array(
 					'artifact_id' => $artifact->getArtifactId(),
-					'type'        => $this->formatTypeName($artifact->getType()),
+					'type'        => $typeHtml,
 					'created'     => gmdate('Y-m-d H:i:s', strtotime($artifact->getCreated())),
 					'view_url'    => Route::_('index.php?option=com_plugnmeet&view=artifacts&layout=details&artifact_id=' . urlencode($artifact->getArtifactId()) . '&room_id=' . urlencode($roomId) . '&paged=' . $page)
 				);
@@ -117,16 +103,6 @@ class ArtifactsModel extends BaseDatabaseModel
 		return $output;
 	}
 
-	/**
-	 * Get the download link of an artifact.
-	 *
-	 * @param   string  $artifactId  The artifact id.
-	 *
-	 * @return  \stdClass  The output object.
-	 *
-	 * @throws  \Exception
-	 * @since   1.0.0
-	 */
 	public function downloadArtifact(string $artifactId)
 	{
 		$output         = new \stdClass();
@@ -147,23 +123,15 @@ class ArtifactsModel extends BaseDatabaseModel
 		$output->msg    = $res->getMsg();
 		if ($res->getStatus())
 		{
-			$params      = ComponentHelper::getParams('com_plugnmeet');
-			$output->url = rtrim($params->get('plugnmeet_server_url'), '/') . '/download/artifact/' . $res->getToken();
+			$params    = ComponentHelper::getParams('com_plugnmeet');
+			$serverUrl = rtrim(trim((string) $params->get('plugnmeet_server_url', '')), '/');
+
+			$output->url = $serverUrl . '/download/artifact/' . $res->getToken();
 		}
 
 		return $output;
 	}
 
-	/**
-	 * Delete an artifact.
-	 *
-	 * @param   string  $artifactId  The artifact id.
-	 *
-	 * @return  \stdClass  The output object.
-	 *
-	 * @throws  \Exception
-	 * @since   1.0.0
-	 */
 	public function deleteArtifact(string $artifactId)
 	{
 		$output         = new \stdClass();
@@ -192,18 +160,6 @@ class ArtifactsModel extends BaseDatabaseModel
 		return $output;
 	}
 
-	/**
-	 * Get the details of an artifact.
-	 *
-	 * @param   string  $artifactId  The artifact id.
-	 * @param   string  $roomId      The room id.
-	 * @param   int     $paged       The current page number.
-	 *
-	 * @return  \stdClass  The output object.
-	 *
-	 * @throws  \Exception
-	 * @since   1.0.0
-	 */
 	public function getArtifactDetails(string $artifactId, string $roomId, int $paged)
 	{
 		$output                         = new \stdClass();
@@ -214,6 +170,8 @@ class ArtifactsModel extends BaseDatabaseModel
 		$output->isFileBased            = false;
 		$output->isAnalytics            = false;
 		$output->isMeetingSummary       = false;
+		$output->isAiSessionSummary     = false;
+		$output->aiSummary              = null;
 		$output->meetingSummaryContent  = '';
 		$output->analytics              = null;
 		$output->analyticsError         = null;
@@ -243,14 +201,16 @@ class ArtifactsModel extends BaseDatabaseModel
 		$info     = $res->getArtifactInfo();
 		$metadata = $info->getMetadata();
 
-		$output->status          = true;
-		$output->msg             = $res->getMsg();
-		$output->artifactInfo    = $info;
-		$output->isFileBased     = $metadata !== null && $metadata->hasFileInfo();
-		$output->isAnalytics     = $info->getType() === RoomArtifactType::MEETING_ANALYTICS;
-		$output->isMeetingSummary = $info->getType() === RoomArtifactType::MEETING_SUMMARY;
+		$isAiSessionSummary = $info->getType() === RoomArtifactType::AI_AGENT_SESSION_SUMMARY;
 
-		// Build the details table.
+		$output->status             = true;
+		$output->msg                = $res->getMsg();
+		$output->artifactInfo       = $info;
+		$output->isFileBased        = $metadata !== null && $metadata->hasFileInfo();
+		$output->isAnalytics        = $info->getType() === RoomArtifactType::MEETING_ANALYTICS;
+		$output->isMeetingSummary   = $info->getType() === RoomArtifactType::MEETING_SUMMARY;
+		$output->isAiSessionSummary = $isAiSessionSummary;
+
 		$details   = array();
 		$details[] = array('label' => Text::_('COM_PLUGNMEET_ARTIFACTS_ARTIFACT_ID'), 'value' => $info->getArtifactId());
 		$details[] = array('label' => Text::_('COM_PLUGNMEET_ANALYTICS_ROOM_ID'), 'value' => $info->getRoomId());
@@ -259,6 +219,24 @@ class ArtifactsModel extends BaseDatabaseModel
 
 		if ($metadata !== null)
 		{
+			if ($metadata->hasUserInfo())
+			{
+				$userInfo = $metadata->getUserInfo();
+				$userName = trim((string) $userInfo->getName());
+
+				if ($userName !== '')
+				{
+					$details[] = array('label' => Text::_('JGLOBAL_FIELD_CREATED_BY_LABEL'), 'value' => $userName);
+				}
+
+				$userId = $userInfo->getExUserId() ?: $userInfo->getUserId();
+
+				if ($userId !== '')
+				{
+					$details[] = array('label' => Text::_('COM_PLUGNMEET_AI_SUMMARY_USER_ID'), 'value' => $userId);
+				}
+			}
+
 			if ($metadata->hasFileInfo())
 			{
 				$fileInfo  = $metadata->getFileInfo();
@@ -309,19 +287,28 @@ class ArtifactsModel extends BaseDatabaseModel
 			$output->meetingSummaryContent = $this->getMeetingSummaryContent($artifactId);
 		}
 
+		if ($isAiSessionSummary)
+		{
+			$output->aiSummary = $this->getAiSessionSummary($artifactId);
+		}
+
 		return $output;
 	}
 
-	/**
-	 * Generate the analytics Excel file for an artifact.
-	 *
-	 * @param   string  $artifactId  The artifact id.
-	 *
-	 * @return  array  An array containing the generated file path and name.
-	 *
-	 * @throws  \Exception
-	 * @since   1.0.0
-	 */
+	private function getAiSessionSummary(string $artifactId): ?array
+	{
+		try
+		{
+			$helper = new AiSummaryHelper($artifactId);
+
+			return $helper->getSummaryData();
+		}
+		catch (\Exception $e)
+		{
+			return null;
+		}
+	}
+
 	public function generateAnalyticsFile(string $artifactId)
 	{
 		$user = Factory::getApplication()->getIdentity();
@@ -335,15 +322,6 @@ class ArtifactsModel extends BaseDatabaseModel
 		return $helper->generateXlsxFile();
 	}
 
-	/**
-	 * Format an artifact type into a human readable name.
-	 *
-	 * @param   int  $type  The artifact type value.
-	 *
-	 * @return  string  The human readable type name.
-	 *
-	 * @since   1.0.0
-	 */
 	private function formatTypeName(int $type)
 	{
 		$name = RoomArtifactType::name($type);
@@ -351,16 +329,6 @@ class ArtifactsModel extends BaseDatabaseModel
 		return ucwords(strtolower(str_replace('_', ' ', $name)));
 	}
 
-	/**
-	 * Fetch and clean the meeting summary content of an artifact.
-	 *
-	 * @param   string  $artifactId  The artifact id.
-	 *
-	 * @return  string  The meeting summary HTML.
-	 *
-	 * @throws  \Exception
-	 * @since   1.0.0
-	 */
 	private function getMeetingSummaryContent(string $artifactId)
 	{
 		$connect = new plugNmeetConnect();
@@ -371,8 +339,9 @@ class ArtifactsModel extends BaseDatabaseModel
 			return '';
 		}
 
-		$params = ComponentHelper::getParams('com_plugnmeet');
-		$url    = rtrim($params->get('plugnmeet_server_url'), '/') . '/download/artifact/' . $res->getToken();
+		$params    = ComponentHelper::getParams('com_plugnmeet');
+		$serverUrl = rtrim(trim((string) $params->get('plugnmeet_server_url', '')), '/');
+		$url       = $serverUrl . '/download/artifact/' . $res->getToken();
 
 		$response = HttpFactory::getHttp()->get($url, array(), 60);
 		$body     = $response->body;

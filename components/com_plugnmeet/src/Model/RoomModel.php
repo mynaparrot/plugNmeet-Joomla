@@ -17,32 +17,16 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
-use Joomla\CMS\Table\Table;
 use Joomla\CMS\Uri\Uri;
+use Mynaparrot\Component\Plugnmeet\Administrator\Helper\PlugnmeetHelper;
 use Mynaparrot\Component\Plugnmeet\Administrator\Helper\plugNmeetConnect;
-use Mynaparrot\Component\Plugnmeet\Site\Helper\PlugnmeetHelper;
+use Mynaparrot\Component\Plugnmeet\Site\Helper\PlugnmeetHelper as PlugnmeetSiteHelper;
+use Mynaparrot\PlugnmeetProto\UserMetadata;
 
-/**
- * Plugnmeet model.
- *
- * @since  1.0.0
- */
 class RoomModel extends ItemModel
 {
 	public $_item;
 
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @return  void
-	 *
-	 * @throws \Exception
-	 * @since   1.0.0
-	 *
-	 */
 	protected function populateState()
 	{
 		parent::populateState();
@@ -52,15 +36,6 @@ class RoomModel extends ItemModel
 		$this->setState('room.id', $id);
 	}
 
-	/**
-	 * Method to get an object.
-	 *
-	 * @param   integer  $id  The id of the object to get.
-	 *
-	 * @return  mixed    Object on success, false on failure.
-	 *
-	 * @throws \Exception
-	 */
 	public function getItem($id = null)
 	{
 		if ($this->_item === null)
@@ -69,33 +44,18 @@ class RoomModel extends ItemModel
 			$table  = $this->getTable();
 			if ($table && $table->load($roomId) && $table->state === 1)
 			{
-				$this->_item = PlugnmeetHelper::getProperties($table);
+				$this->_item = PlugnmeetSiteHelper::getProperties($table);
 			}
 		}
 
 		return $this->_item;
 	}
 
-
-	/**
-	 * Get an instance of Table class
-	 *
-	 * @param   string  $type    Name of the Table class to get an instance of.
-	 * @param   string  $prefix  Prefix for the table class name. Optional.
-	 * @param   array   $config  Array of configuration values for the Table object. Optional.
-	 *
-	 * @return  Table|bool Table if success, false on failure.
-	 */
 	public function getTable($type = 'Room', $prefix = 'Administrator', $config = array())
 	{
 		return parent::getTable($type, $prefix, $config);
 	}
 
-	/**
-	 * Publish the element
-	 **
-	 * @throws \Exception
-	 */
 	public function login(int $id, string $name, string|null $password)
 	{
 		$user           = Factory::getApplication()->getIdentity();
@@ -158,6 +118,48 @@ class RoomModel extends ItemModel
 		{
 			$room_metadata['room_features'] = array();
 		}
+
+		$room_mode        = PlugnmeetHelper::getRoomMode($room_metadata);
+		$enable_ai_agent  = PlugnmeetHelper::isAiAgentEnabled();
+		$is_ai_agent_mode = $enable_ai_agent && $room_mode === 'ai_agent';
+
+		// A controlled AI session is reserved for the selected registered users only.
+		if ($is_ai_agent_mode)
+		{
+			$ai_agent     = isset($room_metadata['insights_features']['ai_agent_features']) && is_array($room_metadata['insights_features']['ai_agent_features'])
+				? $room_metadata['insights_features']['ai_agent_features']
+				: array();
+			$session_mode = (int) ($ai_agent['session_mode'] ?? 2);
+
+			if ($session_mode === 1)
+			{
+				if ((int) $user->id <= 0)
+				{
+					$output->msg = Text::_('COM_PLUGNMEET_AI_CONTROLLED_LOGIN_REQUIRED');
+
+					return $output;
+				}
+
+				if (!$isAdmin)
+				{
+					$auto_session_config = isset($ai_agent['auto_session_config']) && is_array($ai_agent['auto_session_config'])
+						? $ai_agent['auto_session_config']
+						: array();
+					$allowed_ids         = array_map(
+						'strval',
+						PlugnmeetHelper::sanitizeUserIds($auto_session_config['allowed_participant_ids'] ?? array())
+					);
+
+					if (!in_array((string) $user->id, $allowed_ids, true))
+					{
+						$output->msg = Text::_('COM_PLUGNMEET_AI_CONTROLLED_NOT_ALLOWED');
+
+						return $output;
+					}
+				}
+			}
+		}
+
 		$userId = $user->id;
 
 		if (!$userId)
@@ -186,7 +188,14 @@ class RoomModel extends ItemModel
 			return $output;
 		}
 
-		if (!$isRoomActive && !$isAdmin && !empty($room_metadata['room_features']['moderator_join_first']))
+		// An autonomous AI session starts with the first allowed user, no human moderator needed.
+		if (
+			!$isRoomActive &&
+			!$isAdmin &&
+			!$is_ai_agent_mode &&
+			isset($room_metadata['room_features']['moderator_join_first']) &&
+			$room_metadata['room_features']['moderator_join_first'] == 1
+		)
 		{
 			$output->msg = Text::_('COM_PLUGNMEET_MEETING_NOT_STARTED');
 
@@ -217,6 +226,8 @@ class RoomModel extends ItemModel
 					}
 				}
 
+				PlugnmeetHelper::prepareAiAgentFeatures($room_metadata, $params->toArray());
+
 				$res = $connect->createRoom($room_id, $this->_item->room_title, $room_metadata, $this->_item->welcome_message, $logoutUrl->toString(), "", $this->_item->max_participants, 0, $extra_data);
 
 				$isRoomActive = $res->getStatus();
@@ -239,7 +250,22 @@ class RoomModel extends ItemModel
 		{
 			try
 			{
-				$res = $connect->getJoinToken($room_id, $name, $userId, $isAdmin);
+				$userMetadata = null;
+				if ((int) $user->id > 0)
+				{
+					// Links the plugNmeet user with the Joomla account (needed by AI agent sessions).
+					$userMetadata = new UserMetadata();
+					$userMetadata->setExUserId((string) $user->id);
+				}
+
+				$res = $connect->getJoinToken(
+					$this->_item->room_id,
+					$name,
+					(string) $userId,
+					$isAdmin,
+					false,
+					$userMetadata
+				);
 				if (!$res->getStatus())
 				{
 					$output->msg = $res->getMsg();
@@ -251,7 +277,8 @@ class RoomModel extends ItemModel
 				$params         = ComponentHelper::getParams('com_plugnmeet');
 				if ($params->get('client_load', 'remote') === 'redirect')
 				{
-					$output->url = rtrim($params->get('plugnmeet_server_url'), '/') . '/?access_token=' . $res->getToken();
+					$serverUrl   = rtrim(trim((string) $params->get('plugnmeet_server_url', '')), '/');
+					$output->url = $serverUrl . '/?access_token=' . $res->getToken();
 				}
 				else
 				{
@@ -269,9 +296,6 @@ class RoomModel extends ItemModel
 		return $output;
 	}
 
-	/**
-	 * @throws \Exception
-	 */
 	public function getRecordings($id, $from, $limit, $orderBy)
 	{
 		$output         = new \stdClass();
@@ -317,9 +341,6 @@ class RoomModel extends ItemModel
 		return $output;
 	}
 
-	/**
-	 * @throws \Exception
-	 */
 	public function getRecordingLink($id, $recordingId, $access)
 	{
 		$output         = new \stdClass();
@@ -354,7 +375,8 @@ class RoomModel extends ItemModel
 
 			return $output;
 		}
-		// verify to check if request was for correct room
+
+		// Ensure the recording belongs to the requested room.
 		if ($res->getRecordingInfo()->getRoomId() !== $this->_item->room_id)
 		{
 			$output->msg = Text::_("COM_PLUGNMEET_RECORDING_NOT_MATCH_WITH_ROOM");
@@ -373,14 +395,12 @@ class RoomModel extends ItemModel
 		$params         = ComponentHelper::getParams('com_plugnmeet');
 		$output->status = $res->getStatus();
 		$output->msg    = $res->getMsg();
-		$output->url    = sprintf("%s/download/recording/%s", $params->get("plugnmeet_server_url"), $res->getToken());
+		$serverUrl      = rtrim(trim((string) $params->get('plugnmeet_server_url', '')), '/');
+		$output->url    = sprintf('%s/download/recording/%s', $serverUrl, $res->getToken());
 
 		return $output;
 	}
 
-	/**
-	 * @throws \Exception
-	 */
 	public function deleteRecording($id, $recordingId)
 	{
 		$output         = new \stdClass();
@@ -415,7 +435,8 @@ class RoomModel extends ItemModel
 
 			return $output;
 		}
-		// verify to check if request was for correct room
+
+		// Ensure the recording belongs to the requested room.
 		if ($res->getRecordingInfo()->getRoomId() !== $this->_item->room_id)
 		{
 			$output->msg = Text::_("COM_PLUGNMEET_RECORDING_NOT_MATCH_WITH_ROOM");

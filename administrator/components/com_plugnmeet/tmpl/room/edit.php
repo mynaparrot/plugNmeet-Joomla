@@ -10,21 +10,51 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Mynaparrot\Component\Plugnmeet\Administrator\Helper\PlugnmeetHelper;
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->getDocument()->getWebAssetManager();
 $wa->useScript('keepalive')
-        ->useScript('form.validate');
+        ->useScript('form.validate')
+        ->useStyle('com_plugnmeet.admin')
+        ->useScript('com_plugnmeet.admin');
 
-$tabParams = array('active' => 'basic');
-if ((int) $this->item->id > 0)
+$params = ComponentHelper::getParams('com_plugnmeet');
+
+$tabParams = array('active' => 'basic', 'recall' => true);
+
+$isAiAgentEnabled = PlugnmeetHelper::isAiAgentEnabled();
+
+// The form (not the database row) is the source of truth: loadFormData() binds the
+// session state of a failed save on top of the stored item, so reading the form
+// value keeps the selected room_mode after a validation error.
+$formRoomMode = $this->form->getValue('room_mode');
+
+if (empty($formRoomMode))
 {
-    $tabParams["recall"] = true;
+    $formRoomMode = $this->item->room_mode ?? 'conference';
 }
+
+$roomMode = PlugnmeetHelper::getRoomMode(array('room_mode' => $formRoomMode));
+
+$this->getDocument()->addScriptOptions('plugnmeet.admin', array(
+    'aiPresets'              => array_map(static fn($preset) => $preset['prompt'], PlugnmeetHelper::getAiAgentPresets()),
+    'allowWebFetchGlobal'    => !empty($params->get('ai_allow_web_fetch_global', 0)),
+    'avatarEnabledGlobal'    => !empty($params->get('ai_avatar_enabled_global', 0)),
+    'hasMcpServers'          => PlugnmeetHelper::hasEnabledMcpServer(),
+    'maxConcurrentLimit'     => max(1, (int) $params->get('ai_max_concurrent_sessions_limit', 10)),
+    'maxSessionMinutesLimit' => min(120, max(1, (int) $params->get('ai_max_session_minutes_limit', 60))),
+    'i18n'                   => array(
+        'ai_agent_tab'    => Text::_('COM_PLUGNMEET_AI_AGENT_TAB'),
+        'insights_tab'    => Text::_('COM_PLUGNMEET_INSIGHTS_TAB'),
+        'replace_prompt'  => Text::_('COM_PLUGNMEET_AI_AGENT_REPLACE_PROMPT'),
+    ),
+));
 ?>
 
 <form
@@ -32,6 +62,25 @@ if ((int) $this->item->id > 0)
         method="post" enctype="multipart/form-data" name="adminForm" id="room-form"
         class="form-validate form-horizontal">
 
+    <?php if ($isAiAgentEnabled) : ?>
+        <div id="pnm-mode-switcher" class="pnm-mode-switcher" role="radiogroup"
+             aria-label="<?php echo Text::_('COM_PLUGNMEET_ROOM_MODE_LABEL'); ?>">
+            <label class="pnm-mode-option<?php echo $roomMode === 'conference' ? ' is-active' : ''; ?>">
+                <input type="radio" name="jform[room_mode]" value="conference"
+                        <?php echo $roomMode === 'conference' ? 'checked="checked"' : ''; ?>>
+                <span class="pnm-mode-label"><?php echo Text::_('COM_PLUGNMEET_ROOM_MODE_CONFERENCE'); ?></span>
+                <span class="pnm-mode-hint"><?php echo Text::_('COM_PLUGNMEET_ROOM_MODE_CONFERENCE_HINT'); ?></span>
+            </label>
+            <label class="pnm-mode-option<?php echo $roomMode === 'ai_agent' ? ' is-active' : ''; ?>">
+                <input type="radio" name="jform[room_mode]" value="ai_agent"
+                        <?php echo $roomMode === 'ai_agent' ? 'checked="checked"' : ''; ?>>
+                <span class="pnm-mode-label"><?php echo Text::_('COM_PLUGNMEET_ROOM_MODE_AI_AGENT'); ?></span>
+                <span class="pnm-mode-hint"><?php echo Text::_('COM_PLUGNMEET_ROOM_MODE_AI_AGENT_HINT'); ?></span>
+            </label>
+        </div>
+    <?php else : ?>
+        <input type="hidden" name="jform[room_mode]" value="<?php echo htmlspecialchars($roomMode, ENT_QUOTES, 'UTF-8'); ?>">
+    <?php endif; ?>
 
     <?php echo HTMLHelper::_('uitab.startTabSet', 'roomTab', $tabParams); ?>
 
@@ -98,7 +147,20 @@ if ((int) $this->item->id > 0)
     <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
     <?php echo HTMLHelper::_('uitab.addTab', 'roomTab', 'insightsFeatures', Text::_('COM_PLUGNMEET_ROOM_TAB_INSIGHTS_AI_FEATURES', true)); ?>
-    <?php echo $this->form->renderFieldset("insightsFeatures"); ?>
+    <div id="pnm-insights-standard-card">
+        <h3><?php echo Text::_('COM_PLUGNMEET_INSIGHTS_CARD_TITLE'); ?></h3>
+        <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_INSIGHTS_CARD_DES'); ?></p>
+        <?php echo $this->form->renderFieldset("insightsFeatures"); ?>
+        <hr/>
+    </div>
+
+    <?php if ($isAiAgentEnabled) : ?>
+        <div id="pnm-ai-agent-card">
+            <h3><?php echo Text::_('COM_PLUGNMEET_AI_AGENT_CARD_TITLE'); ?></h3>
+            <p class="text-muted"><?php echo Text::_('COM_PLUGNMEET_AI_AGENT_CARD_DES'); ?></p>
+            <?php echo $this->form->renderFieldset("aiAgentFeatures"); ?>
+        </div>
+    <?php endif; ?>
     <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
     <?php echo HTMLHelper::_('uitab.addTab', 'roomTab', 'lockSettings', Text::_('COM_PLUGNMEET_ROOM_TAB_LOCK_SETTINGS', true)); ?>
@@ -131,3 +193,4 @@ if ((int) $this->item->id > 0)
     <?php echo HTMLHelper::_('form.token'); ?>
 
 </form>
+

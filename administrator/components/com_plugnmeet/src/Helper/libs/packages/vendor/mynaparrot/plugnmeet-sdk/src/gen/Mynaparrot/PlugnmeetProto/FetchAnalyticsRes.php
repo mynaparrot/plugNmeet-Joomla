@@ -30,6 +30,10 @@ class FetchAnalyticsRes extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.plugnmeet.FetchAnalyticsResult result = 4;</code>
      */
     protected $result = null;
+    /**
+     * Generated from protobuf field <code>optional string msg_key = 5;</code>
+     */
+    protected $msg_key = null;
 
     /**
      * Constructor.
@@ -41,6 +45,7 @@ class FetchAnalyticsRes extends \Google\Protobuf\Internal\Message
      *     @type string $msg
      *     @type int $status_code
      *     @type \Mynaparrot\PlugnmeetProto\FetchAnalyticsResult $result
+     *     @type string $msg_key
      * }
      */
     public function __construct($data = NULL) {
@@ -140,6 +145,38 @@ class FetchAnalyticsRes extends \Google\Protobuf\Internal\Message
     public function setResult(\Mynaparrot\PlugnmeetProto\FetchAnalyticsResult|null $var)
     {
         $this->result = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string msg_key = 5;</code>
+     * @return string
+     */
+    public function getMsgKey()
+    {
+        return isset($this->msg_key) ? $this->msg_key : '';
+    }
+
+    public function hasMsgKey()
+    {
+        return isset($this->msg_key);
+    }
+
+    public function clearMsgKey()
+    {
+        unset($this->msg_key);
+    }
+
+    /**
+     * Generated from protobuf field <code>optional string msg_key = 5;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setMsgKey(string $var)
+    {
+        GPBUtil::checkString($var, true);
+        $this->msg_key = $var;
 
         return $this;
     }
